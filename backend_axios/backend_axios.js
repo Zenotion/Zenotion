@@ -13,7 +13,7 @@ import 'dotenv/config';
 
  
 const server = express();  
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4000 ;
 const saltRounds = 10;
 const dir = dirname(fileURLToPath(import.meta.url));
 const upload = multer({});
