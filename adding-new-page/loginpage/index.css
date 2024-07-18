@@ -1,0 +1,165 @@
+*{
+    margin: none;
+    padding: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    background-color: #F0EBE3;
+    list-style: none;
+}
+
+.rombus-bg{
+  background-color: #F0EBE3;
+  opacity: 1;
+  background-image:  linear-gradient(135deg, #000000 25%, transparent 25%), linear-gradient(225deg, #000000 25%, transparent 25%), linear-gradient(45deg, #000000 25%, transparent 25%), linear-gradient(315deg, #000000 25%, #F0EBE3 25%);
+  background-position:  4px 0, 4px 0, 0 0, 0 0;
+  background-size: 4px 4px;
+  background-repeat: repeat;
+}
+.dotted-bg{
+  opacity: 1;
+  background-image: radial-gradient(#000000 0.45px, #F0EBE3 0.45px);
+  background-size: 9px 9px;
+}
+
+.main-container{
+  border: 1px solid black;
+  height: 32em;
+  width: 30em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.sign-in-section{
+  background-color: white;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo{
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+}
+.logo-section{
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+.heading{
+  display: flex;
+  justify-content: center;
+}
+.heading h2{
+  font-size: 24px;
+}
+form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-form-container{
+  padding: 0 5em;
+}
+
+input {
+  display: block;
+  color: black;
+  border: none;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid black;
+  
+}
+
+input:focus{
+  background-color: #BBE9FF;
+}
+
+input::selection{
+  border: 5px solid red;
+}
+
+#eyeicon{
+  position: relative;
+  color: white;
+  border: none;
+  left: 80px;
+  bottom: 40px;
+  background: transparent;
+
+}
+
+label {
+  display: block;
+  width: 100%;
+  font-weight: 540;
+  font-size:15px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: left;
+  color: black;
+}
+
+.forget_pass{
+  margin-bottom:15px;
+  align-self: self-start;
+
+}
+
+.forget_pass a{
+  text-decoration: none;
+  color: black;
+}
+
+.forget_pass a:hover{
+  color: #535C91;
+}
+
+.go_back{
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85px;
+  padding: 10px;
+  background-color: #5131F3;
+  color: white;
+  font-weight: 400;
+  border-radius: 5px;
+  margin-top: 15px;
+  transition: all 0.4s ease-in-out;
+  font-size: small;
+}
+
+.go_back:hover{
+  background-color: #ECE8E3;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: -4px 4px 0 0 black;
+}
+.text{
+  font-size: 20px;
+}
+
+.rev-bg{
+  background-color: transparent;
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/with_plus_for_student/subject_page.css">
+    <link rel="stylesheet" href="/styles/with_plus_for_student/media_queries.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/images/lanch_page/favicon.png"> 
+</head>
+<body>
+
+    <!-- nab bar -->
+    <div class="nav_bar">
+        <div class="logo"></div>
+        <a href="<%=`${our_domain}${dept}/${sub}/1`%>"><button class="go_back "><span class="text">Go back</span></button></a>
+
+    </div>
+
+<!-- main continer -->
+<div class="gra_nav"></div>
+
+
+    <div class="main_continer">
+
+        <!-- topic containing contoiner -->
+
+           
+
+            <!-- card continer -->
+            <div class="overlay">
+                <div class="topic_card_continer">
+
+                    <div class="headline"><h1> <span>Topics:</span></h1>
+                        <button type="button" class="button" onclick="openLoginModal()">
+                            <span class="button__text">Add Topic</span>
+                            <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                          </button>
+                    </div>
+                    <div class="topics">
+                        
+                    
+                        <%if(locals.topics){%>
+                            <%for(let i=0; i<topics.length;i++){%>                       
+                        <div>
+                            <a href="<%=`/${dept}/${sub}/student_work/own_work/${topics[i]}/delete`%>">
+                                <div class="delete_section">
+                                    <button class="delete_button" onclick="return submitForm()">
+                                        <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
+                                    </button>
+                                </div>
+                            </a>
+                           <a href="<%= `own_work/${topics[i]}/doc_res`%>"> 
+                            <div class="topic_card">
+                                <div class="content"><h2><%=topics[i]%></h2></div>
+                            </div>
+                            </a>
+                        </div>
+                            <%}}%>
+                       
+                          
+                    </div>
+    
+    
+                </div>
+            </div>
+           
+        </div>
+
+                <!-- The Modal -->
+        <div id="loginModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" onclick="closeLoginModal()">&times;</span>
+                <div class="other_content">
+                <h1 class="sign-in-text"><span>ADD TOPIC</span></h1>
+                <h3>enter the topic name:</h3>
+                <form action="<%=`${domain}${dept}/${sub}/stu/new_topics`%>" method="post" autocomplete="off">
+                    <input type="text" placeholder="enter the topic" name="topic">
+                    <button class="go_back"><span class="text">Add</span></button>
+                </form>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+    <script>
+        function submitForm() {
+   return confirm('Do you want delete a topic');
+}
+
+    </script>
+    
+    <script src="/js_files/with_plus_for_student/nav_bar.js"></script>
+</body>
+</html>

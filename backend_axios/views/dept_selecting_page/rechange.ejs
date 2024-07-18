@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>space name</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <link rel="stylesheet" href="/styles/dept_selecting_page/dept-sem.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!-- nav bar section -->
+    <header id="navbar-main">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#home" class="link-tag-main-logo">
+            <img src="/images/notion_space/group_page/zeotion.png" class="main_logo" alt="">
+          </a>
+        </div>
+        <div class="left-half">
+
+          <a href="<%=our_domain%>notionspace/create/space">
+            <div class="Notion-space">
+              Notion Space          
+            </div>
+          </a>
+
+          <div class="user-profile-option" id="profile-option">
+            <i class="ri-user-fill"></i>
+          </div>
+        
+        </div>
+      </div>
+    </header>
+
+      <div class="pro_option_display rev-bg dis_profile" id="js_display-pro">
+        <div class="profile-detail-button pro_common">
+            <a href="" class="rev-bg">
+            <h4 class="rev-bg">My Profile</h4>
+          </a>
+          </div>
+          <div class="logout-button pro_common">
+            <a href="/log_out" class="rev-bg ">
+          <h4 class="rev-bg">Log out</h4>
+        </a>
+        </div>
+      </div>
+    <!-- main section -->
+    <section id="main content ">
+      <div class="main-container">
+        <div class="adding-blur rev-bg"></div>
+        <div class="option-bar rombus-bg">
+          <div class="option-heading-container">
+            <h3 class="option-heading">Departments</h3>
+          </div>
+          <div class="item-main-conatainer">
+            <% for(let i=0;i<9;i++){%>
+          <a href="<%=`${our_domain}${dept[i]}/${sem_selected}`%>"> <h3 class="option-items" id="<%=dept[i]%>"><i class="ri-group-3-line"></i><%= dept[i] %></h3></a>
+          <%}%>
+        </div>  
+        </div>
+        <!-- main content page -->
+        <div class="content-bar rombus-bg">
+          <div class="main-dept-content-container">
+            <div class="dept-title rev-bg">
+            <p class="dept-name-title rev-bg"><span id="testing-animation"></span></p>
+            </div>
+            <div class="dept-description rev-bg">
+              <div class="desc-header-title rev-bg">
+                <p class="desc-header-title-text rev-bg">
+                  About the course
+                </p>
+              </div>
+              <p class="dept-desc-text rev-bg">
+                 <%=dept_about%>
+              </p>
+            </div>
+            <div class="dept-syllabus rev-bg">
+              <div class="syllabus-header rev-bg">
+                <p class="syllabus-title-text rev-bg">
+                  download the syllabus for the subject:
+                </p>
+              </div>
+              <a href="<%=`${our_domain}${select}/syllabus_download`%>" class="rev-bg">
+                <div class="syllabus-download-but">
+                  download the syllabus of iot
+                  <i class="ri-download-line"></i>
+                </div>
+              </a>
+            
+          </div>
+          </div>
+          
+        </div>
+
+        <!-- the topic card section -->
+        <div class="topic-section-container">
+          <div class="adding-blur rev-bg"></div>
+          <div class="topic-title">
+            <h1>Subject</h1>
+          </div>
+          <div class="divider"></div>
+          <div class="topics-card-container ">
+
+            <!-- pic-filter-containe -->
+            <div class="topic-filter-container rombus-bg">
+              <div class="left-bar-sem-title">
+                <img src="/images/notion_space/group_page/sem.png" alt="" class="sem-img-icon">
+                <p class="sem-heading rev-bg">Semester</p>
+              </div>
+              <div class="sem-main-container">
+                <% for(let i=0;i<8;i++){%>
+                  <a href="<%=`${our_domain}${select}/${i+1}`%>"><div class="sem<%=i+1%> com-style" id="<%=i+1%>">
+                    <h3>SEMESTER <%=i+1%></h3>
+                  </div></a>
+                  <%}%>             
+              </div>
+           </div>
+            <!-- all - topic - section -->
+              <div class="topic-container ">
+                <% for(let i =0;i<sem_sub.length;i++){ %>
+                  <a href="<%=`${our_domain}${select}/${sem_selected}/${sem_sub[i]}/1`%>" class="rev-bg">
+                <div class="topic-card">
+                  <div class="topic-lable">
+                      Semester <%= sem_selected %> </div>
+                  <div class="topic-heading">
+                    <h3><%= sem_sub[i] %></h3>
+                  </div>
+                  <div class="about-topic rev-bg">
+                    <%for(let j=0;j<5;j++){%>
+                    <p class="rev-bg"><span class="unit-blod rev-bg">Unit <%=j+1%></span> :  <%=topic_count[i][`${sem_sub[i]}`][j]%> Topic</p>
+                    <%if(j<4){%>
+                    <div class="divider1"></div>
+                    <%}}%>
+                  
+                  </div>
+                </div> 
+              </a>
+              <% } %>
+              </div> 
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="adding-blur rev-bg"></div>
+      <div class="contact_continer" id = "contact">
+        <a href =""><i class="ri-instagram-fill" ></i></a>
+        <a href=""><i class="ri-linkedin-box-fill"></i></a>
+        <a href=""><i class="ri-mail-fill"></i></a>
+        <a href=""><i class="ri-whatsapp-fill"></i></a>
+      </div>
+    </footer>
+    <script src="/js_files/dept_selecting_page/dept-sem.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed('#testing-animation', {
+        strings: [`<%=dept_name%>`], 
+        typeSpeed: 60,
+        startDelay: 300
+      });
+      document.getElementById("testing-animation").classList.add("rev-bg");
+      document.querySelector(".typed-cursor").classList.add("rev-bg");
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="icon" type="image/x-icon" href="../../images/lanch_page/favicon.png">
+        <link rel="stylesheet" href="../../styles/log_in_page/otp.css">
+</head>
+<body>
+    <div id="loginModal" class="modal">
+    <div class="otp-form">
+      <span>
+        <center>
+        <h2><span>Enter OTP</span></h2>
+        <form id="otpForm" action="/reset_pass" method="post">
+            <div class="otp-inputs">
+                <input type="number" id="otp1" maxlength="1" autocomplete="off" autofocus name="no1">
+                <input type="number" id="otp2" maxlength="1" autocomplete="off" name="no2">
+                <input type="number" id="otp3" maxlength="1" autocomplete="off" name="no3">
+                <input type="number" id="otp4" maxlength="1" autocomplete="off" name="no4">
+                <input type="number" id="otp5" maxlength="1" autocomplete="off" name="no5">
+                <input type="number" id="otp6" maxlength="1" autocomplete="off" name="no6">
+            </div>
+            <button type="submit" class="go_back"><span class="text">Verify OTP</span></button>
+        </form>
+        <% if(locals.alert) {%>
+        <p id="message"><%= alert %></p>
+        <% } %>
+      </center>
+      </span>
+    </div>
+</div>
+    <script src="../../js_files/log_in_page/otp.js"></script>
+</body>
+</html>
