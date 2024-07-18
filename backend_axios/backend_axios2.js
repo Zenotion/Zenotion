@@ -16,7 +16,7 @@ const server = express();
 const port = 5000;
 const saltRounds = 10;
 const dir = dirname(fileURLToPath(import.meta.url));
-const upload = multer({});
+const upload = multer({}); 
 const domain ="http://localhost:3000/"
 const our_domain="http://localhost:5000/"
 
@@ -871,7 +871,7 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
       let result = subject_join(sem_sub,sub);
       console.log(result);
       
-  if(result && unit>=1 && unit <=5 ){
+  if(result && unit>=1 && unit <=5 ){ 
     
       const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
       const topic_arr = topics.data;

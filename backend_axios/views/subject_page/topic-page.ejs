@@ -100,10 +100,16 @@
           <div class="topic-title">
             <h1>Topics</h1>
             <%if(locals.role){%>
+              <div class="buttons-add-delete rev-bg">
+              <div class="delete-topic" id="delete-topic-js">
+                Delete Topic
+                <img src="/images/topic_page/delete-button-icon.png" class="plus-logo1" alt="">
+              </div>
             <div class="add-topic">
               Add new topic
               <img src="/images/notion_space/group_page/plus.png" class="plus-logo1" alt="">
             </div>
+          </div>
             <%}%>
             
           </div>
@@ -131,10 +137,12 @@
               </div>
            </div>
             <!-- all - topic - section -->
-              <div class="topic-container ">
+              <div class="topic-container rev-bg">
                 <%if(locals.topics){
                   for(let i=0;i<topics.length;i++){%>
-                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i]}/video`%>"><div class="topic-card">
+                  <div class="topic-container-section-holder rev-bg">
+
+                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i]}/video`%>"><div class="common-topic-card topic-card">
                     <div class="topic-lable">
                       Unit <%=unit%> </div>
                     <div class="topic-heading">
@@ -147,7 +155,13 @@
                       <div class="divider1"></div>
                       <p>No. of video : 2</p>
                     </div>
-                  </div> </a>
+                  </div> 
+                </a>
+                <div class="delete-button-on delete-button-trans" id="delete-button-js">
+                  delete
+                  <img src="/images/topic_page/delete-button-icon.png" alt="" class="rev-bg">
+                </div>                  
+              </div>
                   <%}}%>
                   
               </div> 
