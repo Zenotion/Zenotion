@@ -221,7 +221,7 @@ app.post("/:department/:subject/:unit", async (req, res) => {
 });
 
 // select all topic from given details 
-app.get("/department/subject/unit", async (req, res) => {
+app.get("/:department/:subject/:unit", async (req, res) => {
     try{
     const { department, subject, unit } = req.params;
     const result = await db2.query(`SELECT topic FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3`, [department, subject, unit]);
