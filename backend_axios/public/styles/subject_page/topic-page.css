@@ -873,8 +873,9 @@ i{
 .delete-topic{
   border: 1px solid black;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 10px;
   width: 150px;
   padding: 10px;
   background-color: #FF4655;
@@ -1080,7 +1081,13 @@ i{
   top: 83px;
 }
 
+.del-icon-config{
+  font-size: 20px;
+}
 
+.del-butotn-text{
+  font-size: 14px;
+}
 
 .left-bar-sem-title{
   display: flex;

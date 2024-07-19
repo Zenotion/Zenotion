@@ -18,12 +18,22 @@ if(s>0){
 let delTopic = document.getElementById("delete-topic-js");
 let topicCard = document.querySelectorAll(".common-topic-card");
 let delButton = document.querySelectorAll(".delete-button-on");
+let textDelButton = document.getElementById("text-change-delete");
+let iconDelButton  = document.getElementById("icon-change-delete");
 
 delTopic.addEventListener("click",()=>{
+  if(textDelButton.textContent = "Cancel"){
+    textDelButton.textContent = "Delete topic"
+    iconDelButton.classList.add("ri-delete-bin-7-fill");
+    iconDelButton.classList.remove("ri-close-large-fill");
+  }else{
+    textDelButton.textContent = "Cancel";
+    iconDelButton.classList.add("ri-close-large-fill");
+    iconDelButton.classList.remove("ri-delete-bin-7-fill");
+  }
   var length_topic_card = topicCard.length;
   for(let i=0;i<length_topic_card;i++){
     topicCard[i].classList.toggle("topic-card-del");
     delButton[i].classList.toggle("delete-button-trans");
   }
-
 })

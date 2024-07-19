@@ -873,7 +873,7 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
       
   if(result && unit>=1 && unit <=5 ){ 
     
-      const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
+      const topics = await axios.get(`${domain}department/subject/unit`);
       const topic_arr = topics.data;
       console.log(topic_arr);
   

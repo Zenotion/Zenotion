@@ -102,8 +102,8 @@
             <%if(locals.role){%>
               <div class="buttons-add-delete rev-bg">
               <div class="delete-topic" id="delete-topic-js">
-                Delete Topic
-                <img src="/images/topic_page/delete-button-icon.png" class="plus-logo1" alt="">
+                <p class="del-butotn-text rev-bg" id="text-change-delete">delete topic</p>
+                <i class="ri-delete-bin-7-fill del-icon-config" id="icon-change-delete"></i>
               </div>
             <div class="add-topic">
               Add new topic
@@ -146,7 +146,7 @@
                     <div class="topic-lable">
                       Unit <%=unit%> </div>
                     <div class="topic-heading">
-                      <h3><%=topics[i]%></h3>
+                      <h3><%=topics[i].topic%></h3>
                       <p>this topic containes the network notes and shit</p></div>
                     <div class="about-topic">
                       <p>No. of documents : 3</p>
