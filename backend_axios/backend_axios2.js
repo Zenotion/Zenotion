@@ -875,7 +875,7 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
     
       const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
       const topic_arr = topics.data;
-      console.log(topic_arr);
+     
   
   if(user_data_role === "teacher" ){
   
@@ -897,6 +897,33 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
    }  
   }); 
     
+
+
+
+server.post("/:dept/:sem/:sub/:unit",async(req,res)=>{
+let {dept,sem,sub,unit} = req.params;
+
+const topic = req.body.topic;
+const description = req.body.des;
+console.log(dept,sem,sub,unit,topic);
+const result = await axios.post(`${domain}department/subject/unit`,{
+  "dept":dept,
+  "sub":sub,
+  "unit":unit,
+  "topic":topic,
+  "des":description
+});
+
+res.redirect(`${domain}${dept}/${sem}/${sub}/${unit}`)
+
+})
+
+
+
+
+
+
+
 
 
 

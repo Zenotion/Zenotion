@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+  <div id="blur">
     <!--nav bar section-->
     <header id="navbar-main">
       <div class="navbar-container">
@@ -105,7 +106,7 @@
                 <p class="del-butotn-text rev-bg" id="text-change-delete">delete topic</p>
                 <i class="ri-delete-bin-7-fill del-icon-config" id="icon-change-delete"></i>
               </div>
-            <div class="add-topic">
+            <div class="add-topic" id="open">
               Add new topic
               <img src="/images/notion_space/group_page/plus.png" class="plus-logo1" alt="">
             </div>
@@ -147,7 +148,7 @@
                       Unit <%=unit%> </div>
                     <div class="topic-heading">
                       <h3><%=topics[i].topic%></h3>
-                      <p>this topic containes the network notes and shit</p></div>
+                      <p><%=topics[i].class%></p></div>
                     <div class="about-topic">
                       <p>No. of documents : 3</p>
                       <div class="divider1"></div>
@@ -178,6 +179,38 @@
         <a href=""><i class="ri-whatsapp-fill"></i></a>
       </div>
     </footer>
+  </div>
+    <div class="main" id="main">
+        <div class="cover">
+
+            <div class="sep">
+                <div class="greetings">
+                    <h2 class="bg welcome-title" >Add Topic</h2>
+                    <div class="box" id="close">
+                        <i class="ri-close-line"></i>
+                    </div>
+                    
+                  </div>
+
+                  <div class="main_form_continer">
+                     
+                      <div class="form">
+                          <form action="" method="" class="form_box">
+                              <label for="title" class="bg">
+                                  Topic name:
+                              </label>
+                              <input type="text" name="title" class="text_enter bg" placeholder="Enter a Topic" id="topic">
+                              <label for="des" class="bg">Description:</label>
+                              <input type="text" class="text_enter bg" placeholder="Enter the Description">
+                              <input type="submit" value="ADD" class="bg go_back">
+                          </form>
+                      </div>
+                      
+                      
+                  </div>
+            </div>
+        </div>
+    </div>
     <script src="/js_files/subject_page/topic-page.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>

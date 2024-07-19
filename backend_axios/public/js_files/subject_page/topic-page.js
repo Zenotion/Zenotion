@@ -37,3 +37,35 @@ delTopic.addEventListener("click",()=>{
     delButton[i].classList.toggle("delete-button-trans");
   }
 })
+
+
+const open = document.getElementById("open");
+const main = document.getElementById("main"); 
+const close = document.getElementById("close");
+const blurs = document.getElementById("blur")
+
+console.log(blur)
+
+open.addEventListener("click",()=>{
+
+    main.classList.add("on");
+    blurs.style.filter = "blur(5px)";
+    
+});
+
+close.addEventListener("click",()=>{
+
+    main.classList.remove("on");
+    blurs.style.filter = "none";
+})
+
+
+main.addEventListener('click', (event) => {
+    console.log(event.target);
+    console.log(main);
+    if (event.target === main) {
+        main.classList.remove("on")
+        blurs.style.filter = "none";
+
+    }
+});
