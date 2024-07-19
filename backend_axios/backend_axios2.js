@@ -139,7 +139,23 @@ server.get("/log_out",(req, res) =>{
     }
   })
 
-
+  server.get("/sign_up",(req,res)=>{
+    try{
+      if(req.isAuthenticated()){
+        req.logout(function (err) {
+          if (err) { 
+            return next(err);
+          }
+          res.redirect("/sign_up")
+        });
+      }else{
+        res.render("sign-up-page/sign-up.ejs");
+      }
+    }catch(err){
+      console.error('Error fetching department data:', err);
+      res.status(500).send('Internal Server Error');
+    }
+  })
 
   //for authentication and login 
 server.post("/login", 
