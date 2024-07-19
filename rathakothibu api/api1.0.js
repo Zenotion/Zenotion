@@ -896,7 +896,7 @@ app.post("/register/auth", async(req,res)=>{
     console.log("name insert successfully in user table"); 
     
     console.log(new_username); 
-   
+    
     res.json(cred.rows);
 } catch (error) {
     console.error('Error during registration:', error);

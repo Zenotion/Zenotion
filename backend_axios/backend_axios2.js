@@ -487,7 +487,7 @@ server.post("/opt_verify",async(req,res)=>{
 
   
   
-//registation
+//registation 
 server.post("/register",async(req,res)=>{
     try{
       console.log("came here");
