@@ -890,12 +890,13 @@ app.post("/register/auth", async(req,res)=>{
     console.log(new_password);
     let new_email = req.body.email;
     let the_role = "stud";
+    let cred = await db3.query("SELECT * FROM CREDENTIALS WHERE username = $1",[new_username]);
     await db3.query("INSERT INTO CREDENTIALS(username,password,role,email) values($1,$2,$3,$4)",[new_username,new_password,the_role,new_email]);
     await db5.query("INSERT INTO users(user_name) values($1)",[req.body.username]);
     console.log("name insert successfully in user table"); 
     
     console.log(new_username); 
-  
+   
     res.json(cred.rows);
 } catch (error) {
     console.error('Error during registration:', error);
