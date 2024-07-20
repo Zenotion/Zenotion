@@ -746,17 +746,18 @@ server.get("/:dept/:sem/:sub/syllabus_download", async (req, res) => {
         // console.log(check_topic);  
         select = select.toLowerCase(); 
         let sem_selected = req.params.sem;
-        // console.log(sem_selected) 
+        console.log(sem_selected) 
      
     if(check_topic){
         const dept_sem_collection = await axios.get(`${domain}${select}`);
         const data = dept_sem_collection.data;
-        // console.log(data);
+        console.log(data);
   
         const result=await axios.post(`${domain}topics`,{
           "dept":req.params.dept,
           "sem":parseInt(sem_selected)
         });
+        console.log(result.data);
         const sem_sub=[];
         const v=[];
         

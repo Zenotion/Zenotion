@@ -1005,6 +1005,7 @@ i{
 
 .topic-card-del{
   border: 1px solid #FF4655;
+  opacity:.7;
   animation: subtleVibration 1s infinite;
 }
 
