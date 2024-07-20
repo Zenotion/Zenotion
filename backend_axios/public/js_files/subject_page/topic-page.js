@@ -49,7 +49,7 @@ console.log(blur)
 open.addEventListener("click",()=>{
 
     main.classList.add("on");
-    blurs.style.filter = "blur(5px)";
+    blurs.style.filter = "blur(3px)";
     
 });
 
@@ -68,4 +68,42 @@ main.addEventListener('click', (event) => {
         blurs.style.filter = "none";
 
     }
+});
+
+const topic_input = document.getElementById("topic");
+const counter = document.getElementById("count1");
+const description_input = document.getElementById("des");
+const count = document.getElementById("count2");
+
+
+topic_input.addEventListener("focus", function() {
+  topic_input.disabled = false; // Enable the input on focus
+});
+
+topic_input.addEventListener("input", (event) => {
+  const maxLength = 25;
+  let val = topic_input.value;
+
+  if (val.length <= maxLength) {
+      counter.innerHTML = `${val.length}/${maxLength}`;
+  } else {
+    topic_input.value = val.slice(0, maxLength); // Trim the value to maxLength
+      counter.innerHTML = `${maxLength}/${maxLength}`;
+  }
+});
+
+description_input.addEventListener("focus", function() {
+  description_input.disabled = false; // Enable the input on focus
+});
+
+description_input.addEventListener("input", (event) => {
+  const maxLength = 75;
+  let val = description_input.value;
+
+  if (val.length <= maxLength) {
+    count.innerHTML = `${val.length}/${maxLength}`;
+  } else {
+    description_input.value = val.slice(0, maxLength); // Trim the value to maxLength
+      count.innerHTML = `${maxLength}/${maxLength}`;
+  }
 });

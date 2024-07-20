@@ -28,6 +28,7 @@ let otp;
 server.use(express.static("public"));
 server.use(body.urlencoded({extended:true,limit:'100mb'}));
 server.use(body.json({limit:'100mb'}));
+server.use(express.json());
 server.use(
     session({
       secret: process.env.SESSION_SECRET,
@@ -922,6 +923,7 @@ let {dept,sem,sub,unit} = req.params;
 
 const topic = req.body.topic;
 const description = req.body.des;
+if(locals.topic){
 console.log(dept,sem,sub,unit,topic);
 const result = await axios.post(`${domain}department/subject/unit`,{
   "dept":dept,
@@ -930,14 +932,29 @@ const result = await axios.post(`${domain}department/subject/unit`,{
   "topic":topic,
   "des":description
 });
+}
 
-res.redirect(`${domain}${dept}/${sem}/${sub}/${unit}`)
+res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}`)
 
 })
 
 
 
+server.get(`/:dept/:sem/:sub/:unit/delete_topic`,async(req,res)=>{
 
+  const {dept,sem,sub,unit} = req.params;
+  const topic = req.query.topic;
+  const data = {
+    "dept":dept,
+    "sub":sub, 
+    "unit":unit, 
+    "topic":topic  
+  }
+  console.log(topic);
+  await axios.delete(`${domain}delete_topic`,{data})  
+
+  res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}`)
+})
 
 
 
