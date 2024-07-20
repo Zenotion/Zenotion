@@ -636,14 +636,14 @@ server.post("/reset_otp",(req,res)=>{
           }
           console.log('Message sent: %s', info.messageId);
       });
-    res.render("./log_in_page/forget_otp.ejs");
+      res.render("./log_in_page/forget_pass.ejs",{emailMgs:"Code sent",email:datas[2]});
   });
   
    
 
   
 server.get("/forget_pass",(req,res)=>{
-    res.render("./log_in_page/forget_pass.ejs");
+    res.render("./log_in_page/forget_pass.ejs",{email:"enter your email"});
   });
   
   server.post("/reset_pass",async(req,res)=>{

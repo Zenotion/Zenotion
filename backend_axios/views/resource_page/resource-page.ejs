@@ -43,11 +43,11 @@
             <h3 class="option-heading">Unit 1</h3>
           </div>
           <div class="item-main-conatainer">
-            <% for(let i=0;i<topics.length;i++){%>
+            <% for(let i=0;i<topics.length;i++){ %>
               <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i]}/${res_ty}`%>">
             <h3 class="option-items"><i class="ri-group-3-line"></i><%= topics[i] %></h3>
           </a>
-            <%}%>
+            <% } %>
         </div>  
         </div>
         <!-- main content page -->
