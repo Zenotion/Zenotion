@@ -118,40 +118,6 @@ nav{
   background-color: #FFEAE3;
 }
 /* main content */
-
-.personal-space-contianer{
-align-self: flex-end;
-padding-right: 3%;
-}
-
-.personal-space{
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 175px;
-  padding: 15px;
-  background-color: #5131F3;
-  color: white;
-  font-weight: 400;
-  border-radius: 5px;
-  transition: all 0.4s ease-in-out;
-  font-size: 1em;
-}
-
-.personal-space img{
-  background: transparent;
-}
-
-.personal-space:hover{
-  background-color: #ECE8E3;
-  color: black;
-  cursor: pointer;
-  transform: translateY(-3px) translateX(2px);
-  box-shadow: -4px 4px 0 0 black;
-}
-
-
 .blurred-background {
   position: absolute;
   top: 0;
@@ -484,13 +450,14 @@ i{
 }
 
 .content-bar{
-  height: 81%;
-  margin-top: 2%;
+  height: 80%;
+  margin-top: 1%;
   width: 71.5vw;
+  padding-top: 1%;
   background-color: #e5e5f7;
   opacity: 1;
   border: 0.3px solid black;
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content:end;
@@ -503,6 +470,16 @@ i{
 
 .sub-info-padding{
   padding: 3%;
+}
+.student-heading{
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+  background-color: #2a292a;
+  color: white;
+  border-radius: 0px 0px 10px 10px ;
 }
 
 .subject-name-main-container{

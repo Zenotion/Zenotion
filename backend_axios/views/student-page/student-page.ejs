@@ -8,7 +8,8 @@
     href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
     rel="stylesheet"
 />
-  <link rel="stylesheet" href="/styles/subject_page/topic-page.css">
+  <!-- <link rel="stylesheet" href="topic-page.css"> -->
+  <link rel="stylesheet" href="/styles/student-page/student-page.css"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -18,7 +19,7 @@
       <div class="navbar-container">
         <div class="logo">
           <a href="#home" class="link-tag-main-logo">
-            <img src="/images/topic_page/zeotion.png" class="main_logo" alt="">
+            <img src="/images/student-page/zeotion.png" class="main_logo" alt="">
           </a>
         </div>
         <div class="left-half">
@@ -44,8 +45,8 @@
             <h3 class="option-heading">Semester 1</h3>
           </div>
           <div class="item-main-conatainer">
-            <%if(locals.sub_arr){
-              for(let i=0;i<sub_arr.length;i++){%>
+            <% if(locals.sub_arr){
+              for(let i=0;i<sub_arr.length;i++){ %>
 
 <a href="<%=`${our_domain}${dept}/${sem}/${sub_arr[i]}/1`%>" ><h3 class="option-items"><i class="ri-group-3-line"></i><%=sub_arr[i]%></h3></a>
 
@@ -55,20 +56,11 @@
         </div>
         <!-- main content page -->
         <div class="content-bar rombus-bg">
-          <div class="personal-space-contianer rev-bg">
-
-          <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/student`%>">
-            <div class="personal-space">
-              Personal Space          
-            </div>
-          </a>
-                      
-        </div>
           <div class="sub-info-padding rev-bg">
 
           <div class="subject-name-main-container">
               <div class="path-content-container rev-bg">
-                <p class="rev-bg">loT and Cyber security including Block chain Technology/semester 1/<b class="rev-bg"><%=sub%></b></p>
+                <p class="rev-bg">loT and Cyber security including Block chain Technology/semester 1/<b class="rev-bg"><%=sub %></b>/<b class="rev-bg">student</b></p>
               </div>
               <div class="subject-name-container rev-bg">
                 <p class="rev-bg"><span id="testing-animation"></span></p>
@@ -87,18 +79,8 @@
                       
         </div>
           <div class="connectors-holder rev-bg">
-            <div class="cover-container">
-              <div class="connector">
-                <div class="connector-header-container">
-                  <p>For to know more about the subject</p>  
-                </div>
-                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/syllabus_download`%>">
-                  <div class="subject-syllabus-download-but">
-                    download the syllabus for <%=sub%>
-                    <i class="ri-download-line"></i>
-                  </div>
-                </a>
-              </div>
+            <div class="student-heading">
+              Student Personal Space
             </div>
           </div>
 
@@ -109,7 +91,6 @@
           <div class="adding-blur rev-bg"></div>
           <div class="topic-title">
             <h1>Topics</h1>
-            <%if(locals.role){%>
               <div class="buttons-add-delete rev-bg">
               <div class="delete-topic" id="delete-topic-js">
                 <p class="del-butotn-text rev-bg" id="text-change-delete">delete topic</p>
@@ -120,11 +101,11 @@
               <img src="/images/notion_space/group_page/plus.png" class="plus-logo1" alt="">
             </div>
           </div>
-            <%}%>
+
             
           </div>
           <div class="divider"></div>
-          <div class="topics-card-container ">
+          <div class="topics-card-container topic-section-bg">
 
             <!-- pic-filter-containe -->
             <div class="topic-filter-container rombus-bg">
@@ -139,15 +120,10 @@
                     <h3>UNIT <%=j%></h3>
                   </div></a>
                   <%}}%>
-               
-                      
-                
-                
-               
               </div>
            </div>
             <!-- all - topic - section -->
-              <div class="topic-container rev-bg">
+              <div class="topic-container topic-section-bg">
                 <%if(locals.topics){
                   for(let i=0;i<topics.length;i++){%>
                   <div class="topic-container-section-holder rev-bg">
@@ -219,8 +195,8 @@
                   </div>
             </div>
         </div>
-    </div>
-    <script src="/js_files/subject_page/topic-page.js"></script>
+      </div>
+    <script src="/js_files/student-page/student-page.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
       var typed = new Typed('#testing-animation', {
