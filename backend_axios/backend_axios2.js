@@ -20,8 +20,8 @@ const upload = multer({});
 const domain ="http://localhost:3000/"
 const our_domain="http://localhost:5000/"
 
-var dept =""; 
-var sub=""; 
+let dept =""; 
+let sub=""; 
 let datas = []
 let otp;    
   
@@ -637,14 +637,14 @@ server.post("/reset_otp",(req,res)=>{
           }
           console.log('Message sent: %s', info.messageId);
       });
-    res.render("./log_in_page/forget_otp.ejs");
+      res.render("./log_in_page/forget_pass.ejs",{emailMgs:"Code sent",email:datas[2]});
   });
   
    
 
   
 server.get("/forget_pass",(req,res)=>{
-    res.render("./log_in_page/forget_pass.ejs");
+    res.render("./log_in_page/forget_pass.ejs",{email:"enter your email"});
   });
   
   server.post("/reset_pass",async(req,res)=>{
@@ -791,11 +791,52 @@ server.get("/:dept/:sem/:sub/syllabus_download", async (req, res) => {
         res.send("page not found");
     }}else{
       res.redirect("/log_in");
-    }
+    } 
     }catch(err){
         res.send(err); 
     }
   }); 
+
+
+//student-page 
+
+function subject_join(arr,sub) {
+
+  return arr.includes(sub);
+}
+
+server.get("/:dept/:sem/:sub/:unit/student", async (req,res)=>{
+  const dept = req.params.dept.toUpperCase();
+      const sem = parseInt(req.params.sem);
+      const sub = req.params.sub;
+      const unit = parseInt(req.params.unit);
+  
+    //   let check = req.user.role;
+  
+      const subject=await axios.post(`${domain}topics`,{
+        "dept":req.params.dept,
+        "sem":parseInt(sem)
+      });
+  
+      
+      const sem_sub=[];
+      subject.data.forEach(obj => {
+        const key = Object.keys(obj)[0]; // Get the first key
+       sem_sub.push(key);
+    });  
+    console.log(sem_sub)
+    
+      let result = subject_join(sem_sub,sub);
+      console.log(result);
+      
+  if(result && unit>=1 && unit <=5 ){ 
+    
+      const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
+      const topic_arr = topics.data;
+      res.render("student-page/student-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"sub_arr":sem_sub});
+  }
+});
+
 
 
   // //post request for document resource to add
@@ -1027,11 +1068,3 @@ passport.use(
     console.log(`sever is running in port ${port}`);
 });
 
-
-//functions for backend
-
-function subject_join(arr,sub) {
-
- 
-  return arr.includes(sub);
-}

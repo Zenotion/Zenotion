@@ -79,3 +79,21 @@ document.getElementById('otpForm').addEventListener('input', function(event) {
         }
     });
   });
+
+
+let otpBoxes = document.querySelectorAll(".otp-boxex");
+let otpSendButton = document.getElementById("otp-button");
+let emailSendInput = document.getElementById("emailInput");
+let eamilOtpSendButton = document.getElementById("email-button");
+
+if( document.getElementById("message")){
+    for(let i= 0; i<otpBoxes.length;i++){
+        otpBoxes[i].disabled = false;
+    }
+    otpSendButton.disabled = false;
+    emailSendInput.disabled =true;
+    eamilOtpSendButton.disabled = true;
+}else{
+    emailSendInput.disabled =false;
+    eamilOtpSendButton.disabled = false;
+}
