@@ -44,8 +44,8 @@
           </div>
           <div class="item-main-conatainer">
             <% for(let i=0;i<topics.length;i++){%>
-              <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i]}/${res_ty}`%>">
-            <h3 class="option-items"><i class="ri-group-3-line"></i><%= topics[i] %></h3>
+              <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i].topic}/${res_ty}`%>">
+            <h3 class="option-items"><i class="ri-group-3-line"></i><%= topics[i].topic %></h3>
           </a>
             <%}%>
         </div>  
@@ -57,7 +57,7 @@
           </div>
           <div class="subject-name-main-container">
               <div class="path-content-container rev-bg">
-                <p class="rev-bg">loT and Cyber security including Block chain Technology/semester 1/Mathematics–I/Unit 1/<b class="rev-bg">neural network</b></p>
+                <p class="rev-bg">loT and Cyber security including Block chain Technology/semester 1/Mathematics–I/Unit 1/<b class="rev-bg"><%=topic%></b></p>
               </div>
               <div class="subject-name-container rev-bg">
                 <p class="rev-bg"><span id="testing-animation"></span></p>

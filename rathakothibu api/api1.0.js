@@ -54,6 +54,7 @@ app.use(bodyParser.urlencoded({ extended: true,limit:'100mb' }));
 app.use(bodyParser.json({limit:'100mb'}));
 app.use(express.json());
 db.connect(); 
+db2.connect();
 db3.connect();
 db4.connect();
 db5.connect();
@@ -89,9 +90,11 @@ app.post("/topics", async (req, res) => {
         const department = req.body.dept;
         const semester = req.body.sem;
 
+
         // Get subjects for the given semester and department
         const subject = await db.query(`SELECT "${semester}" AS subject FROM ${department} WHERE "${semester}" IS NOT NULL`);
         const sub_list = subject.rows.map(row => row.subject);
+        console.log(sub_list);
 
         // Initialize an array to hold the result
         //subject and each unit topic count
@@ -101,23 +104,25 @@ app.post("/topics", async (req, res) => {
         for (let j = 0; j < sub_list.length; j++) {
             const topic_count = [];
             for (let i = 1; i <= 5; i++) {
-                const unit = await db2.query(`SELECT COUNT(topic) FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3`, [department, sub_list[j], i]);
+                const unit = await db2.query(`SELECT COUNT(topic) FROM topics WHERE dept_name = $1 AND sub_name =$2 AND unit_name = $3`,[department,sub_list[j],i]);
                 const count = parseInt(unit.rows[0].count, 10);
                 topic_count.push(count);
             }
             // Push the subject and its unit counts to the result array
             sub_and_topiccount.push({ [sub_list[j]]: topic_count });
         }
+        // console.log(unit.rows);
 
         console.log(sub_and_topiccount); 
-
+ 
         // Send the result back to the client
-        res.send(sub_and_topiccount);
+        res.json(sub_and_topiccount);
     } catch (err) {
         console.log(err);
         res.status(500).send("An error occurred while processing your request.");
-    }
+    }
 });
+
 
 //count document,links and videos
 app.post("/count_docs_video_link", async (req, res) => {
@@ -225,17 +230,15 @@ app.post("/department/subject/unit", async (req, res) => {
 app.get("/:department/:subject/:unit", async (req, res) => {
     try{
     const { department, subject, unit } = req.params;
-    const result = await db2.query(`SELECT topic FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3`, [department, subject, unit]);
-    let topics = result.rows.map(row => ({
-        topic: row.topic,
-        class:row.class}));
+    const result = await db2.query(`SELECT topic,class FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3`, [department, subject, unit]);
+    let topics = result.rows;
     res.send(topics);
 } catch (error) {
     // Handle any errors that occur during the database query or processing
     console.error('Error fetching topics:', error);
     res.status(500).send('Internal Server Error');
 }
-});
+}); 
 
 // Route to upload PDF files
     app.post("/upload_pdf", async (req, res) => {
@@ -896,7 +899,7 @@ app.post("/register/auth", async(req,res)=>{
     console.log("name insert successfully in user table"); 
     
     console.log(new_username); 
-   
+    
     res.json(cred.rows);
 } catch (error) {
     console.error('Error during registration:', error);
@@ -1254,7 +1257,7 @@ app.delete("/link_group",async(req,res)=>{
     const space_id=req.body.space_id;
     const lable=req.body.lable;
     const topic=req.body.topic;
-    const link_title=req.body.link_name;
+    const link_title=req.body.link_name; 
     const admin_username=req.body.username;
     const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
     const lable_id = lable_query.rows[0].lable_id; 
@@ -1287,11 +1290,11 @@ app.post("/reteive_links",async(req,res)=>{
     const link_query=await db4.query(`select * from links where topic_key=$1`,[topicKey]);
     const links = link_query.rows.map(row => ({
         link: row.link,
-        link_title: row.link_title,
+        link_title: row.link_title, 
         link_desc: row.link_desc
     }));   
     res.json(links)
-
+ 
 })
 
 app.post("/retrive_spaces",async(req,res)=>{

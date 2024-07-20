@@ -129,11 +129,7 @@
                 <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${j}`%>"> <div class="unit1 com-style">
                     <h3>UNIT <%=j%></h3>
                   </div></a>
-                  <%}}%>
-               
-                      
-                
-                
+                  <%}}%> 
                
               </div>
            </div>
@@ -143,7 +139,7 @@
                   for(let i=0;i<topics.length;i++){%>
                   <div class="topic-container-section-holder rev-bg">
 
-                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i]}/video`%>"><div class="common-topic-card topic-card">
+                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i].topic}/video`%>"><div class="common-topic-card topic-card">
                     <div class="topic-lable">
                       Unit <%=unit%> </div>
                     <div class="topic-heading">
