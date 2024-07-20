@@ -200,18 +200,19 @@ app.post("/dept_syllabus", async (req, res) => {
 
 
 //putting the topic in the database 
-app.post("/:department/:subject/:unit", async (req, res) => {
+app.post("/department/subject/unit", async (req, res) => {
     try{
     const department = req.body.dept;
     const subject= req.body.sub;
     const unit= req.body.unit;
         const topicname =req.body.topic;
-        console.log(topicname);
+        const description=req.body.des;
+        console.log(topicname,description);
         const existingRecord = await db2.query("SELECT * FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3 AND topic = $4", [department, subject, unit, topicname]);
         if (existingRecord.rows.length > 0) {
             res.send(`The topic are already available`);
         } else {
-            await db2.query("INSERT INTO topics (dept_name, sub_name, unit_name, topic) VALUES ($1, $2, $3, $4)", [department, subject, unit, topicname]);
+            await db2.query("INSERT INTO topics (dept_name, sub_name, unit_name, topic,class) VALUES ($1, $2, $3, $4,$5)", [department, subject, unit, topicname,description]);
             res.send(`Topic '${topicname}' successfully added`);
         }
     } catch (error) {
@@ -224,11 +225,10 @@ app.post("/:department/:subject/:unit", async (req, res) => {
 app.get("/:department/:subject/:unit", async (req, res) => {
     try{
     const { department, subject, unit } = req.params;
-    const result = await db2.query(`SELECT topic,class FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3`, [department, subject, unit]);
-    let topics = result.rows;
-    // let topics = result.rows.map(row => ({
-    //     topic: row.topic,
-        // class:row.class}));
+    const result = await db2.query(`SELECT topic FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3`, [department, subject, unit]);
+    let topics = result.rows.map(row => ({
+        topic: row.topic,
+        class:row.class}));
     res.send(topics);
 } catch (error) {
     // Handle any errors that occur during the database query or processing
@@ -581,7 +581,6 @@ catch (error) {
     console.error('Error adding video:', error);
     res.status(500).json({ error: 'Internal Server Error' });
 }
-
 })
 
 //send the  links to  the server
@@ -827,7 +826,7 @@ app.post("/delete_video", async (req, res) => {
     try{
     const new_username=req.body.user_name;
 
-
+                                 
       // Fetch the PDF file data from the database
     const topic_key = await db4.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND topic = $3 and user_name=$4", [department, subject,topic,new_username]);
     const topicKey = topic_key.rows[0].topic_key;
@@ -891,12 +890,13 @@ app.post("/register/auth", async(req,res)=>{
     console.log(new_password);
     let new_email = req.body.email;
     let the_role = "stud";
+    let cred = await db3.query("SELECT * FROM CREDENTIALS WHERE username = $1",[new_username]);
     await db3.query("INSERT INTO CREDENTIALS(username,password,role,email) values($1,$2,$3,$4)",[new_username,new_password,the_role,new_email]);
     await db5.query("INSERT INTO users(user_name) values($1)",[req.body.username]);
     console.log("name insert successfully in user table"); 
     
     console.log(new_username); 
-  
+    
     res.json(cred.rows);
 } catch (error) {
     console.error('Error during registration:', error);
@@ -919,11 +919,533 @@ app.post("/changePass",async(req,res)=>{
 });
 
 //zenotion room
-app.post("/get_room_names",async(req,res)=>{
-    const spaces=await db4.query("select space_id from space_members where user_name=$1",[req.user.username]);
-    console.log(spaces);
-    res.json(spaces.rows);
+
+app.post("/create_space",async(req,res)=>{
+
+    const sname=req.body.sname;
+    const description=req.body.desc;
+    const group_profile=req.body.g_profile;
+    const user_profile=req.body.u_profile;
+    console.log(req.body);
+    const sid_query=await db4.query(`insert into space (space_name,description,profile) values($1,$2,$3) RETURNING space_id`,[sname,description,group_profile ]);
+    console.log(sid_query.rows[0].space_id);
+    const sid=sid_query.rows[0].space_id;
+    const query=await db4.query(`insert into members (space_id,user_name,user_profile,is_admin) values($1,$2,$3,$4)`,[sid,req.body.user,user_profile,req.body.admin])
+   //insert lables
+    const lables = ["machine learning", "artificial intelligence", "iot", "cyber security", "blockchain", "robotics"];
+    const values = lables.map((lable, index) => `($1, $${index + 2})`).join(', ');
+    const params = [sid, ...lables];
+    const lableQuery = await db4.query(`INSERT INTO lables(space_id, lable) VALUES ${values} RETURNING *`, params);
+    console.log("seccessfull");
+    const lableIds = lableQuery.rows.map(row => row.lable_id);
+    console.log(lableIds);
+    
+    res.json("successfully space created");
+
 })
+
+app.post("/add_topic_group", async (req, res) => {
+    try {
+        const { space_id, lable, topic,topic_desc } = req.body;
+        const lable_query=await db4.query(`select lable_id from lables where space_id=$1 and lable=$2`,[space_id,lable]);
+        const lable_id = lable_query.rows[0].lable_id;
+        console.log(lable_id);
+
+        const topicQuery = await db4.query(`SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2`, [topic, lable_id]);
+        if (topicQuery.rows.length > 0) {
+            return res.status(409).send('Topic already exists');
+        }
+        // Insert topic into topics table
+        await db4.query(`INSERT INTO topics (topic,topic_desc,lable_id) VALUES ($1, $2, $3)`, [topic, topic_desc, lable_id]);
+        
+        console.log("Topic added successfully");
+        res.status(201).send('Topic added successfully');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.post("/retrive_topics",async(req,res)=>{
+    const { space_id, lable} = req.body;
+    const lable_query=await db4.query(`select lable_id from lables where space_id=$1 and lable=$2`,[space_id,lable]);
+    const lable_id = lable_query.rows[0].lable_id;
+    console.log(lable_id);
+    const topic=await db4.query(`select * from topics where lable_id=$1`,[lable_id])
+    const topics = topic.rows.map(row => ({
+        topic: row.topic,
+        topic_title: row.topic_title,
+        lable_id: row.lable_id
+    }));   
+    res.json(topics)
+
+})
+
+app.delete("/topic_group",async(req,res)=>{
+  try{
+    const { space_id, lable, topic } = req.body;
+    const admin_username=req.body.username
+    const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
+
+    if (adminCheckResult.rowCount === 0 || !adminCheckResult.rows[0].is_admin) {
+        return res.status(403).json({ error: 'Only admins can delete a topic.' });
+    }
+    const lable_query=await db4.query(`select lable_id from lables where space_id=$1 and lable=$2`,[space_id,lable]);
+    const lable_id = lable_query.rows[0].lable_id;
+    console.log(lable_id);
+    await db4.query(`delete from topics where lable_id=$1 and topic=$2`,[lable_id,topic])
+    console.log("delete topic successfully");
+    res.send("delete topic successfully");
+  }catch(err){
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+})
+
+app.post("/add_lable_group",async(req,res)=>{
+    try{
+    const { space_id, lable } = req.body;
+    const lablequery = await db4.query(`SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2`, [space_id, lable]);
+        if (lablequery.rows.length > 0) {
+            return res.status(409).send('lable already exists');
+        }
+    await db4.query(`INSERT INTO lables (space_id ,lable) VALUES ($1, $2)`, [space_id,lable]);
+    console.log("lable added successfully");
+    res.json("lable added successfully");
+} catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+}
+    
+}) 
+
+app.delete("/lable_group",async(req,res)=>{
+    try{
+    const { space_id, lable } = req.body;
+    const admin_username=req.body.username;
+
+    const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
+
+    if (adminCheckResult.rowCount === 0 || !adminCheckResult.rows[0].is_admin) {
+        return res.status(403).json({ error: 'Only admins can delete a lable.' });
+    }
+    await db4.query(`delete from lables where space_id=$1 and lable=$2`,[space_id,lable])
+   console.log("successfully deleted lable");
+   res.json("successfully deleted lable"); 
+}catch(err){
+    console.error("Error uploading file:", err);
+    res.status(500).send("Internal Server Error");
+}
+})
+
+app.post("/retrive_lable",async(req,res)=>{
+    try{
+    const space_id= req.body.space_id;
+    const lable_query=await db4.query(`SELECT * from lables where space_id=$1`,[space_id]);
+    const lables = lable_query.rows.map(row => ({
+        lable: row.lable,
+        lable_id: row.lable_id
+    }));
+    res.json(lables);
+}catch(err){
+    console.error("Error uploading file:", err);
+    res.status(500).send("Internal Server Error");
+}
+})
+
+app.post("/add_doc_group", async (req, res) => {
+    try{
+        console.log(req.body);
+        const space_id=req.body.space_id;
+        const topic=req.body.topic;
+        const lable=req.body.lable;
+        const originalname=req.body.file;
+        const buffer= req.body.buffer;
+        const document_title= req.body.doc_title; 
+        const document_desc= req.body.description;
+        const iconClass=req.body.iconClass;
+         
+        console.log(iconClass);
+        const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
+        const lable_id = lable_query.rows[0].lable_id; 
+        console.log(lable_id);
+        // console.log(buffer);
+        const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
+        console.log(topic_key.rows[0]);
+        const topicKey = topic_key.rows[0].topic_key; 
+        console.log(topicKey);
+        await db4.query('INSERT INTO documents(topic_key,document_title,document_desc,document,name,class) VALUES ($1, $2,$3,$4,$5,$6)', [topicKey,document_title,document_desc,buffer,originalname,iconClass]);
+        console.log("file upload successfully");
+        
+        res.json("file upload successfully"); 
+      
+    } catch (error) {
+        console.error("Error uploading file:", error);
+        res.status(500).send("Internal Server Error");
+    } 
+      });  
+      
+app.delete("/doc_group",async(req,res)=>{
+    try{
+    const space_id=req.body.space_id;
+    const topic=req.body.topic;
+    const lable=req.body.lable;
+   const originalname=req.body.file;
+   const admin_username=req.body.username;
+   const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
+
+   if (adminCheckResult.rowCount === 0 || !adminCheckResult.rows[0].is_admin) {
+       return res.status(403).json({ error: 'Only admins can delete a document.' });
+   }
+   const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
+        const lable_id = lable_query.rows[0].lable_id; 
+        console.log(lable_id);
+        // console.log(buffer);
+        const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
+        const topicKey = topic_key.rows[0].topic_key;
+        console.log(topicKey);
+        await db4.query(`delete from documents where topic_key=$1 and name=$2`,[topicKey,originalname])
+        console.log("successfully deleted document");
+
+}catch(err){
+    console.error("Error uploading file:", err);
+    res.status(500).send("Internal Server Error");
+}
+})
+
+app.post("/retrive_documents",async(req,res)=>{
+    try{
+    const space_id=req.body.space_id;
+    const topic=req.body.topic;
+    const lable=req.body.lable;
+   const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
+        const lable_id = lable_query.rows[0].lable_id; 
+        console.log(lable_id);
+        const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
+        const topicKey = topic_key.rows[0].topic_key; 
+        console.log(topicKey);
+    const document_query=await db4.query(`select * from documents where topic_key=$1`,[topicKey]);
+    const docs = document_query.rows.map(row => ({
+        document_title: row.document_title,
+        document_desc: row.document_desc,
+        name: row.name,
+        class:row.class
+    }));    
+     res.json(docs);
+}catch(err){
+    console.error("Error uploading file:", err);
+    res.status(500).send("Internal Server Error");
+}
+})
+
+app.post(`/add_video_group`,async(req,res)=>{
+        try{
+        console.log(req.body);
+        const space_id=req.body.space_id;
+        const topic=req.body.topic;
+        const lable=req.body.lable;
+        const video=req.body.link;
+        console.log(video);
+        function extractVideoId(videoUrl) {
+            // Regular expression to match YouTube video IDs
+            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            var match = videoUrl.match(regExp);
+            if (match && match[2].length === 11) {
+                // The video ID is the second element in the match array
+                return match[2];
+            } else {
+                // If no match found or video ID is not 11 characters long, return null
+                return null;
+            }
+        } 
+        
+        var videoUrl = video;
+        var videoId = extractVideoId(videoUrl);
+        console.log('YouTube Video ID:', videoId);
+        const video_title=req.body.link_name;
+        const video_desc=req.body.description;
+        const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
+        const lable_id = lable_query.rows[0].lable_id; 
+        console.log(lable_id);
+        const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
+        const topicKey = topic_key.rows[0].topic_key;
+        await db4.query("INSERT INTO videos (video, topic_key,video_title,video_desc) VALUES ($1, $2, $3, $4)", [videoId,topicKey,video_title,video_desc]);
+        res.json("add successfully");
+        
+    }
+catch (error) {
+        console.error('Error adding video:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+app.delete("/video_group",async(req,res)=>{
+    try{
+    const space_id=req.body.space_id;
+    const topic=req.body.topic;
+    const lable=req.body.lable;
+    const video_title=req.body.video_title;
+    const admin_username=req.body.username
+
+    const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
+    const lable_id = lable_query.rows[0].lable_id; 
+    console.log(lable_id);
+    const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
+
+       if (adminCheckResult.rowCount === 0 || !adminCheckResult.rows[0].is_admin) {
+           return res.status(403).json({ error: 'Only admins can delete a vidoe.' });
+       }
+    const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
+    const topicKey = topic_key.rows[0].topic_key;
+    await db4.query(`delete from videos where topic_key=$1 and video_title=$2`,[topicKey,video_title])
+    console.log("successfully deleted video");
+    res.json("successfully deleted video");
+    }catch(err){
+        console.error('Error adding video:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+app.post("/retrive_videos",async(req,res)=>{
+    const space_id=req.body.space_id;
+    const topic=req.body.topic;
+    const lable=req.body.lable;
+    console.log(lable);
+   const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
+        const lable_id = lable_query.rows[0].lable_id; 
+        console.log(lable_id);
+    const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
+    const topicKey = topic_key.rows[0].topic_key;
+    const video_query=await db4.query(`select * from videos where topic_key=$1`,[topicKey]);
+    const videos =video_query.rows.map(row => ({
+        video: row.video,
+        video_title: row.video_title,
+        video_desc: row.video_desc
+    }));   
+   
+res.json(videos);
+})
+
+app.post(`/add_link_group`,async(req,res)=>{
+    try{
+    const space_id=req.body.space_id;
+    const lable=req.body.lable;
+    const topic=req.body.topic;
+    const link=req.body.link;
+    const link_title=req.body.link_name;
+    const link_desc=req.body.description;
+    const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
+    const lable_id = lable_query.rows[0].lable_id; 
+    console.log(lable_id);
+
+    const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
+    const topicKey = topic_key.rows[0].topic_key;
+    await db4.query("INSERT INTO links (link,topic_key,link_title, link_desc) VALUES ($1, $2, $3, $4)", [link, topicKey,link_title,link_desc]);
+    res.json("add successfully");
+  
+} catch (error) {
+    console.error("Error adding link:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+}
+});
+
+app.delete("/link_group",async(req,res)=>{
+    try{
+    const space_id=req.body.space_id;
+    const lable=req.body.lable;
+    const topic=req.body.topic;
+    const link_title=req.body.link_name;
+    const admin_username=req.body.username;
+    const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
+    const lable_id = lable_query.rows[0].lable_id; 
+    console.log(lable_id);
+    const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
+
+       if (adminCheckResult.rowCount === 0 || !adminCheckResult.rows[0].is_admin) {
+           return res.status(403).json({ error: 'Only admins can delete a link.' });
+       }
+    const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
+    const topicKey = topic_key.rows[0].topic_key;
+    await db4.query(`delete from links where topic_key=$1 and link_title=$2`,[topicKey,link_title])
+    console.log("successfully deleted links");
+    res.json("successfully deleted links");
+    }catch(err){
+        console.error("Error adding link:", err);
+        res.status(500).json({ error: "Internal Server Error" }); 
+    }
+})
+
+app.post("/reteive_links",async(req,res)=>{
+    const space_id=req.body.space_id;
+    const lable=req.body.lable;
+    const topic=req.body.topic;
+    const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
+    const lable_id = lable_query.rows[0].lable_id; 
+    console.log(lable_id);
+    const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
+    const topicKey = topic_key.rows[0].topic_key;
+    const link_query=await db4.query(`select * from links where topic_key=$1`,[topicKey]);
+    const links = link_query.rows.map(row => ({
+        link: row.link,
+        link_title: row.link_title,
+        link_desc: row.link_desc
+    }));   
+    res.json(links)
+
+})
+
+app.post("/retrive_spaces",async(req,res)=>{
+    try{
+    const user = req.body.username;
+    console.log(user);
+    const query_space=await db4.query(`SELECT s.space_id, s.space_name, s.description ,s.profile,s.created_at,m.user_profile,m.is_admin,m.join_date FROM space s JOIN members m ON s.space_id = m.space_id WHERE m.user_name = $1`,[req.body.username]);
+    const space=query_space.rows;
+    console.log(space);
+    res.json(space);
+    }catch{
+        console.error("Error retrive spaces:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
+    
+app.delete("/spaces",async(req,res)=>{
+     const space_id=req.body.space_id;
+     const admin_username=req.body.username
+     const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
+
+        if (adminCheckResult.rowCount === 0 || !adminCheckResult.rows[0].is_admin) {
+            return res.status(403).json({ error: 'Only admins can delete a space.' });
+        }
+        const spaceCheckResult = await db4.query(
+            `SELECT * FROM space WHERE space_id = $1`,
+            [space_id]
+        );
+
+        if (spaceCheckResult.rowCount === 0) {
+            return res.status(404).json({ error: 'Space not found.' });
+        }
+        // Optionally, delete related rows in the members table
+        await db4.query(`DELETE FROM members WHERE space_id = $1`, [space_id]);
+
+        // Optionally, delete related rows in the topics and lables tables
+        await db4.query(`DELETE FROM topics WHERE lable_id IN (SELECT lable_id FROM lables WHERE space_id = $1)`, [space_id]);
+        await db4.query(`DELETE FROM lables WHERE space_id = $1`, [space_id]);
+        // Delete the space
+        await db4.query(`DELETE FROM space WHERE space_id = $1`, [space_id]);
+
+        console.log("space deleted successfully");
+        res.json({ message: 'Space deleted successfully.' });
+})
+
+
+app.post("/retrive_space_members",async(req,res)=>{
+    const sid = req.body.space_id;
+    console.log(sid);
+    const query_space_members=await db4.query(`SELECT m.user_name,m.is_admin FROM members m JOIN space s ON m.space_id = s.space_id WHERE s.space_id = $1`,[sid]);
+    const space_members = query_space_members.rows.map(row => ({
+        user_name: row.user_name,
+        is_admin: row.is_admin
+    }));
+    console.log(space_members);
+    res.json(space_members);
+})
+
+app.post("/add_members_to_space", async (req, res) => {
+    const { space_id, admin_username, new_members } = req.body;
+
+    try {
+        console.log(admin_username);
+        const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
+        if (adminCheckResult.rowCount === 0 || !adminCheckResult.rows[0].is_admin) {
+            return res.status(403).json({ error: 'Only admins can add new members to this space.' });
+        }
+
+        const newMemberUsernames = new_members.map(member => member.user_name);
+        const existingMembersResult = await db4.query(
+            `SELECT user_name FROM members WHERE space_id = $1 AND user_name = ANY($2::text[])`,
+            [space_id, newMemberUsernames]
+        );
+
+        const existingMemberUsernames = existingMembersResult.rows.map(row => row.user_name);
+        const membersToAdd = new_members.filter(member => !existingMemberUsernames.includes(member.user_name));
+
+        if (membersToAdd.length === 0) {
+            return res.status(400).json('All specified users are already members of the space.' );
+        }
+
+        const values = membersToAdd.map((member, index) => `($1, $${index * 3 + 2}, $${index * 3 + 3}, $${index * 3 + 4})`).join(', ');
+        const params = [space_id];
+        membersToAdd.forEach(member => {
+            params.push(member.user_name, member.user_profile, member.is_admin || false);
+        });
+
+        await db4.query(`INSERT INTO members (space_id, user_name, user_profile, is_admin) VALUES ${values}`, params);
+
+        res.status(200).json({ message: 'Members added successfully.', added_members: membersToAdd });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+app.post("/remove_members_from_space",async(req,res)=>{
+
+    const { space_id, admin_username, username_remove} = req.body;
+
+    try {
+        const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
+
+        if (adminCheckResult.rowCount === 0 || !adminCheckResult.rows[0].is_admin) {
+            return res.status(403).json({ error: 'Only admins can remove members to this space.' });
+        }
+
+        const memberCheckResult = await db4.query(`SELECT user_name FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, username_remove]);
+
+        if (memberCheckResult.rowCount === 0) {
+            return res.status(404).json({ error: 'User not found in the specified space.' });
+        }
+
+        // Step 3: Remove the user from the space
+        await db4.query(`DELETE FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, username_remove]);
+        console.log("successfully removed that user from space");
+        res.json("successfully removed that user from space");
+    }catch(err){
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.post("/make_or_remove_admin",async(req,res)=>{
+    
+    const { space_id, admin_username, username_makeorremove_admin,admin} = req.body;
+
+    try{
+        const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
+
+        if (adminCheckResult.rowCount === 0 || !adminCheckResult.rows[0].is_admin) {
+            return res.status(403).json({ error: 'Only admins can make or remove admin the user.' });
+        }
+         // Step 2: Check if the user to be updated is a member of the space
+         const memberCheckResult = await db4.query(` SELECT user_name FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, username_makeorremove_admin]);
+        if (memberCheckResult.rowCount === 0) {
+            return res.status(404).json({ error: 'User not found in the specified space.' });
+        }
+        // Step 3: Update the is_admin status of the target user
+        await db4.query(`UPDATE members SET is_admin = $1 WHERE space_id = $2 AND user_name = $3`, [admin, space_id, username_makeorremove_admin]);
+
+        // Step 4: Return a success response
+        res.status(200).json({ message: 'User admin status updated successfully.' });
+    }catch(err){
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+
+  
+
 
 
 

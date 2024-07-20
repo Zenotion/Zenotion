@@ -137,10 +137,26 @@ server.get("/log_out",(req, res) =>{
     }catch(err){
       console.error('Error fetching department data:', err);
       res.status(500).send('Internal Server Error');
-    }
+    } 
   })
 
-
+  server.get("/sign_up",(req,res)=>{
+    try{
+      if(req.isAuthenticated()){
+        req.logout(function (err) {
+          if (err) { 
+            return next(err);
+          }
+          res.redirect("/sign_up")
+        });
+      }else{
+        res.render("sign-up-page/sign-up.ejs");
+      }
+    }catch(err){
+      console.error('Error fetching department data:', err);
+      res.status(500).send('Internal Server Error');
+    }
+  })
 
   //for authentication and login 
 server.post("/login", 
@@ -327,7 +343,7 @@ server.post("/opt_verify",async(req,res)=>{
     datas[2]=req.body.email;
     console.log(`working till now `);
     console.log(req.session.previousUrl); 
-    res.render("./log_in_page/otp.ejs"); 
+    res.render("./sign-up-page/otp-verification.ejs"); 
      
   }catch(err){
     console.log("notworking") 
@@ -472,8 +488,8 @@ server.post("/opt_verify",async(req,res)=>{
 
   
   
-//registation
-server.get("/register",async(req,res)=>{
+//registation 
+server.post("/register",async(req,res)=>{
     try{
       console.log("came here");
       let new_username = datas[0];
@@ -485,14 +501,15 @@ server.get("/register",async(req,res)=>{
       "password":new_password,
       "email":new_email
     });
-        const user = result.data[0]; 
+        const user = result.data; 
+        console.log(user)
         req.login(user, (err) => {
           console.log("success");
-          res.redirect("/IOT"); 
+          res.redirect("/log_in"); 
         });
     }catch(err){
       console.log(err);
-    }
+    } 
   
   });
   
