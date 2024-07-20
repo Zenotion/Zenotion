@@ -1793,7 +1793,7 @@ border-radius: 50%;
   flex-direction: column;
   align-items: center;
   width:25em;
-  height: 20em;
+  height: auto;
   background-color: #FFF8F3;
   border: 2px solid black;
   border-radius: 10px;
@@ -1874,4 +1874,11 @@ border-radius: 50%;
   }
   .blur{
     filter: blur(5px);
+  }
+
+  .count{
+    display: flex;
+    justify-content: end;
+    background-color: transparent;
+    font-size: 10px;
   }

@@ -52,8 +52,8 @@ app.use(express.static("public"));
 const upload = multer();
 app.use(bodyParser.urlencoded({ extended: true,limit:'100mb' }));
 app.use(bodyParser.json({limit:'100mb'}));
-db.connect();
-db2.connect();
+app.use(express.json());
+db.connect(); 
 db3.connect();
 db4.connect();
 db5.connect();
@@ -379,7 +379,7 @@ app.post("/topic/doc_get",async(req,res)=>{
 //send the  links to  the server
 app.post(`/topic/link_get`,async(req,res)=>{
     try {
-    const department=req.body.dept;
+    const department=req.body.dept; 
     const subject=req.body.sub;
     const unit=req.body.unit;
     const topic=req.body.topic;
@@ -443,18 +443,19 @@ app.post("/delete_document", async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
 }         
 });
-
+  
 //delete topic
-app.post("/delete_topic", async (req, res) => {
+app.delete("/delete_topic", async (req, res) => {
     try{
         const  department = req.body.dept;
         const subject = req.body.sub;
         const topicname =req.body.topic;
-        const unit=req.body.unit;
-        console.log(req.body);
+        const unit=req.body.unit; 
+        console.log(req.body);  
+        console.log("yes");
         const topic_key = await db2.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name =$3 AND topic = $4", [department, subject,unit,topicname]);
         const topicKey = topic_key.rows[0].topic_key;
-        console.log(topicKey);   
+        console.log(topicKey);     
 
             console.log("topic come to delete");
             await db2.query("delete from documents where topic_key=$1", [topicKey]);
@@ -471,7 +472,7 @@ app.post("/delete_topic", async (req, res) => {
     }
 });
 
-
+ 
 
 //student
 //putting the topic in the stu database 
@@ -926,7 +927,7 @@ app.post("/get_room_names",async(req,res)=>{
 
 
 
-
+     
 
 
 db2.end;
