@@ -230,17 +230,15 @@ app.post("/department/subject/unit", async (req, res) => {
 app.get("/:department/:subject/:unit", async (req, res) => {
     try{
     const { department, subject, unit } = req.params;
-    const result = await db2.query(`SELECT topic FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3`, [department, subject, unit]);
-    let topics = result.rows.map(row => ({
-        topic: row.topic,
-        class:row.class}));
+    const result = await db2.query(`SELECT topic,class FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3`, [department, subject, unit]);
+    let topics = result.rows;
     res.send(topics);
 } catch (error) {
     // Handle any errors that occur during the database query or processing
     console.error('Error fetching topics:', error);
     res.status(500).send('Internal Server Error');
 }
-});
+}); 
 
 // Route to upload PDF files
     app.post("/upload_pdf", async (req, res) => {

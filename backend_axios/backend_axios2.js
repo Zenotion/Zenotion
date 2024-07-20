@@ -894,7 +894,7 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
     
       const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
       const topic_arr = topics.data;
-     
+     console.log(topic_arr);
   
   if(user_data_role === "teacher" ){
   
@@ -923,8 +923,8 @@ server.post("/:dept/:sem/:sub/:unit",async(req,res)=>{
 let {dept,sem,sub,unit} = req.params;
 
 const topic = req.body.topic;
-const description = req.body.des;
-if(locals.topic){
+const description = req.body.discription;
+console.log(description);
 console.log(dept,sem,sub,unit,topic);
 const result = await axios.post(`${domain}department/subject/unit`,{
   "dept":dept,
@@ -933,7 +933,7 @@ const result = await axios.post(`${domain}department/subject/unit`,{
   "topic":topic,
   "des":description
 });
-}
+
 
 res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}`)
 
@@ -959,6 +959,21 @@ server.get(`/:dept/:sem/:sub/:unit/delete_topic`,async(req,res)=>{
 
 
 
+server.get("/:dept/:sem/:sub/:unit/:topic/:res_type",async(req,res)=>{
+
+  const res_ty = req.params.res_type;
+  const dept = req.params.dept.toUpperCase();
+  const sem = parseInt(req.params.sem);
+  const sub = req.params.sub;
+  const unit = parseInt(req.params.unit);
+  const topic = req.params.topic;
+  const check = req.user.role;
+  const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
+  console.log(topics.data);
+  res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check});
+});
+  
+ 
 
 
 
