@@ -986,6 +986,18 @@ border: 0.3px solid black;
 .pro_common:hover{
   background-color: #00000072;
 }
+.profile_pic{
+  border-radius:50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.main_profile_image{
+  border-radius:50%;
+  width: 50px;
+}
 
 .left-bar-sem-title{
   display: flex;

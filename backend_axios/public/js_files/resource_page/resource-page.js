@@ -21,6 +21,13 @@ if(s>0){
 //   imgFilter.style.transform = 'translate(' + x * 20 + 'px, ' + y * 20 + 'px)';
 // });
 
+let pro_button = document.getElementById("profile-option");
+let dis_pro_option = document.getElementById("js_display-pro")
+
+pro_button.addEventListener("click",()=>{
+  dis_pro_option.classList.toggle("dis_profile");
+})
+
 let revealbut = document.querySelector(".chat-trigger1");
 let revealbut1 = document.querySelector(".chat-trigger");
 let icon = document.querySelector(".chat-trigger i");

@@ -751,6 +751,7 @@ server.get("/:dept/:sem/:sub/syllabus_download", async (req, res) => {
         select = select.toLowerCase(); 
         let sem_selected = req.params.sem;
         console.log(sem_selected) 
+        let firstLetter = req.user.username[0].toUpperCase();  
      
     if(check_topic){
         const dept_sem_collection = await axios.get(`${domain}${select}`);
@@ -788,8 +789,8 @@ server.get("/:dept/:sem/:sub/syllabus_download", async (req, res) => {
           "sem_selected":parseInt(sem_selected),
           "topic_count":result.data,
           "dept_name":dept_name,
-          "dept_about":dept_about
-          
+          "dept_about":dept_about,
+          "letter":firstLetter,   
         });
     }else{
         res.send("page not found");
@@ -814,6 +815,7 @@ server.get("/:dept/:sem/:sub/:unit/student", async (req,res)=>{
       const sem = parseInt(req.params.sem);
       const sub = req.params.sub;
       const unit = parseInt(req.params.unit);
+      let firstLetter = req.user.username[0].toUpperCase();  
   
     //   let check = req.user.role;
   
@@ -917,6 +919,7 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
       const sub = req.params.sub;
       const unit = parseInt(req.params.unit);
   
+      let firstLetter = req.user.username[0].toUpperCase(); 
     //   let check = req.user.role;
   
       const subject=await axios.post(`${domain}topics`,{
@@ -947,12 +950,12 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
   
   if(user_data_role === "teacher" ){
   
-      res.render("subject_page/topic-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"role":user_data_role,"sub_arr":sem_sub});
+      res.render("subject_page/topic-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"role":user_data_role,"sub_arr":sem_sub,"letter":"T"});
   
   }else{
     if(user_data_role === "stud"){
   
-      res.render("subject_page/topic-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"sub_arr":sem_sub});
+      res.render("subject_page/topic-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"sub_arr":sem_sub,"letter":firstLetter});
       
   }else{ 
       res.send("page not found");
@@ -1058,6 +1061,8 @@ resource = result.data;
 
 console.log(resource);
   const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
+  let firstLetter = req.user.username[0].toUpperCase();  
+
   console.log(topics.data);
   res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse":resource});
 });
