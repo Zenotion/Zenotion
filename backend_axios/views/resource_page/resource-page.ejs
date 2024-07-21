@@ -136,7 +136,14 @@
            </div>
             <!-- all - topic - section -->
               <div class="topic-container ">
-                    <div class="document-hold-container">
+                    
+                        
+                        <% if(res_ty == "document"){
+                          if(locals.resourse){
+                            for(let i = 0;i<resourse.length;i++){
+                          %>
+
+                          <div class="document-hold-container">
                       <div class="topic-name-lable">
                         <p>neutral networks</p>
                       </div>
@@ -146,22 +153,80 @@
                         </div>
                         <div class="doc-desc rev-bg">
                           <p class="rev-bg">this is mainly used to activate the neurons in the neural network</p>
+                          
                         </div>
-                        <% if(res_ty == "document"){%>
+
                         <div class="main-resource rev-bg">
                           <img src="/images/resource_page/docs.png" alt="" class="file-type rev-bg">
                           <p class="rev-bg">filename.pdf</p>
                         </div>
-                        <% }else if(res_ty == "link"){%>
+
+                          </div>
+                          </div>
+
+                        <%}} }else if(res_ty == "link"){
+                          if(locals.resourse){
+                            for(let i = 0;i<resourse.length;i++){
+                          %>
+
+
+                          <div class="document-hold-container">
+                      <div class="topic-name-lable">
+                        <p>neutral networks</p>
+                      </div>
+                      <div class="main-container-of-document">
+                        <div class="doc-title rev-bg">
+                          <h3 class="rev-bg">Activation Functions</h3>
+                        </div>
+                        <div class="doc-desc rev-bg">
+                          <p class="rev-bg">this is mainly used to activate the neurons in the neural network</p>
+                          
+                        </div>
+                        <a href="<%=`${resourse[i].link}`%>" class="tr_background" target="_blank">
                         <div class="link-button">
                           <p class="rev-bg"><i class="ri-link"></i>link</p>
                         </div>
-                        <% }else{%>
-                          <div class="video-section">
-                          </div>
-                          <% } %>
+                      </a>
+                        </div>
+                        </div>
+
+
+                        <% }}}else{ if(res_ty == "video"){
+
+                          if(locals.resourse){
+                            for(let i = 0;i<resourse.length;i++){
+                          %>
+
+
+                          <div class="document-hold-container">
+                      <div class="topic-name-lable">
+                        <p>neutral networks</p>
                       </div>
-                    </div>
+                      <div class="main-container-of-document">
+                        <div class="doc-title rev-bg">
+                          <h3 class="rev-bg">Activation Functions</h3>
+                        </div>
+                        <div class="doc-desc rev-bg">
+                          <p class="rev-bg">this is mainly used to activate the neurons in the neural network</p>
+                          
+                        </div>
+
+                          <div class="video-section tr_background">
+                            <div class="whole_continer">
+                              <div class="video_continer">
+                                  <!-- <div class="title"></div> -->
+                                  <iframe src="https://www.youtube.com/embed/<%=`${resourse[i].video}`%>" frameborder="0" width="100%" height="350"></iframe>
+                                  
+                      
+                              </div>
+                          </div>
+                          </div>
+                          </div>
+
+
+                          <% }}} }%>
+                      </div>
+                    
                     <!-- <dsiv class="link-hold-container">
                       <div class="topic-name-lable">
                         <p>neutral networks</p>

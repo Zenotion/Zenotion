@@ -725,6 +725,7 @@ background-color:#ECE3CE ;
   display: flex;
   flex-direction: column;
   gap: 1px;
+  margin:10px;
 }
 .link-hold-container{
   width: 100%;
@@ -1766,3 +1767,45 @@ border-radius: 50%;
   border-radius: 10px 0 10px 10px;
 }
 
+
+.whole_continer{
+  padding:6px;
+  display: flex;
+  flex-direction: column;
+  background-color: #5131F3;
+  border-radius: 13px;
+  transition: all .3s ease-in-out;
+ 
+}
+
+iframe{
+  border-radius: 9px;
+}
+.video_continer{
+  border:2px solid #5131F3;
+  padding:6px;
+  border-radius: 11px;
+  background-color: #FFE3E1;
+}
+
+.tr_background{
+  background-color: transparent;
+
+}
+.video_des{
+  display: flex;
+  align-items: center;
+  gap:5px;
+}
+.title{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap:5px;
+  background-color: transparent;
+
+}
+
+.whole_continer:hover{
+  box-shadow: 3px 3px 5px #0808088c;
+}
