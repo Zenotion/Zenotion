@@ -66,7 +66,9 @@ server.get("/",(req,res)=>{
    //notion space
 server.get("/notionspace", async(req,res)=>{
     let user_name = "hirthick"; 
-    let group_name = await axios.get(`${domain}notion_space/${user_name}`);
+    let group_name = await axios.post(`${domain}retrive_spaces`,{
+      "username":user_name
+    })
     let grp_names = group_name.data;
     console.log(grp_names);
     res.render("notion_space/notion_space_home.ejs",{ 
@@ -74,6 +76,8 @@ server.get("/notionspace", async(req,res)=>{
       "our_domain":our_domain}); 
   }); 
   
+
+
   server.get("/notionspace/:selected_grp_id",async(req,res)=>{
     console.log("came here")
     let g_id = req.params.selected_grp_id;
@@ -824,17 +828,21 @@ server.get("/:dept/:sem/:sub/:unit/student", async (req,res)=>{
         const key = Object.keys(obj)[0]; // Get the first key
        sem_sub.push(key);
     });  
-    console.log(sem_sub)
+    // console.log(sem_sub)
     
       let result = subject_join(sem_sub,sub);
-      console.log(result);
-      
-  if(result && unit>=1 && unit <=5 ){ 
-    
-      const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
-      const topic_arr = topics.data;
-      res.render("student-page/student-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"sub_arr":sem_sub});
-  }
+      // console.log(result);
+
+
+      const stu_topic = await axios.post(`${domain}show_stu_topic`,{
+        "dept":dept,
+        "sub":sub,
+        "user_name":"hirthick"
+      })
+      console.log(stu_topic.data);
+      res.render("student-page/student-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":stu_topic.data,"domain":domain,"our_domain":our_domain,"sub_arr":sem_sub});
+
+
 });
 
 
@@ -958,7 +966,7 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
   }); 
     
 
-
+// topic adding rought
 
 server.post("/:dept/:sem/:sub/:unit",async(req,res)=>{
 let {dept,sem,sub,unit} = req.params;
@@ -980,7 +988,7 @@ res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}`)
 
 })
 
-
+// topic deleteing route 
 
 server.get(`/:dept/:sem/:sub/:unit/delete_topic`,async(req,res)=>{
 
@@ -998,7 +1006,7 @@ server.get(`/:dept/:sem/:sub/:unit/delete_topic`,async(req,res)=>{
   res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}`)
 })
 
-
+// resource showing rought
 
 server.get("/:dept/:sem/:sub/:unit/:topic/:res_type",async(req,res)=>{
 
@@ -1009,17 +1017,57 @@ server.get("/:dept/:sem/:sub/:unit/:topic/:res_type",async(req,res)=>{
   const unit = parseInt(req.params.unit);
   const topic = req.params.topic;
   const check = req.user.role;
+
+  let resource ;
+
+if(res_ty === "video"){
+  const result = await axios.post(`${domain}topic/video_get`,{
+    "dept":dept,
+    "sub":sub,
+    "unit":unit,
+    "topic":topic
+  })
+// console.log(result.data)
+resource = result.data;
+}else{
+  if(res_ty === "document"){
+    const result = await axios.post(`${domain}topic/doc_get`,{
+    "dept":dept,
+    "sub":sub,
+    "unit":unit,
+    "topic":topic
+    })
+    console.log(result.data)
+    resource = result.data;
+
+  }else{
+    if(res_ty === "link"){
+      const result = await axios.post(`${domain}topic/link_get`,{
+        "dept":dept,
+        "sub":sub, 
+        "unit":unit,
+        "topic":topic
+        })
+        console.log(result.data)
+        resource = result.data;
+
+    }
+  }
+}
+
+
+console.log(resource);
   const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
   console.log(topics.data);
-  res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check});
+  res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse":resource});
 });
-  
+
+ 
+
  
 
 
-
-
-  
+   
 passport.use(
     "local",
     new Strategy(async function verify(username, password, cb) {

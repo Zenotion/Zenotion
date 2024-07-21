@@ -514,8 +514,8 @@ app.post("/show_stu_topic", async (req, res) => {
     const new_username=req.body.user_name;
     console.log(new_username,department,subject)
     const result = await db5.query(`SELECT topic FROM topics WHERE dept_name = $1 AND sub_name = $2 and user_name=$3`, [department, subject,new_username]);
-    let topics = result.rows.map(row => row.topic);
-    res.send(topics);
+    let topics = result.rows;
+    res.json(topics);
     db.end;
 } catch (error) {
     // Handle any errors that occur during the database query or processing
@@ -1298,7 +1298,7 @@ app.post("/reteive_links",async(req,res)=>{
 })
 
 app.post("/retrive_spaces",async(req,res)=>{
-    try{
+    try{ 
     const user = req.body.username;
     console.log(user);
     const query_space=await db4.query(`SELECT s.space_id, s.space_name, s.description ,s.profile,s.created_at,m.user_profile,m.is_admin,m.join_date FROM space s JOIN members m ON s.space_id = m.space_id WHERE m.user_name = $1`,[req.body.username]);
