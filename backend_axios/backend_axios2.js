@@ -982,7 +982,7 @@ const result = await axios.post(`${domain}department/subject/unit`,{
 res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}`)
 
 })
-
+  
 // topic deleteing route 
 
 server.get(`/:dept/:sem/:sub/:unit/delete_topic`,async(req,res)=>{
