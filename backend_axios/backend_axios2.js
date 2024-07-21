@@ -66,7 +66,9 @@ server.get("/",(req,res)=>{
    //notion space
 server.get("/notionspace", async(req,res)=>{
     let user_name = "hirthick"; 
-    let group_name = await axios.get(`${domain}notion_space/${user_name}`);
+    let group_name = await axios.post(`${domain}retrive_spaces`,{
+      "username":user_name
+    });
     let grp_names = group_name.data;
     console.log(grp_names);
     res.render("notion_space/notion_space_home.ejs",{ 
@@ -984,7 +986,7 @@ const result = await axios.post(`${domain}department/subject/unit`,{
 
 res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}`)
 
-})
+}) 
 
 // topic deleteing route 
 

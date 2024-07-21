@@ -1310,7 +1310,7 @@ app.post("/retrive_spaces",async(req,res)=>{
         res.status(500).json({ error: "Internal Server Error" });
     }
 })
-    
+     
 app.delete("/spaces",async(req,res)=>{
      const space_id=req.body.space_id;
      const admin_username=req.body.username
