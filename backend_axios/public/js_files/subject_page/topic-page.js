@@ -15,6 +15,13 @@ if(s>0){
 });
 
 
+let pro_button = document.getElementById("profile-option");
+let dis_pro_option = document.getElementById("js_display-pro")
+
+pro_button.addEventListener("click",()=>{
+  dis_pro_option.classList.toggle("dis_profile");
+})
+
 let delTopic = document.getElementById("delete-topic-js");
 let topicCard = document.querySelectorAll(".common-topic-card");
 let delButton = document.querySelectorAll(".delete-button-on");
@@ -44,7 +51,6 @@ const main = document.getElementById("main");
 const close = document.getElementById("close");
 const blurs = document.getElementById("blur")
 
-console.log(blur)
 
 open.addEventListener("click",()=>{
 
@@ -67,7 +73,7 @@ main.addEventListener('click', (event) => {
         main.classList.remove("on")
         blurs.style.filter = "none";
 
-    }
+}
 });
 
 const topic_input = document.getElementById("topic");

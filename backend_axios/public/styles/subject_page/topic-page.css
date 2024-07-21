@@ -79,6 +79,7 @@ nav{
   align-items: center;
   border: 1px solid black;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .user-profile-option i{
@@ -117,6 +118,40 @@ nav{
   animation-duration: 0.8s;
   background-color: #FFEAE3;
 }
+
+
+
+.pro_option_display{
+  position:fixed;
+  width: 11em;
+  border: 1px solid black;
+  display: flex;
+  background-color: #F0EBE3;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  right: 3.2em;
+  z-index: 6;
+
+}
+
+.dis_profile{
+  display: none;
+}
+
+.pro_common{
+  width: 100%;
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pro_common:hover{
+  background-color: #00000072;
+}
+
 /* main content */
 
 .personal-space-contianer{
