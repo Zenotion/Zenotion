@@ -27,13 +27,27 @@
               Notion Space          
             </div>
           </a>
-          <div class="user-profile-option">
-            <i class="ri-user-fill"></i>
+          <div class="user-profile-option" id="profile-option">
+            <div class="profile_pic">
+              <img src="/images/logos/<%=`${letter}`%>.png" alt="" class="main_profile_image">
+            </div>
           </div>
         </disv>
       </div>
     </header>
-
+    
+    <div class="pro_option_display dis_profile" id="js_display-pro">
+      <div class="profile-detail-button pro_common">
+          <a href="" class="rev-bg">
+          <h4 class="rev-bg">My Profile</h4>
+        </a>
+        </div>
+        <div class="logout-button pro_common">
+          <a href="/log_out" class="rev-bg ">
+        <h4 class="rev-bg">Log out</h4>
+      </a>
+      </div>
+    </div>
     <!-- main section -->
     <section id="main content ">
       <div class="main-container">
@@ -104,7 +118,7 @@
           <div class="topics-card-container topic-section-bg">
 
             <!-- pic-filter-containe -->
-            <div class="topic-filter-container rombus-bg">
+            <!-- <div class="topic-filter-container rombus-bg">
               <div class="left-bar-sem-title">
                 <img src="/images/notion_space/group_page/unit.png" alt="" class="sem-img-icon">
                 <p class="sem-heading rev-bg">Units</p>
@@ -117,7 +131,7 @@
                   </div></a>
                   <%}}%>
               </div>
-           </div>
+           </div> -->
             <!-- all - topic - section -->
               <div class="topic-container topic-section-bg">
                 <%if(locals.topics){
@@ -126,7 +140,7 @@
 
                 <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i]}/video`%>"><div class="common-topic-card topic-card">
                     <div class="topic-lable">
-                      Unit <%=unit%> </div>
+                      <%=sub%> </div>
                     <div class="topic-heading">
                       <h3><%=topics[i].topic%></h3>
                       <p><%=topics[i].class%></p></div>

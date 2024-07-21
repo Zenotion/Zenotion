@@ -71,6 +71,20 @@ nav{
   justify-content: center;
   gap: 20px;
 }
+
+
+.profile_pic{
+  border-radius:50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.main_profile_image{
+  border-radius:50%;
+  width: 50px;
+}
 .user-profile-option{
   width: 45px;
   height: 45px;
