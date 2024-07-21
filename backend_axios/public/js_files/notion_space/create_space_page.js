@@ -10,3 +10,5 @@ uploadButton.onchange = () => {
   }
   fileName.textContent = uploadButton.files[0].name;
 }
+
+

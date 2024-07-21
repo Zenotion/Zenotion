@@ -1304,7 +1304,7 @@ app.post("/retrive_spaces",async(req,res)=>{
     const query_space=await db4.query(`SELECT s.space_id, s.space_name, s.description ,s.profile,s.created_at,m.user_profile,m.is_admin,m.join_date FROM space s JOIN members m ON s.space_id = m.space_id WHERE m.user_name = $1`,[req.body.username]);
     const space=query_space.rows;
     console.log(space);
-    res.json(space);
+    res.json(space); 
     }catch{
         console.error("Error retrive spaces:", error);
         res.status(500).json({ error: "Internal Server Error" });

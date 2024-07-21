@@ -32,53 +32,60 @@
       <div class="main-container">
         <div class="option-bar rombus-bg">
           <div class="option-heading-container">
-            <a href="<%=our_domain%>notionspace">
+            <a href="">
             <h3 class="option-heading">Notion Space</h3>
           </a>
           </div>
           <div class="item-main-conatainer">
-            <% if(locals.grp_names){%>
+            <!-- <% if(locals.grp_names){%>
               <%for(let i = 0; i<grp_names.length;i++){%>
           <a href="<%=`${our_domain}notionspace/${grp_names[i].space_id}`%>">
             <h3 class="option-items"><i class="ri-group-3-line"></i><%=grp_names[i].space_name%></h3>
           </a>
-            <% }} %>
+            <% }} %> -->
         </div>
         </div>
         <!-- main content page -->
         <div class="content-bar rombus-bg">
           <div class="create-grp-container">
+
+            <div class="add-space-img">
+                          
             <div class="heading-create">
               <h1><span id="testing-animation"></span></h1>
             </div>
-            <div class="add-space-img">
+              <p class="editing-p pro_heading rev-bg">Upload a new profile:</p>
               <div class="file-upload-section rev-bg">
-                <p class="editing-p pro_heading rev-bg">Upload a new profile:</p>
+                <figure class="image-container rev-bg">
+                  <img id="chosen-image" class="rev-bg" src="/images/notion_space/group_page/img.png">
+                  <figcaption id="file-name"></figcaption>
+              </figure>
                 <div class="form-container rev-bg ">
                   <input type="file" id="upload-button" accept="image/*">
-                  <label for="upload-button" class="button-lable rev-bg">
+                  <label for="upload-button" class="button-lable">
                     <i class="fas fa-upload rev-bg"></i> &nbsp; Choose A Photo
                   </label>
                 </div>
-                <figure class="image-container rev-bg">
-                    <img id="chosen-image" class="rev-bg" src="/images/notion_space/group_page/img.png">
-                    <figcaption id="file-name"></figcaption>
-                </figure>
+
               </div>
+
               <div class="new-group-name rev-bg">
-                <p class="editing-p rev-bg">Enter new name:</p>
+                <p class="editing-p rev-bg">Enter space name:</p>
                 <input type="text" class="new-space-new" maxlength="15" oninput="checkCharCount_title()" placeholder="enter the group" id="new_title_form">
-                <div id="charCount_title">0/15</div>
+                <div id="charCount_title" class="count-text">0/15</div>
               </div>
+
               <div class="new-group-name rev-bg">
-                <p class="editing-p rev-bg">Enter new description:</p>
+                <p class="editing-p rev-bg">Enter space description:</p>
                 <input type="text" name="new_description" maxlength="75" class="new-space-new"  oninput="checkCharCount_desc()" placeholder="enter the description" id="new_decs_form">
-                <div id="charCount_desc">0/75</div>
+                <div id="charCount_desc" class="count-text">0/75</div>
               </div>
+
               <div class="add-member-to-grp">
                 <p class="editing-p rev-bg">Enter new description:</p>
                 <input type="text" name="add_member" maxlength="75" class="new-space-new"  oninput="checkCharCount_desc()" placeholder="enter the description" id="new_decs_form">
               </div>
+
             </div>
             
           </div>
