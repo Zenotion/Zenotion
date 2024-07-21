@@ -138,11 +138,7 @@
                 <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${j}`%>"> <div class="unit1 com-style">
                     <h3>UNIT <%=j%></h3>
                   </div></a>
-                  <%}}%>
-               
-                      
-                
-                
+                  <%}}%> 
                
               </div>
            </div>
@@ -152,7 +148,7 @@
                   for(let i=0;i<topics.length;i++){%>
                   <div class="topic-container-section-holder rev-bg">
 
-                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i]}/video`%>"><div class="common-topic-card topic-card">
+                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i].topic}/video`%>"><div class="common-topic-card topic-card">
                     <div class="topic-lable">
                       Unit <%=unit%> </div>
                     <div class="topic-heading">
@@ -167,10 +163,12 @@
                     </div>
                   </div> 
                 </a>
+                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/delete_topic?topic=${topics[i].topic}`%>">
                 <div class="delete-button-on delete-button-trans" id="delete-button-js">
                   delete
                   <img src="/images/topic_page/delete-button-icon.png" alt="" class="rev-bg">
-                </div>                  
+                </div>        
+                </a>          
               </div>
                   <%}}%>
                   
@@ -204,13 +202,15 @@
                   <div class="main_form_continer">
                      
                       <div class="form">
-                          <form action="" method="" class="form_box">
-                              <label for="title" class="bg">
+                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}`%>" method="post" class="form_box">
+                              <label for="topic" class="bg">
                                   Topic name:
                               </label>
-                              <input type="text" name="title" class="text_enter bg" placeholder="Enter a Topic" id="topic">
-                              <label for="des" class="bg">Description:</label>
-                              <input type="text" class="text_enter bg" placeholder="Enter the Description">
+                              <input type="text" name="topic" class="text_enter bg" placeholder="Enter a Topic" id="topic" required>
+                              <div class="count" id="count1">0/25</div>
+                              <label for="description" class="bg">Description:</label>
+                              <input type="text" class="text_enter bg" placeholder="Enter the Description" name="discription" id="des">
+                              <div class="count" id="count2">0/75</div>
                               <input type="submit" value="ADD" class="bg go_back">
                           </form>
                       </div>

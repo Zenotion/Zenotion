@@ -1038,6 +1038,7 @@ i{
 
 .topic-card-del{
   border: 1px solid #FF4655;
+  opacity:.7;
   animation: subtleVibration 1s infinite;
 }
 
@@ -1822,12 +1823,11 @@ border-radius: 50%;
   }
   
   .sep{
-  
   display: flex;
   flex-direction: column;
   align-items: center;
   width:25em;
-  height: 20em;
+  height: auto;
   background-color: #FFF8F3;
   border: 2px solid black;
   border-radius: 10px;
@@ -1908,4 +1908,11 @@ border-radius: 50%;
   }
   .blur{
     filter: blur(5px);
+  }
+
+  .count{
+    display: flex;
+    justify-content: end;
+    background-color: transparent;
+    font-size: 10px;
   }

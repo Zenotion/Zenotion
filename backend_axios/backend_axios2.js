@@ -28,6 +28,7 @@ let otp;
 server.use(express.static("public"));
 server.use(body.urlencoded({extended:true,limit:'100mb'}));
 server.use(body.json({limit:'100mb'}));
+server.use(express.json());
 server.use(
     session({
       secret: process.env.SESSION_SECRET,
@@ -745,17 +746,18 @@ server.get("/:dept/:sem/:sub/syllabus_download", async (req, res) => {
         // console.log(check_topic);  
         select = select.toLowerCase(); 
         let sem_selected = req.params.sem;
-        // console.log(sem_selected) 
+        console.log(sem_selected) 
      
     if(check_topic){
         const dept_sem_collection = await axios.get(`${domain}${select}`);
         const data = dept_sem_collection.data;
-        // console.log(data);
+        console.log(data);
   
         const result=await axios.post(`${domain}topics`,{
           "dept":req.params.dept,
           "sem":parseInt(sem_selected)
         });
+        console.log(result.data);
         const sem_sub=[];
         const v=[];
         
@@ -933,7 +935,7 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
     
       const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
       const topic_arr = topics.data;
-     
+     console.log(topic_arr);
   
   if(user_data_role === "teacher" ){
   
@@ -962,7 +964,8 @@ server.post("/:dept/:sem/:sub/:unit",async(req,res)=>{
 let {dept,sem,sub,unit} = req.params;
 
 const topic = req.body.topic;
-const description = req.body.des;
+const description = req.body.discription;
+console.log(description);
 console.log(dept,sem,sub,unit,topic);
 const result = await axios.post(`${domain}department/subject/unit`,{
   "dept":dept,
@@ -972,16 +975,46 @@ const result = await axios.post(`${domain}department/subject/unit`,{
   "des":description
 });
 
-res.redirect(`${domain}${dept}/${sem}/${sub}/${unit}`)
+
+res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}`)
 
 })
 
 
 
+server.get(`/:dept/:sem/:sub/:unit/delete_topic`,async(req,res)=>{
+
+  const {dept,sem,sub,unit} = req.params;
+  const topic = req.query.topic;
+  const data = {
+    "dept":dept,
+    "sub":sub, 
+    "unit":unit, 
+    "topic":topic  
+  }
+  console.log(topic);
+  await axios.delete(`${domain}delete_topic`,{data})  
+
+  res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}`)
+})
 
 
 
+server.get("/:dept/:sem/:sub/:unit/:topic/:res_type",async(req,res)=>{
 
+  const res_ty = req.params.res_type;
+  const dept = req.params.dept.toUpperCase();
+  const sem = parseInt(req.params.sem);
+  const sub = req.params.sub;
+  const unit = parseInt(req.params.unit);
+  const topic = req.params.topic;
+  const check = req.user.role;
+  const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
+  console.log(topics.data);
+  res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check});
+});
+  
+ 
 
 
 
