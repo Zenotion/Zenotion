@@ -1059,7 +1059,7 @@ console.log(resource);
   let firstLetter = req.user.username[0].toUpperCase();  
 
   console.log(topics.data);
-  res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse":resource});
+  res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse":resource ,"letter":firstLetter});
 });
 
  
