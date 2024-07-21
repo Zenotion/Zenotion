@@ -65,7 +65,7 @@ server.get("/",(req,res)=>{
 
    //notion space
 server.get("/notionspace", async(req,res)=>{
-    let user_name = "hirthick"; 
+  let user_name = req.user.username;
     let group_name = await axios.get(`${domain}notion_space/${user_name}`);
     let grp_names = group_name.data;
     console.log(grp_names);
@@ -77,7 +77,7 @@ server.get("/notionspace", async(req,res)=>{
   server.get("/notionspace/:selected_grp_id",async(req,res)=>{
     console.log("came here")
     let g_id = req.params.selected_grp_id;
-    let user_name = "hirthick"; 
+    let user_name = req.user.username;
     let group_name = await axios.get(`${domain}notion_space/${user_name}`);
     let grp_names = group_name.data;
     let grp_details = await axios.get(`${domain}space_detail/${g_id}`);
@@ -94,14 +94,11 @@ server.get("/notionspace", async(req,res)=>{
 
   //create space route  
 
-server.get("/notionspace/create/space",async(req,res)=>{
-    let user_name = "hirthick";
-    let group_name = await axios.get(`${domain}notion_space/${user_name}`);
-    let grp_names = group_name.data;
-    res.render("notion_space/create_space_page.ejs",{
-      "our_domain":our_domain,
-      "grp_names":grp_names,
-    }) 
+server.get("/notionspace/create/space",(req,res)=>{
+    // let user_name = req.user.username;
+    // let group_name = await axios.get(`${domain}notion_space/${user_name}`);
+    // let grp_names = group_name.data;
+    res.render("notion_space/create_space_page.ejs");
   })
 
  
