@@ -10,6 +10,7 @@ import { Strategy } from "passport-local";
 import session from "express-session";
 import nodemailer from "nodemailer";
 import 'dotenv/config';
+import { waitForDebugger } from "inspector";
 
  
 const server = express();  
@@ -198,6 +199,16 @@ server.post("/login",
     }
 });
 
+server.post("/email_api_redirect", async(req,res)=>{
+  let response = await axios.post(`${domain}check_email`,{
+    "email": req.body.email
+  })
+  if (response.data == "email does not exit"){
+    res.json(false);
+  }else{
+    res.json(true);
+  }
+})
 
 server.post("/user_check", async(req,res)=>{
     try{

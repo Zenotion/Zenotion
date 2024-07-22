@@ -44,7 +44,7 @@ function validateEmailFormat(email) {
 
 async function checkEmailAvailablity(email){
   try {
-    const response = await fetch('http://localhost:3000/check_email', {
+    const response = await fetch('http://localhost:5000/email_api_redirect', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -53,30 +53,35 @@ async function checkEmailAvailablity(email){
         email : email
        })
     });
-    if (!response.ok) {
-      throw new Error('Network response was not ok ' + response.statusText);
-    }
-    const data = await response.json();
-    console.log(data);
+    const datas = await response.json();
+    return datas
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error);
   }
 }
+;
 
-emailAddButton.addEventListener("click",()=>{
+
+
+emailAddButton.addEventListener("click",async()=>{
   let newElementValue = document.getElementById("new_eamil_form").value;
   let result = validateEmailFormat(newElementValue);
   let errorDisplay = document.getElementById("error-display");
-  checkEmailAvailablity(newElementValue);
+  let availableCHeck = await checkEmailAvailablity(newElementValue);
+  console.log(checkEmailAvailablity(newElementValue))
   if(result){
-    errorDisplay.textContent = "";
-    addElement(newElementValue);
-    addRemove(newElementValue);
-    document.getElementById("new_eamil_form").value = "";
+    if(availableCHeck){
+      errorDisplay.textContent = "";
+      addElement(newElementValue);
+      addRemove(newElementValue);
+      document.getElementById("new_eamil_form").value = "";
+    }else{
+      errorDisplay.textContent = "email does not exit";
+    }
+
   }else{
     errorDisplay.textContent = "email is invalid";
   }
-
 })
 
 let createSpaceButton = document.getElementById("create-space-button-js");

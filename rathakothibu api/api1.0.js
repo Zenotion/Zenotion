@@ -1496,3 +1496,18 @@ app.listen(port, () => {
     
    
 
+  app.post("/check_email",async(req,res)=>{
+    try{
+    const email=req.body.email;
+    const result=await db3.query(`select email from credentials where email=$1`,[email]);
+    if(result.rowCount === 0){
+        res.json("email does not exit")
+    }
+    else{
+        res.json("email available")
+    }
+}catch(err){
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+}
+})
