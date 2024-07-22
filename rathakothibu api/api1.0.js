@@ -147,7 +147,7 @@ app.post("/count_docs_video_link", async (req, res) => {
             let dlv=[documents_count,link_count,video_count];
             sub_and_topiccount.push({ [topic_list[j]]: dlv });
         }
-       console.log(sub_and_topiccount)
+       console.log(sub_and_topiccount) 
         res.send(sub_and_topiccount );
     } catch (err) {
         console.log(err);
@@ -1305,13 +1305,42 @@ app.post("/retrive_spaces",async(req,res)=>{
     const space=query_space.rows;
     console.log(space);
     res.json(space);
-    }catch{
+    }catch{  
         console.error("Error retrive spaces:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
+}) 
+app.post("/retrive_space_details",async(req,res)=>{
+    try{
+    const space_id = req.body.space_id;
+    console.log(space_id);
+    const result=await db4.query(`SELECT * FROM public.space WHERE space_id = $1`,[req.body.space_id]);
+    if (result.rows.length === 0) {
+        return res.status(404).json({ error: 'Space not found' });
+      }
+  
+      const space = result.rows[0];
+      const createdAt = new Date(space.created_at); 
+  
+      // Separate date and time
+      const createdDate = createdAt.toISOString().split('T')[0];
+      const createdTime = createdAt.toISOString().split('T')[1].split('.')[0];
+  
+      // Add separated date and time to the space object
+      space.created_date = createdDate;
+      space.created_time = createdTime;
+  
+      // Optionally remove the original created_at field
+      delete space.created_at;
+  
+      res.json(space);
+    }catch{
+        console.error("Error retrive spaces:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 })
-     
-app.delete("/spaces",async(req,res)=>{
+
+app.delete("/spaces",async(req,res)=>{ 
      const space_id=req.body.space_id;
      const admin_username=req.body.username
      const adminCheckResult = await db4.query(`SELECT is_admin FROM members WHERE space_id = $1 AND user_name = $2`, [space_id, admin_username]);
@@ -1321,7 +1350,7 @@ app.delete("/spaces",async(req,res)=>{
         }
         const spaceCheckResult = await db4.query(
             `SELECT * FROM space WHERE space_id = $1`,
-            [space_id]
+            [space_id] 
         );
 
         if (spaceCheckResult.rowCount === 0) {

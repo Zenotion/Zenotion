@@ -81,19 +81,26 @@ server.get("/notionspace", async(req,res)=>{
   server.get("/notionspace/:selected_grp_id",async(req,res)=>{
     console.log("came here")
     let g_id = req.params.selected_grp_id;
-    let user_name = req.user.username;
-    let group_name = await axios.get(`${domain}notion_space/${user_name}`);
-    let grp_names = group_name.data;
-    let grp_details = await axios.get(`${domain}space_detail/${g_id}`);
+    // let user_name = req.user.username;
+    let user_name = "hirthick";
+    let group_name = await axios.post(`${domain}retrive_spaces`,{
+
+      "username":user_name
+
+    }); 
+  
+    let group_detail = await axios.post(`${domain}retrive_space_details`,{
+      "space_id":parseInt(g_id) 
+    })
+  console.log(group_detail.data)
+  
     res.render("notion_space/group_page.ejs",{
-      "grp_names":grp_names,
-      "our_domain":our_domain,  
-      "grp_creator":grp_details.data.creator_name, 
-      "grp_created_time":grp_details.data.space_created_time,
-      "grp_created_date":grp_details.data.space_created_date,
-      "grp_name_title":grp_details.data.space_name,
-      "grp_des":grp_details.data.space_description
-    });  
+     "group_detail":group_detail.data,
+     "groups":group_name.data, 
+     "our_domain":our_domain
+    });   
+  
+  
   });  
 
   //create space route  

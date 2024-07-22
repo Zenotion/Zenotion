@@ -20,7 +20,7 @@
             <img src="/images/notion_space/group_page/zeotion.png" class="main_logo" alt="">
           </a>
         </div>
-        <a href="<%=our_domain%>notionspace/create/space">
+        <a href="<%=`${our_domain}`%>notionspace/create/space">
           <div class="create-room">
             Create new space
             <img src="/images/notion_space/notion_space_home/plus.png" class="plus-logo" alt="">
@@ -55,13 +55,13 @@
         </div>
         <div class="new-group-name rev-bg">
           <p class="editing-p rev-bg">Enter new name:</p>
-          <input type="text" class="new-space-new" maxlength="15" oninput="checkCharCount_title()" value="<%= grp_name_title %> " id="new_title_form">
-          <div id="charCount_title"><%= grp_name_title.length %>/15</div>
+          <input type="text" class="new-space-new" maxlength="15" oninput="checkCharCount_title()" value="<%= group_detail.space_name %> " id="new_title_form">
+          <div id="charCount_title"><%= group_detail.space_name %>/15</div>
         </div>
         <div class="new-group-name rev-bg"> 
           <p class="editing-p rev-bg">Enter new description:</p>
-          <input type="text" name="new_description" maxlength="75" class="new-space-new"  oninput="checkCharCount_desc()" value="<%= grp_des %>" id="new_decs_form">
-          <div id="charCount_desc"><%= grp_des.length %>/75</div>
+          <input type="text" name="new_description" maxlength="75" class="new-space-new"  oninput="checkCharCount_desc()" value="<%= group_detail.description%>" id="new_decs_form">
+          <div id="charCount_desc"><%= group_detail.description %>/75</div>
         </div>
         <div class="post-button rev-bg">
           <div class="create-room-upload rev-bg">
@@ -250,10 +250,10 @@
           </a>
           </div>
           <div class="item-main-conatainer">
-            <% if(locals.grp_names){%>
-              <%for(let i = 0; i<grp_names.length;i++){%>
-          <a href="<%=`${our_domain}notionspace/${grp_names[i].space_id}`%>">
-            <h3 class="option-items" id="<%=`/notionspace/${grp_names[i].space_id}` %>"><i class="ri-group-3-line"></i><%=grp_names[i].space_name%></h3>
+            <% if(locals.groups){%>
+              <%for(let i = 0; i<groups.length;i++){%>
+          <a href="<%=`${our_domain}notionspace/${groups[i].space_id}`%>">
+            <h3 class="option-items" id="<%=`/notionspace/${groups[i].space_id}` %>"><i class="ri-group-3-line"></i><%=groups[i].space_name%></h3>
           </a>
             <% }} %>
         </div>  
@@ -284,7 +284,7 @@
             </div>
             <div class="space-desc rev-bg">
               <h2 class="rev-bg">description</h2>
-              <p class="rev-bg"><%= grp_des %> 
+              <p class="rev-bg"><%= group_detail.description%> 
               </p>
             </div>
             <div class="main-member-about-section rev-bg">
@@ -326,8 +326,8 @@
                 <div class="about-space rev-bg">
                   <h4 class="rev-bg">Total Topic : 9</h4>
                   <h4 class="rev-bg">Total Members : 10</h4>
-                  <h4 class="rev-bg">Create By : <%= grp_creator %></h4>
-                  <h4 class="rev-bg">Created On : <%= grp_created_date %></h4>
+                  <!-- <h4 class="rev-bg">Create By : </h4> -->
+                  <h4 class="rev-bg">Created On : <%=group_detail.created_date %></h4>
                 </div>
               </div>
              </div>
@@ -505,7 +505,7 @@
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
       var typed = new Typed('#testing-animation', {
-        strings: [`<%= grp_name_title %>`],
+        strings: [`<%= group_detail.space_name %>`],
         typeSpeed: 60,
         startDelay: 300
       });
