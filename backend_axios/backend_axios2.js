@@ -110,6 +110,7 @@ server.get("/notionspace/create/space",(req,res)=>{
     // let group_name = await axios.get(`${domain}notion_space/${user_name}`);
     // let grp_names = group_name.data;
     res.render("notion_space/create_space_page.ejs");
+
   })
 
  
@@ -853,7 +854,7 @@ server.get("/:dept/:sem/:sub/:unit/student", async (req,res)=>{
 
 
 
-  // //post request for document resource to add
+  //post request for document resource to add
 
 server.post("/:dept/:sub/:unit/:topic/doc_res",upload.single('file'),async(req,res)=>{
   try{
@@ -937,7 +938,7 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
         const key = Object.keys(obj)[0]; // Get the first key
        sem_sub.push(key);
     });  
-    console.log(sem_sub)
+    console.log(sem_sub) 
 
       let user_data_username = req.user.username;
       let user_data_role = req.user.role;
@@ -950,16 +951,23 @@ res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
     
       const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
       const topic_arr = topics.data;
-     console.log(topic_arr);
+    //  console.log(topic_arr);
+
+     const resource_count = await axios.post(`${domain}count_docs_video_link`,{
+    "dept":dept,
+    "sub":sub,
+    "unit":unit
+  })
+  console.log(resource_count.data);
   
   if(user_data_role === "teacher" ){
   
-      res.render("subject_page/topic-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"role":user_data_role,"sub_arr":sem_sub,"letter":"T"});
+      res.render("subject_page/topic-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"role":user_data_role,"sub_arr":sem_sub,"letter":"T","resource_count":resource_count.data});
   
   }else{
     if(user_data_role === "stud"){
   
-      res.render("subject_page/topic-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"sub_arr":sem_sub,"letter":firstLetter});
+      res.render("subject_page/topic-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":topic_arr,"domain":domain,"our_domain":our_domain,"sub_arr":sem_sub,"letter":firstLetter,"resource_count":resource_count.data});
       
   }else{ 
       res.send("page not found");
@@ -1018,37 +1026,53 @@ server.get(`/:dept/:sem/:sub/:unit/delete_topic`,async(req,res)=>{
 server.get("/:dept/:sem/:sub/:unit/:topic/:res_type",async(req,res)=>{
 
   const res_ty = req.params.res_type;
-  const dept = req.params.dept.toUpperCase();
-  const sem = parseInt(req.params.sem);
+  const dept = req.params.dept.toUpperCase(); 
+  const sem = parseInt(req.params.sem); 
   const sub = req.params.sub;
-  const unit = parseInt(req.params.unit);
+  const unit = parseInt(req.params.unit); 
   const topic = req.params.topic;
   const check = req.user.role;
 
-  let resource ;
+  const resource_count = await axios.post(`${domain}count_docs_video_link`,{
+    "dept":dept,
+    "sub":sub,
+    "unit":unit
+  })
+  
+  const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
+  let firstLetter = req.user.username[0].toUpperCase();  
+
 
 if(res_ty === "video"){
+  console.log("video");
   const result = await axios.post(`${domain}topic/video_get`,{
     "dept":dept,
     "sub":sub,
     "unit":unit,
     "topic":topic
   })
-// console.log(result.data)
-resource = result.data;
+console.log(result.data)
+ 
+res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse": result.data,"letter":firstLetter});
+
 }else{
   if(res_ty === "document"){
+console.log("doc");
     const result = await axios.post(`${domain}topic/doc_get`,{
+
     "dept":dept,
     "sub":sub,
     "unit":unit,
     "topic":topic
-    })
+
+    }) 
+
     console.log(result.data)
-    resource = result.data;
+    res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse": result.data,"letter":firstLetter});
 
   }else{
     if(res_ty === "link"){
+      console.log("link");
       const result = await axios.post(`${domain}topic/link_get`,{
         "dept":dept,
         "sub":sub, 
@@ -1056,27 +1080,101 @@ resource = result.data;
         "topic":topic
         })
         console.log(result.data)
-        resource = result.data;
+  res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse": result.data,"letter":firstLetter});
 
     }
   }
 }
 
 
-console.log(resource);
-  const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
-  let firstLetter = req.user.username[0].toUpperCase();  
-
-  console.log(topics.data);
-  res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse":resource ,"letter":firstLetter});
+  // console.log(topics.data);
+  // res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse":resource,"letter":firstLetter});
 });
 
  
+// add resource
 
+
+
+
+server.post(`/:dept/:sem/:sub/:unit/:topic/:res_type`,upload.single('file'),async(req,res)=>{
+
+      const {dept,sem,sub,unit,topic} = req.params;
+      const type = req.params.res_type;
+      let iconClass = "";
+      console.log(type);
+      console.log(req.body); 
+
+if(type === "link"){
+  await axios.post(`${domain}topic/link`,{
+    "dept":dept,
+    "sub":sub,
+    "unit":unit,
+    "topic":topic,
+    "body":req.body
+  })
+}else{
+  if(type === "video"){
+    await axios.post(`${domain}topic/video`,{
+      "dept":dept,
+      "sub":sub,
+      "unit":unit,
+      "topic":topic,
+      "body":req.body
+    })
+  }else{
+    if(type === "document"){
+      const fileType = getFileType(req.file.originalname);
+
+      switch (fileType) {
+        case "PDF Document":
+          iconClass = "pdf.png";        
+          break;
+        case "JPG Image":
+        case "PNG Image":
+          iconClass = "docs.png"; 
+          break;
+        case "Microsoft Word Document x":
+        case "Microsoft Word Document":
+          iconClass = "docs.png";  
+          break;
+        case "Microsoft PowerPoint Presentation":
+        case "Microsoft PowerPoint Presentation x":
+          iconClass = "ppt.png";
+          break;
+        case "MP4 Video":
+          iconClass = "video.png"; 
+          break;
+        default:
+          iconClass = "docs.png"; 
+      }
+
+
+      const respond = await axios.post(`${domain}upload_pdf`,{
+        "dept":dept,
+        "sub":sub, 
+        "unit":unit,
+        "topic":topic, 
+        "buffer":req.file.buffer,
+        "file":req.file.originalname,
+        "doc_title":req.body.topic,
+        "description":req.body.discription,
+        "iconClass": iconClass
+    })
+
+console.log(respond.data);
+
+    }
+  } 
+} 
+
+res.redirect(`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/${type}`)
+ 
+})
  
 
 
-   
+    
 passport.use(
     "local",
     new Strategy(async function verify(username, password, cb) {
@@ -1125,3 +1223,35 @@ passport.use(
     console.log(`sever is running in port ${port}`);
 });
 
+
+
+
+
+//function
+
+//find which type of file is this
+function getFileType(filename) {
+  // Get the file extension
+  const extension = filename.split('.').pop().toLowerCase();
+
+  // Define mappings of file extensions to file types
+  const fileTypes = {
+    'pdf': 'PDF Document',
+    'doc': 'Microsoft Word Document',
+    'docx': 'Microsoft Word Document x',
+    'ppt': 'Microsoft PowerPoint Presentation',
+    'pptx': 'Microsoft PowerPoint Presentation x',
+    'jpg': 'JPG Image',
+    'jpeg': 'JPEG Image',
+    'png': 'PNG Image',
+    'gif': 'GIF Image',
+    'mp4': 'MP4 Video',
+  };
+
+  // Check if the extension exists in the fileTypes object
+  if (fileTypes.hasOwnProperty(extension)) {
+      return fileTypes[extension];
+  } else {
+      return 'Unknown File Type';
+  }
+}

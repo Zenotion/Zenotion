@@ -1752,31 +1752,31 @@ function subject_join(arr,sub) {
 }
 
 
-// //find which type of file is this
-// function getFileType(filename) {
-//   // Get the file extension
-//   const extension = filename.split('.').pop().toLowerCase();
+//find which type of file is this
+function getFileType(filename) {
+  // Get the file extension
+  const extension = filename.split('.').pop().toLowerCase();
 
-//   // Define mappings of file extensions to file types
-//   const fileTypes = {
-//     'pdf': 'PDF Document',
-//     'doc': 'Microsoft Word Document',
-//     'docx': 'Microsoft Word Document x',
-//     'ppt': 'Microsoft PowerPoint Presentation',
-//     'pptx': 'Microsoft PowerPoint Presentation x',
-//     'jpg': 'JPG Image',
-//     'jpeg': 'JPEG Image',
-//     'png': 'PNG Image',
-//     'gif': 'GIF Image',
-//     'mp4': 'MP4 Video',
-//   };
+  // Define mappings of file extensions to file types
+  const fileTypes = {
+    'pdf': 'PDF Document',
+    'doc': 'Microsoft Word Document',
+    'docx': 'Microsoft Word Document x',
+    'ppt': 'Microsoft PowerPoint Presentation',
+    'pptx': 'Microsoft PowerPoint Presentation x',
+    'jpg': 'JPG Image',
+    'jpeg': 'JPEG Image',
+    'png': 'PNG Image',
+    'gif': 'GIF Image',
+    'mp4': 'MP4 Video',
+  };
 
-//   // Check if the extension exists in the fileTypes object
-//   if (fileTypes.hasOwnProperty(extension)) {
-//       return fileTypes[extension];
-//   } else {
-//       return 'Unknown File Type';
-//   }
-// }
+  // Check if the extension exists in the fileTypes object
+  if (fileTypes.hasOwnProperty(extension)) {
+      return fileTypes[extension];
+  } else {
+      return 'Unknown File Type';
+  }
+}
 
 

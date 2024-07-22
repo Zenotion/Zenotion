@@ -87,7 +87,7 @@ app.get("/:dept",async(req,res)=>{
 
 app.post("/topics", async (req, res) => {
     try {
-        const department = req.body.dept;
+        const department = req.body.dept; 
         const semester = req.body.sem;
 
 
@@ -126,15 +126,15 @@ app.post("/topics", async (req, res) => {
 
 //count document,links and videos
 app.post("/count_docs_video_link", async (req, res) => {
-    try {
+    try {  
         const department = req.body.dept;
-        const subject = req.body.sub;
+        const subject = req.body.sub; 
         const unit=req.body.unit
         const topics = await db2.query(`SELECT topic FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3`, [department, subject, unit]);
         const topic_list = topics.rows.map(row => row.topic);
         const sub_and_topiccount = [];
-        for (let j = 0; j < topic_list.length; j++) {
-            const topic= topic_list[j];
+        for (let j = 0; j < topic_list.length; j++) {  
+            const topic= topic_list[j]; 
             const topic_key_result = await db2.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3 AND topic = $4", [department, subject, unit, topic]);
              console.log(topic_key_result.rows[0].topic_key);
              const topic_key=topic_key_result.rows[0].topic_key;
@@ -148,12 +148,12 @@ app.post("/count_docs_video_link", async (req, res) => {
             sub_and_topiccount.push({ [topic_list[j]]: dlv });
         }
        console.log(sub_and_topiccount) 
-        res.send(sub_and_topiccount );
+        res.json(sub_and_topiccount );
     } catch (err) {
         console.log(err);
         res.status(500).send("An error occurred while processing your request.");
     }
-});
+}); 
 
 
 app.post("/dept_syllabus", async (req, res) => {
@@ -252,22 +252,22 @@ try{
        const document_title= req.body.doc_title; 
        const document_desc= req.body.description;
        const iconClass=req.body.iconClass;
-       console.log(iconClass);
-    //    console.log(buffer);
+       console.log(document_desc);
+       console.log(req.body);
      const topic_key = await db2.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3 AND topic = $4", [department, subject, unit, topic]);
      const topicKey = topic_key.rows[0].topic_key;
     console.log(topicKey);
-    await db2.query('INSERT INTO documents (topic_key,document_title,document_desc,document,name) VALUES ($1, $2,$3,$4,$5)', [topicKey,document_title,document_desc,buffer,originalname]);
+    await db2.query('INSERT INTO documents (topic_key,document_title,document_desc,document,name,class) VALUES ($1,$2,$3,$4,$5,$6)', [topicKey,document_title,document_desc,buffer,originalname,iconClass]);
     console.log("file upload successfully");
     res.json("file upload successfully");
-} catch (error) {
+} catch (error) { 
     console.error("Error uploading file:", error);
     res.status(500).send("Internal Server Error");
 } 
   });     
   
 // Route to fetch all PDF files
-app.post("/show_pdf", async (req, res) => {
+app.post("/show_pdf", async (req, res) => { 
     try{
     const department=req.body.dept;
     console.log(department)
@@ -302,7 +302,7 @@ app.post(`/topic/link`,async(req,res)=>{
     const topic=req.body.topic;
     const link=req.body.body.link;
     const link_title=req.body.body.link_name;
-    const link_desc=req.body.body.description;
+    const link_desc=req.body.body.discription;
     console.log(link,link_title,link_desc,department,subject,unit,topic)
     const topic_key = await db2.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3 AND topic = $4", [department, subject, unit, topic]);
     const topicKey = topic_key.rows[0].topic_key;
@@ -321,9 +321,11 @@ app.post(`/topic/video`,async(req,res)=>{
     
     const department=req.body.dept;
     const subject=req.body.sub;
-    const unit=req.body.unit;
+    const unit=req.body.unit; 
     const topic=req.body.topic;
-    const video=req.body.body.link;
+    const video=req.body.body.link_name;
+    const video_title=req.body.body.topic;
+    const video_desc=req.body.body.discription;
 
     function extractVideoId(videoUrl) {
         // Regular expression to match YouTube video IDs
@@ -338,11 +340,8 @@ app.post(`/topic/video`,async(req,res)=>{
         }
     }
     
-    var videoUrl = video;
-    var videoId = extractVideoId(videoUrl);
+    var videoId = extractVideoId(video);
     console.log('YouTube Video ID:', videoId);
-    const video_title=req.body.body.link_name;
-    const video_desc=req.body.body.description;
     const topic_key = await db2.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3 AND topic = $4", [department, subject, unit, topic]);
     const topicKey = topic_key.rows[0].topic_key;
     await db2.query("INSERT INTO videos (video, topic_key,video_title,video_desc) VALUES ($1, $2, $3, $4)", [ videoId,topicKey,video_title,video_desc]);
@@ -361,15 +360,18 @@ app.post("/topic/doc_get",async(req,res)=>{
     const subject=req.body.sub;
     const unit=req.body.unit;
     const topic=req.body.topic;
+
     const topic_key = await db2.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3 AND topic = $4", [department, subject, unit, topic]);
     const topicKey = topic_key.rows[0].topic_key;
     const documents = await db2.query("SELECT document_title,document_desc,name,class FROM documents WHERE topic_key = $1", [topicKey]);
-    const docs = documents.rows.map(row => ({
-        document_title: row.document_title,
-        document_desc: row.document_desc,
-        name: row.name,
-        class:row.class
-    }));    
+    const docs = documents.rows;
+    // .map(row => ({
+    //     document_title: row.document_title,
+    //     document_desc: row.document_desc,
+    //     name: row.name,
+    //     class:row.class
+    // }));    
+    console.log(docs);
      res.json(docs);
      }catch(error){
         console.error('Error showing doc names:', error);
@@ -1320,7 +1322,7 @@ app.post("/retrive_space_details",async(req,res)=>{
       }
   
       const space = result.rows[0];
-      const createdAt = new Date(space.created_at); 
+      const createdAt = new Date(space.created_at);  
   
       // Separate date and time
       const createdDate = createdAt.toISOString().split('T')[0];
