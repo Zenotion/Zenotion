@@ -82,12 +82,18 @@
               </div>
 
               <div class="add-member-to-grp">
-                <p class="editing-p rev-bg">Enter new description:</p>
-                <input type="text" name="add_member" maxlength="75" class="new-space-new"  oninput="checkCharCount_desc()" placeholder="enter the description" id="new_decs_form">
+                <p class="editing-p rev-bg">add members:</p>
+                <div class="email-container">
+                  <input type="email" name="add_member" maxlength="75" class="new-space-email"  placeholder="enter the description" id="new_eamil_form">
+                  <div class="add-email-button" id="add-email-button-js">add</div>
+                </div>
+                <div class="entered-email-section" id="entered-email-section-js">
+                </div>
+                <div class="rev-bg error-display-style" id="error-display"></div>
               </div>
 
             </div>
-            
+            <div class="create-space-button" id="create-space-button-js">Create space</div>
           </div>
         </div>
     </section>

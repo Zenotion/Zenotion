@@ -1033,11 +1033,7 @@ border: 0.3px solid black;
   font-weight: 500;
   font-size: 20px;
 }
-.new-group-name{
-  display: flex;
-  flex-direction: column;
-  gap:7px;
-}
+
 #charCount_title{
   font-size: 10px;
   align-self: self-end;

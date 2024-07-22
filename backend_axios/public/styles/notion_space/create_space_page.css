@@ -255,8 +255,8 @@ i{
 }
 .image-container img{
   position: relative; 
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
 }
 
 .button-lable{
@@ -335,8 +335,11 @@ i{
 .create-grp-container{
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 25px 10px;
   border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 
@@ -346,11 +349,31 @@ i{
 
 
 
+.pro_heading{
+  align-self: center;
+  font-size: 1.3em;
+  font-weight: 500;
+}
 
 
+.email_arrangement{
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+  align-items: center;
+}
 
+.error-display-style{
+  color: red;
+}
 
+.email_arrangement p{ 
+  background-color: transparent;
+}
 
+.worng_button:hover{
+  color: red;
+}
 
 footer{
   position: relative;
@@ -476,3 +499,91 @@ border-radius: 50%;
   border-radius: 10px 0 10px 10px;
 }
 
+.add-email-button{
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 180px;
+  padding: 10px;
+  background-color: #5131F3;
+  color: white;
+  font-weight: 400;
+  border-radius: 5px;
+  transition: all 0.4s ease-in-out;
+  font-size: small;
+}
+
+.add-email-button:hover{
+  background-color: #ECE8E3;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: -4px 4px 0 0 black;
+}
+
+.add-member-to-grp{
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.email-container{
+  display: flex;
+  gap: 5px;
+}
+
+.new-space-email{
+  outline: none;
+  border: none;
+  padding: 3px;
+  border: 1px solid black;
+  width:100%;
+  height: 40px;
+  font-size: 15px;
+}
+.new-space-email:hover{
+  border-color: #667BC6;
+  background-color: #D3CEDF;
+}
+.new-space-email:focus{
+  border-color: #5131F3;
+  background-color: #D3CEDF;
+}
+
+.entered-email-section{
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.email-item{
+  padding: 7px;
+  border-radius: 15px;
+  background-color: #D0B8A8;
+}
+
+.create-space-button{
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 180px;
+  padding: 10px;
+  background-color: #5131F3;
+  color: white;
+  font-weight: 400;
+  border-radius: 5px;
+  transition: all 0.4s ease-in-out;
+  font-size: 1.1em;
+  align-self: center;
+}
+
+.create-space-button:hover{
+  background-color: #ECE8E3;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: -4px 4px 0 0 black;
+}
