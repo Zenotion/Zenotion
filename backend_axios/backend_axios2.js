@@ -112,6 +112,9 @@ server.get("/notionspace/create/space",(req,res)=>{
     res.render("notion_space/create_space_page.ejs");
   })
 
+server.post("/notionspace/create/space",(req,res)=>{
+  console.log(req.body);
+})
  
   //send the log in page to client
 
