@@ -125,6 +125,7 @@ server.get("/notionspace/create/space",(req,res)=>{
 
   //send the log in page to client
 
+  
 server.get("/log_out",(req, res) =>{
     try{
     req.logout(function (err) {
