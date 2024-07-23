@@ -54,14 +54,14 @@
             <div class="heading-create">
               <h1><span id="testing-animation"></span></h1>
             </div>
-              <p class="editing-p pro_heading rev-bg">Upload a new profile:</p>
+            <p class="editing-p pro_heading rev-bg">Upload a new profile:* <span id="require-alert-mgs-img"></span></p>
               <div class="file-upload-section rev-bg">
                 <figure class="image-container rev-bg">
                   <img id="chosen-image" class="rev-bg" src="/images/notion_space/group_page/img.png">
                   <figcaption id="file-name"></figcaption>
               </figure>
                 <div class="form-container rev-bg ">
-                  <input type="file" id="upload-button" accept="image/*">
+                  <input type="file" id="upload-button" name="image" oninput="imgaleart()" accept="image/*">
                   <label for="upload-button" class="button-lable">
                     <i class="fas fa-upload rev-bg"></i> &nbsp; Choose A Photo
                   </label>
@@ -70,21 +70,21 @@
               </div>
 
               <div class="new-group-name rev-bg">
-                <p class="editing-p rev-bg">Enter space name:</p>
+                <p class="editing-p rev-bg">Enter space name:*  <span id="require-alert-mgs"></span></p>
                 <input type="text" class="new-space-new" maxlength="15" oninput="checkCharCount_title()" placeholder="enter the group" id="new_title_form">
                 <div id="charCount_title" class="count-text">0/15</div>
               </div>
 
               <div class="new-group-name rev-bg">
-                <p class="editing-p rev-bg">Enter space description:</p>
+                <p class="editing-p rev-bg">Enter space description: <i><span>(optional)</span></i> </p>
                 <input type="text" name="new_description" maxlength="75" class="new-space-new"  oninput="checkCharCount_desc()" placeholder="enter the description" id="new_decs_form">
                 <div id="charCount_desc" class="count-text">0/75</div>
               </div>
 
               <div class="add-member-to-grp">
-                <p class="editing-p rev-bg">add members:</p>
+                <p class="editing-p rev-bg">add members:* <span id="require-alert-mgs-email"></span></p>
                 <div class="email-container">
-                  <input type="email" name="add_member" maxlength="75" class="new-space-email"  placeholder="enter the description" id="new_eamil_form">
+                  <input type="email" name="add_member" maxlength="75" class="new-space-email" oninput="checkCharCount_email()"  placeholder="example@gmail.com" id="new_eamil_form">
                   <div class="add-email-button" id="add-email-button-js">add</div>
                 </div>
                 <div class="entered-email-section" id="entered-email-section-js">

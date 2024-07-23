@@ -113,10 +113,15 @@ server.get("/notionspace/create/space",(req,res)=>{
     res.render("notion_space/create_space_page.ejs");
   })
 
-server.post("/notionspace/create/space",(req,res)=>{
-  console.log(req.body);
-})
- 
+  server.post('/notionspace/create/space', upload.single('image'), (req, res) => {
+    const { spaceName, description, email } = req.body;
+    const image = req.file;
+    console.log('Space Name:', spaceName);
+    console.log('Description:', description);
+    console.log('Email:', JSON.parse(email)); // Parse JSON string to array
+    console.log('Image:', image.buffer);
+});
+
   //send the log in page to client
 
 server.get("/log_out",(req, res) =>{
@@ -126,7 +131,7 @@ server.get("/log_out",(req, res) =>{
         return next(err);
       }
       res.redirect("/")
-    });
+    });     
   }catch(err){
     console.error('Error fetching department data:', err);
     res.status(500).send('Internal Server Error');
