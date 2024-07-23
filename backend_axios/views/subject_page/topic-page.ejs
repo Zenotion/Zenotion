@@ -169,11 +169,11 @@
                       <h3><%=topics[i].topic%></h3>
                       <p><%=topics[i].class%></p></div>
                     <div class="about-topic">
-                      <p>No. of documents : 3</p>
+                      <p>No. of documents : <%=resource_count[i][`${topics[i].topic}`][0]%></p>
                       <div class="divider1"></div>
-                      <p>No. of links : 5</p>
+                      <p>No. of links : <%=resource_count[i][`${topics[i].topic}`][1]%></p>
                       <div class="divider1"></div>
-                      <p>No. of video : 2</p>
+                      <p>No. of video : <%=resource_count[i][`${topics[i].topic}`][2]%></p>
                     </div>
                   </div> 
                 </a>
@@ -201,6 +201,7 @@
       </div>
     </footer>
   </div>
+  
     <div class="main" id="main">
         <div class="cover">
 

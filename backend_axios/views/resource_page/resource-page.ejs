@@ -50,7 +50,7 @@
     </div>
     
     <!-- main section -->
-    <section id="main content ">
+    <section id="blurs">
       <div class="main-container">
         <div class="adding-blur rev-bg"></div>
         <div class="option-bar rombus-bg">
@@ -101,7 +101,7 @@
           <div class="topic-title">
             <h1>Resource</h1>
             <% if(check == "teacher"){%>
-            <div class="add-topic">
+            <div class="add-topic" id="open">
               Add new topic
               <img src="/images/notion_space/group_page/plus.png" class="plus-logo1" alt="">
             </div>
@@ -149,16 +149,16 @@
                       </div>
                       <div class="main-container-of-document">
                         <div class="doc-title rev-bg">
-                          <h3 class="rev-bg">Activation Functions</h3>
+                          <h3 class="rev-bg"><%=resourse[i].document_title%></h3>
                         </div>
                         <div class="doc-desc rev-bg">
-                          <p class="rev-bg">this is mainly used to activate the neurons in the neural network</p>
+                          <p class="rev-bg"><%=resourse[i].document_desc%></p>
                           
                         </div>
 
                         <div class="main-resource rev-bg">
-                          <img src="/images/resource_page/docs.png" alt="" class="file-type rev-bg">
-                          <p class="rev-bg">filename.pdf</p>
+                          <img src="<%=`/images/resource_page/${resourse[i].class}`%>" alt="" class="file-type rev-bg">
+                          <p class="rev-bg"><%=resourse[i].name%></p>
                         </div>
 
                           </div>
@@ -172,14 +172,14 @@
 
                           <div class="document-hold-container">
                       <div class="topic-name-lable">
-                        <p>neutral networks</p>
+                        <p><%=topic%></p>
                       </div>
                       <div class="main-container-of-document">
                         <div class="doc-title rev-bg">
-                          <h3 class="rev-bg">Activation Functions</h3>
+                          <h3 class="rev-bg"><%=resourse[i].link_title%></h3>
                         </div>
                         <div class="doc-desc rev-bg">
-                          <p class="rev-bg">this is mainly used to activate the neurons in the neural network</p>
+                          <p class="rev-bg"><%=resourse[i].link_desc%></p>
                           
                         </div>
                         <a href="<%=`${resourse[i].link}`%>" class="tr_background" target="_blank">
@@ -200,14 +200,14 @@
 
                           <div class="document-hold-container">
                       <div class="topic-name-lable">
-                        <p>neutral networks</p>
+                        <p><%=topic%></p>
                       </div>
                       <div class="main-container-of-document">
                         <div class="doc-title rev-bg">
-                          <h3 class="rev-bg">Activation Functions</h3>
+                          <h3 class="rev-bg"><%=resourse[i].video_title%></h3>
                         </div>
                         <div class="doc-desc rev-bg">
-                          <p class="rev-bg">this is mainly used to activate the neurons in the neural network</p>
+                          <p class="rev-bg"><%=resourse[i].video_desc%></p>
                           
                         </div>
 
@@ -255,6 +255,141 @@
         <a href=""><i class="ri-whatsapp-fill"></i></a>
       </div>
     </footer>
+
+
+    <%if(res_ty === "video"){%>
+    <div class="main" id="main">
+        <div class="cover">
+
+            <div class="sep">
+                <div class="greetings">
+                    <h2 class="bg welcome-title" >Add Topic</h2>
+                    <div class="box" id="close">
+                        <i class="ri-close-line"></i>
+                    </div>
+                    
+                  </div>
+
+                  <div class="main_form_continer">
+                     
+                      <div class="form">
+                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/${res_ty}`%>" method="post" class="form_box">
+                              <label for="topic" class="bg">
+                                  Topic name:
+                              </label>
+                              <input type="text" name="topic" class="text_enter bg" placeholder="Enter a Topic" id="topic" required>
+                              <div class="count" id="count1">0/25</div>
+                              <label for="description" class="bg">Description:</label>
+                              <input type="text" class="text_enter bg" placeholder="Enter the Description" name="discription" id="des">
+                              <div class="count" id="count2">0/75</div>
+                              <label for="link_name" class="bg">Youtube Link:</label>
+                              <input type="text" name="link_name" class="text_enter bg"  placeholder="Enter a Youtube Link"r equired>
+                              <input type="submit" value="ADD" class="bg go_back">
+                          </form>
+                      </div>
+                      
+                      
+                  </div>
+            </div>
+        </div>
+    </div>
+<%}else{if(res_ty === "link"){%>
+
+  <div class="main" id="main">
+        <div class="cover">
+
+            <div class="sep">
+                <div class="greetings">
+                    <h2 class="bg welcome-title" >Add Topic</h2>
+                    <div class="box" id="close">
+                        <i class="ri-close-line"></i>
+                    </div>
+                    
+                  </div>
+
+                  <div class="main_form_continer">
+                     
+                      <div class="form">
+                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/${res_ty}`%>" method="post" class="form_box">
+                              <label for="link_name" class="bg">
+                                  Topic name:
+                              </label>
+                              <input type="text" name="link_name" class="text_enter bg" placeholder="Enter a Topic" id="topic" required>
+                              <div class="count" id="count1">0/25</div>
+                              <label for="description" class="bg">Description:</label>
+                              <input type="text" class="text_enter bg" placeholder="Enter the Description" name="discription" id="des">
+                              <div class="count" id="count2">0/75</div>
+                              <label for="link" class="bg">Link:</label>
+                              <input type="text" name="link" class="text_enter bg"  placeholder="Enter a Link" required>
+                              <input type="submit" value="ADD" class="bg go_back">
+                          </form>
+                      </div>
+                      
+                      
+                  </div>
+            </div>
+        </div>
+    </div>
+<%}else{if(res_ty === "document"){%>
+
+  <div class="main" id="main">
+        <div class="cover">
+
+            <div class="sep">
+                <div class="greetings">
+                    <h2 class="bg welcome-title" >Add Topic</h2>
+                    <div class="box" id="close">
+                        <i class="ri-close-line"></i>
+                    </div>
+                    
+                  </div>
+
+                  <div class="main_form_continer">
+                     
+                      <div class="form">
+                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/${res_ty}`%>" method="post" class="form_box" enctype="multipart/form-data">
+                              <label for="topic" class="bg">
+                                  Topic name:
+                              </label>
+                              <input type="text" name="topic" class="text_enter bg" placeholder="Enter a Topic" id="topic" required>
+                              <div class="count" id="count1">0/25</div>
+                              <label for="description" class="bg">Description:</label>
+                              <input type="text" class="text_enter bg" placeholder="Enter the Description" name="discription" id="des">
+                              <div class="count" id="count2">0/75</div>
+                              <label for="topic" class="bg">Upload File:</label>
+                              <input type="file" name="file" class="text_enter bg"  placeholder="Enter a Link" required>
+                              <input type="submit" value="ADD" class="bg go_back">
+                          </form>
+                      </div>
+                      
+                      
+                  </div>
+            </div>
+        </div>
+    </div>
+
+<%}}}%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script src="/js_files/resource_page/resource-page.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
