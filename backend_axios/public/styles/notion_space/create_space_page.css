@@ -363,6 +363,19 @@ i{
   align-items: center;
 }
 
+#require-alert-mgs{
+  color: red;
+  font-weight: 600;
+}
+#require-alert-mgs-img{
+  color: red;
+  font-weight: 600;
+}
+#require-alert-mgs-email{
+  color: red;
+  font-weight: 600;
+}
+
 .error-display-style{
   color: red;
 }

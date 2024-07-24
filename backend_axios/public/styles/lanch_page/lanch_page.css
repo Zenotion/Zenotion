@@ -838,8 +838,17 @@ label {
 
 .crew-main-section{
   height: 493em;
-  background-color: #000000;
-  padding: 3em;
+  /* background-image: url("../../images/lanch_page/boxes.png");
+  background-size: contain;
+  background-repeat: repeat; */
+  /* background-color: #2c1f33;
+  opacity: 1;
+  background-size: 8px 8px;
+  background-image: repeating-linear-gradient(45deg, #000000 0, #000000 0.8px, #2c1f33 0, #2c1f33 50%);  padding: 3em; */
+  background-color: #0e0444;
+opacity: 1;
+background-image: radial-gradient(#7e7a7a 0.45px, #0e0444 0.45px);
+background-size: 9px 9px;
   padding-top: 5em;
 }
 .crew-section{
@@ -887,7 +896,8 @@ label {
   height: 32em;
  display: flex;
  justify-content: center;
-
+  border: 1.5px solid white;  
+  background-color: #222831;
 }
 .two-line{
   display: flex;
@@ -898,7 +908,43 @@ label {
 .two-one{
   width:  32em;
   height: 60em;
-  background-color: yellow;
+  background-color: #2C394B;
+  writing-mode: vertical-rl;
+  transform: rotateZ(180deg);
+  border: 1.5px solid white;
+}
+
+.div-circle1-hirthick{
+  background-color: #334756;
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.div-circle2-hirthick{
+  background-color: #FF4C29;
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.hirthick-extra-img{
+  transform: rotateZ(90deg);
+  border-radius: 50%;
+  width:20em;
+}
+
+.hirthick-extra-des{
+  font-size: 1.4em;
+  font-weight: 200;
+  padding: 0px 15px;
+  text-align: justify;
+  cursor:default;
+  color: hsla(0, 0%, 100%, 0.559);
+
+}
+
+.hirthick-extra-title{
+  font-size: 2em;
+  color: white;
 }
 
 .two-two{
@@ -956,6 +1002,59 @@ label {
 
 .zenotion-connector2{
   background-color: #18122B;
+}
+
+.crew-common-div{
+  display: flex;
+  gap: 15px;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+.div-circle1{
+  background-color: #C8ACD6;
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.div-circle2{
+  background-color: #240750;
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.crew-member-profile-pic{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  align-items: center;
+}
+
+.crew-member-img{
+  border-radius: 50%;
+  width: 20em;
+}
+
+.about-crew-member{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 20px;
+  padding-top: 50px;
+}
+
+.about-crew-title{
+  font-size: 2em;
+  color: white;
+}
+
+.about-crew-des{
+  font-size: 1.4em;
+  font-weight: 200;
+  padding: 0px 15px;
+  text-align: justify;
+  color: hsla(0, 0%, 100%, 0.611);
 }
 
 footer{
