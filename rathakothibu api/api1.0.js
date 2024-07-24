@@ -155,6 +155,29 @@ app.post("/count_docs_video_link", async (req, res) => {
     }
 }); 
 
+app.post("/count_onetopic_docs_video_link",async(req,res)=>{
+    try {  
+        const department = req.body.dept;
+        const subject = req.body.sub; 
+        const unit=req.body.unit;
+        const topic=req.body.topic;
+            const topic_key_result = await db2.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3 AND topic = $4", [department, subject, unit, topic]);
+            console.log(topic_key_result.rows[0].topic_key);
+            const topic_key=topic_key_result.rows[0].topic_key;
+            const documents = await db2.query("SELECT COUNT(document_title) FROM documents WHERE topic_key = $1", [topic_key]);
+            const link=await db2.query("SELECT  COUNT(link) FROM links WHERE topic_key =  $1",[topic_key]);
+            const video=await db2.query("SELECT COUNT(video) FROM videos WHERE topic_key = $1",[topic_key]);   
+            const documents_count = parseInt(documents.rows[0].count, 10);
+            const link_count = parseInt(link.rows[0].count, 10);
+            const video_count = parseInt(video.rows[0].count, 10);
+            let dlv=[documents_count,link_count,video_count];
+        console.log(dlv) 
+        res.json(dlv);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("An error occurred while processing your request.");
+    }
+})
 
 app.post("/dept_syllabus", async (req, res) => {
     const dept = req.body.dept;
@@ -179,13 +202,13 @@ app.post("/dept_syllabus", async (req, res) => {
   });
 
   app.post("/sub_syllabus", async (req, res) => {
-    const dept =req.body.dept;
+    const dept =req.body.dept; 
     const sub=req.body.sub; 
   
     try {
       const result = await db.query(`SELECT syllabus FROM syllabus WHERE department=$1 and subject=$2`, [dept,sub]);
       const pdf = result.rows[0].syllabus;
-      res.setHeader('Content-Type', 'image/png');  
+      res.setHeader('Content-Type', 'image/png');   
       res.json(pdf);
     }catch(err){
   console.log(err);
@@ -251,8 +274,8 @@ try{
        const buffer= req.body.buffer;
        const document_title= req.body.doc_title; 
        const document_desc= req.body.description;
-       const iconClass=req.body.iconClass;
-       console.log(document_desc);
+       const iconClass=req.body.iconClass; 
+       console.log(document_desc); 
        console.log(req.body);
      const topic_key = await db2.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3 AND topic = $4", [department, subject, unit, topic]);
      const topicKey = topic_key.rows[0].topic_key;
@@ -260,8 +283,8 @@ try{
     await db2.query('INSERT INTO documents (topic_key,document_title,document_desc,document,name,class) VALUES ($1,$2,$3,$4,$5,$6)', [topicKey,document_title,document_desc,buffer,originalname,iconClass]);
     console.log("file upload successfully");
     res.json("file upload successfully");
-} catch (error) { 
-    console.error("Error uploading file:", error);
+} catch (error) {  
+    console.error("Error uploading file:", error);  
     res.status(500).send("Internal Server Error");
 } 
   });     
@@ -270,23 +293,27 @@ try{
 app.post("/show_pdf", async (req, res) => { 
     try{
     const department=req.body.dept;
-    console.log(department)
+    console.log(req.body)
     const subject=req.body.sub;
     const unit=req.body.unit;
     const topic=req.body.topic;
-    const originalname = req.body.file_n['file_name'];  
-    console.log(originalname);
+    const originalname = req.body['file_name'];  
+    console.log(originalname);       
+    // const originalname = req.body.file_n['file_name'];  
+
       // Fetch the PDF file data from the database
     const topic_key = await db2.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND unit_name = $3 AND topic = $4", [department, subject, unit, topic]);
     const topicKey = topic_key.rows[0].topic_key;
     console.log(topicKey);   
     const result = await db2.query(`SELECT document FROM documents WHERE name=$1 AND topic_key=$2`, [originalname,topicKey]);
-    const documents = result.rows[0]; 
+    const documents = result.rows[0].document;  
+
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'inline');
-    res.json(documents);
+    res.setHeader('Content-Disposition', 'inline; filename=' + originalname);
+    res.send(documents);  // Directly send the binary data
+
 } catch (error) {
-    console.error('Error fetching PDF file:', error);
+    console.error('Error fetching PDF file:', error); 
     res.status(500).json({ error: 'Internal Server Error' });
 }
 });
@@ -482,40 +509,40 @@ app.delete("/delete_topic", async (req, res) => {
 //student
 //putting the topic in the stu database 
 app.post("/stu_add_topic", async (req, res) => {
-    try{
+    try{ 
         const  department = req.body.dept;
-        const subject = req.body.sub;
+        const subject = req.body.sub; 
         const topicname =req.body.topic;
+        const desc=req.body.topic_desc;
         const new_username=req.body.user_name;
-        console.log(new_username);
-
+        console.log(new_username,desc); 
         
         const existingRecord = await db5.query("SELECT * FROM topics WHERE dept_name = $1 AND sub_name = $2 AND topic = $3 and user_name=$4", [department, subject,topicname,new_username]);
         
-        if (existingRecord.rows.length > 0) {
+        if (existingRecord.rows.length > 0) { 
             res.send(`The topic are already available`);
-        } else {
+        } else { 
             console.log("topic come to add");
-            await db5.query("INSERT INTO topics (dept_name,sub_name,topic,user_name) VALUES ($1, $2,$3,$4)", [department, subject, topicname,new_username]);
+            await db5.query("INSERT INTO topics (dept_name,sub_name,topic,user_name,topic_desc) VALUES ($1, $2,$3,$4,$5)", [department, subject, topicname,new_username,desc]);
            console.log("topic scccessfully added");
             res.send(`Topic '${topicname}'  successfully added`);
-        }  
+        }   
          
-    } catch (error) { 
+    } catch (error) {  
         console.error('Error processing request:', error);
         res.status(500).send('Internal Server Error');
     }
-});
+}); 
  
  
 //select all topic from given details
 app.post("/show_stu_topic", async (req, res) => {
-    try{
-    const department=req.body.dept;
+    try{ 
+    const department=req.body.dept; 
     const subject = req.body.sub;
     const new_username=req.body.user_name;
     console.log(new_username,department,subject)
-    const result = await db5.query(`SELECT topic FROM topics WHERE dept_name = $1 AND sub_name = $2 and user_name=$3`, [department, subject,new_username]);
+    const result = await db5.query(`SELECT topic,topic_desc FROM topics WHERE dept_name = $1 AND sub_name = $2 and user_name=$3`, [department, subject,new_username]);
     let topics = result.rows;
     res.json(topics);
     db.end;
@@ -526,6 +553,61 @@ app.post("/show_stu_topic", async (req, res) => {
 }
 });
 
+app.post("/count_stu_onetopic_docs_video_link",async(req,res)=>{
+    try {  
+        const department = req.body.dept;
+        const subject = req.body.sub; 
+        const topic=req.body.topic;
+        const new_username=req.body.user_name;
+            const topic_key_result = await db5.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND user_name=$3 AND topic = $4", [department, subject, new_username, topic]);
+            console.log(topic_key_result.rows[0].topic_key);
+            const topic_key=topic_key_result.rows[0].topic_key;
+            const documents = await db5.query("SELECT COUNT(document_title) FROM documents WHERE topic_key = $1", [topic_key]);
+            const link=await db5.query("SELECT  COUNT(link) FROM links WHERE topic_key =  $1",[topic_key]);
+            const video=await db5.query("SELECT COUNT(video) FROM videos WHERE topic_key = $1",[topic_key]);   
+            const documents_count = parseInt(documents.rows[0].count, 10);
+            const link_count = parseInt(link.rows[0].count, 10);
+            const video_count = parseInt(video.rows[0].count, 10);
+            let dlv=[documents_count,link_count,video_count];
+        console.log(dlv) 
+        res.json(dlv);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("An error occurred while processing your request.");
+    }
+})
+
+//count document,links and videos
+app.post("/count_stu_docs_video_link", async (req, res) => {
+    try {  
+        const department = req.body.dept;
+        const subject = req.body.sub;
+        const topics = await db5.query(`SELECT topic FROM topics WHERE dept_name = $1 AND sub_name = $2`, [department, subject]);
+        const topic_list = topics.rows.map(row => row.topic);
+        const sub_and_topiccount = [];
+        for (let j = 0; j < topic_list.length; j++) {  
+            const topic= topic_list[j]; 
+            const topic_key_result = await db5.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND topic = $4", [department, subject, topic]);
+             console.log(topic_key_result.rows[0].topic_key);
+             const topic_key=topic_key_result.rows[0].topic_key;
+            const documents = await db5.query("SELECT COUNT(document_title) FROM documents WHERE topic_key = $1", [topic_key]);
+            const link=await db5.query("SELECT  COUNT(link) FROM links WHERE topic_key =  $1",[topic_key]);
+            const video=await db5.query("SELECT COUNT(video) FROM videos WHERE topic_key = $1",[topic_key]);   
+            const documents_count = parseInt(documents.rows[0].count, 10);     
+            const link_count = parseInt(link.rows[0].count, 10);
+            const video_count = parseInt(video.rows[0].count, 10);
+            let dlv=[documents_count,link_count,video_count];
+            sub_and_topiccount.push({ [topic_list[j]]: dlv });
+        }
+       console.log(sub_and_topiccount) 
+        res.json(sub_and_topiccount );
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("An error occurred while processing your request.");
+    }
+}); 
+
+
 
 app.post(`/stu_add_topic_link`,async(req,res)=>{
     try{
@@ -534,7 +616,7 @@ app.post(`/stu_add_topic_link`,async(req,res)=>{
     const topic=req.body.topic;
     const link=req.body.body.link;
     const link_title=req.body.body.link_name;
-    const link_desc=req.body.body.description;
+    const link_desc=req.body.body.discription;
     const new_username=req.body.user_name;
     console.log(link,link_title,link_desc,department,subject,topic)
     const topic_key = await db5.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND topic = $3 and user_name=$4", [department, subject, topic,new_username]);
@@ -556,7 +638,7 @@ app.post(`/stu_add_topic_video`,async(req,res)=>{
     const department=req.body.dept;
     const subject=req.body.sub;
     const topic=req.body.topic;
-    const video=req.body.body.link;
+    const video=req.body.body.link_name;
     function extractVideoId(videoUrl) {
         // Regular expression to match YouTube video IDs
         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -567,14 +649,14 @@ app.post(`/stu_add_topic_video`,async(req,res)=>{
         } else {
             // If no match found or video ID is not 11 characters long, return null
             return null;
-        }
+        }  
     } 
     
     var videoUrl = video;
     var videoId = extractVideoId(videoUrl);
     console.log('YouTube Video ID:', videoId);
-    const video_title=req.body.body.link_name;
-    const video_desc=req.body.body.description;
+    const video_title=req.body.body.topic;
+    const video_desc=req.body.body.discription;
     const new_username=req.body.user_name;
 const topic_key = await db5.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND topic = $3 and user_name=$4", [department, subject,topic,new_username]);
     const topicKey = topic_key.rows[0].topic_key;
@@ -620,6 +702,7 @@ app.post(`/stu_shows_video`,async(req,res)=>{
     const subject=req.body.sub;
     const topic=req.body.topic;
     const new_username=req.body.user_name;
+    console.log(req.body);
     const topic_key = await db5.query("SELECT topic_key FROM topics WHERE dept_name = $1 AND sub_name = $2 AND  topic = $3 and user_name=$4", [department, subject, topic,new_username]);
     const topicKey = topic_key.rows[0].topic_key; 
     const video=await db5.query("SELECT video,video_title,video_desc FROM videos WHERE topic_key = $1 and user_name=$2",[topicKey,new_username]);   
@@ -642,7 +725,7 @@ app.post("/stu_show_pdf", async (req, res) => {
     console.log(req.body);
     const subject=req.body.sub;
     const topic=req.body.topic;
-    const originalname = req.body.file_n['file_name'];  
+    const originalname = req.body['file_name'];  
     console.log(originalname);
     const new_username=req.body.user_name;
 
@@ -651,8 +734,11 @@ app.post("/stu_show_pdf", async (req, res) => {
     const topicKey = topic_key.rows[0].topic_key;
     console.log(topicKey);  
     const result = await db5.query(`SELECT document FROM documents WHERE name=$1 AND topic_key=$2 and user_name=$3`, [originalname,topicKey,new_username]);
-    const documents = result.rows[0]; 
-    res.json(documents);
+    const documents = result.rows[0].document; 
+    console.log(documents);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline; filename=' + originalname);
+    res.send(documents);  // Directly send the binary data
 } catch (error) {
     console.error('Error fetching PDF file:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -691,7 +777,7 @@ app.post("/stu_add_topic_doc", async (req, res) => {
             const subject=req.body.sub;
             const topic=req.body.topic;
            const originalname=req.body.file;
-           const buffer= req.body.buffer_base64;
+           const buffer= req.body.buffer;
            const document_title= req.body.doc_title; 
            const document_desc= req.body.description;
            const iconClass=req.body.iconClass;
@@ -712,9 +798,6 @@ app.post("/stu_add_topic_doc", async (req, res) => {
         res.status(500).send("Internal Server Error");
     } 
       });     
-      
-
-
 
 //delete stu document
 app.post("/stu_delete_document", async (req, res) => {
@@ -742,14 +825,14 @@ app.post("/stu_delete_document", async (req, res) => {
 
 
 //delete topic student
-app.post("/stu_delete_topic", async (req, res) => {
+app.delete("/stu_delete_topic", async (req, res) => {
     try{
         console.log(req.body);
       const  department = req.body.dept;
       const subject = req.body.sub;
         const topicname =req.body.topic;
         const new_username=req.body.user_name;
-        console.log(new_username);
+        console.log(new_username); 
 
   
             console.log("topic come to delete");

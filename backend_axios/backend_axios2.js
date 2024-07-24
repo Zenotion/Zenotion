@@ -829,104 +829,260 @@ function subject_join(arr,sub) {
   return arr.includes(sub);
 }
 
-server.get("/:dept/:sem/:sub/:unit/student", async (req,res)=>{
+server.get("/:dept/:sem/:sub/student", async (req,res)=>{
   const dept = req.params.dept.toUpperCase();
       const sem = parseInt(req.params.sem);
       const sub = req.params.sub;
       const unit = parseInt(req.params.unit);
-      let firstLetter = req.user.username[0].toUpperCase();  
+      let firstLetter = "teacher"[0].toUpperCase();  
   
     //   let check = req.user.role;
-  
-      const subject=await axios.post(`${domain}topics`,{
+   
+      const subject = await axios.post(`${domain}topics`,{
         "dept":req.params.dept,
         "sem":parseInt(sem)
       });
   
-      
-      const sem_sub=[];
+      // console.log(subject.data)
+      const sem_sub=[]; 
       subject.data.forEach(obj => {
         const key = Object.keys(obj)[0]; // Get the first key
        sem_sub.push(key);
     });  
-    // console.log(sem_sub)
+    console.log(sem_sub)
     
-      let result = subject_join(sem_sub,sub);
-      // console.log(result);
+    //   let result = subject_join(sem_sub,sub);
+    //   console.log(result);
 
 
       const stu_topic = await axios.post(`${domain}show_stu_topic`,{
-        "dept":dept,
+        "dept":dept, 
         "sub":sub,
         "user_name":"hirthick"
       })
+  
       console.log(stu_topic.data);
-      res.render("student-page/student-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":stu_topic.data,"domain":domain,"our_domain":our_domain,"sub_arr":sem_sub});
-
+ 
+      res.render("student-page/student-page.ejs",{"sub":sub,"dept":dept,"sem":sem,"unit":unit,"topics":stu_topic.data,"domain":domain,"our_domain":our_domain,"sub_arr":sem_sub,"letter":firstLetter});
 
 });
 
 
+server.post("/:dept/:sem/:sub/student",async(req,res)=>{
+const {dept,sem,sub,unit} = req.params;
+console.log(dept,sem,sub,unit);
+console.log(req.body);
 
-  //post request for document resource to add
+  await axios.post(`${domain}stu_add_topic`,{
+  "dept":dept,
+  "sub":sub,
+  "topic":req.body.topic,
+  "topic_desc":req.body.Description,
+  "user_name":"hirthick"
 
-server.post("/:dept/:sub/:unit/:topic/doc_res",upload.single('file'),async(req,res)=>{
-  try{
-    if(req.isAuthenticated()){
-    const dept =req.params.dept;
-    const sub=req.params.sub;
-    const unit =req.params.unit;
-    const topic = req.params.topic;
-    const fileType = getFileType(req.file.originalname);
-    let iconClass = "";
+  })
+  res.redirect(`${our_domain}${dept}/${sem}/${sub}/student`)
 
-    switch (fileType) {
-      case "PDF Document":
-        iconClass = ".\images\resource_page\pdf.png";        
-        break;
-      case "JPG Image":
-      case "PNG Image":
-        iconClass = ".\images\resource_page\docs.png"; 
-        break;
-      case "Microsoft Word Document x":
-      case "Microsoft Word Document":
-        iconClass = ".\images\resource_page\docs.png";
-        break;
-      case "Microsoft PowerPoint Presentation":
-      case "Microsoft PowerPoint Presentation x":
-        iconClass = ".\images\resource_page\ppt.png";
-        break;
-      case "MP4 Video":
-        iconClass = ".\images\resource_page\docs.png"; 
-        break;
-      default:
-        iconClass = ".\images\resource_page\docs.png"; 
+})
+
+
+server.get("/:dept/:sem/:sub/student/delete_topic",async(req,res)=>{
+
+  const {dept,sem,sub,unit} = req.params;
+  const topic =req.query.topic;
+  const data = {
+    "dept":dept,
+    "sub":sub,
+    "topic":topic,
+    "user_name":"hirthick"
+  }
+
+await axios.delete(`${domain}stu_delete_topic`,{data})
+
+res.redirect(`${our_domain}${dept}/${sem}/${sub}/student`)
+})
+
+
+//student resource page
+
+server.get("/:dept/:sem/:sub/student/:topic/:res_type",async(req,res)=>{
+  const {dept,sem,sub,topic,res_type} = req.params;
+  let firstLetter = "teacher"[0].toUpperCase();  
+console.log(dept,sem,sub,topic,res_type);
+
+const stu_topic = await axios.post(`${domain}show_stu_topic`,{
+  "dept":dept, 
+  "sub":sub,
+  "user_name":"hirthick"
+})
+
+const subject = await axios.post(`${domain}topics`,{
+  "dept":req.params.dept,
+  "sem":parseInt(sem)
+});
+
+// console.log(subject.data)
+const sem_sub=[]; 
+subject.data.forEach(obj => {
+  const key = Object.keys(obj)[0]; // Get the first key
+ sem_sub.push(key);
+});  
+// console.log(sem_sub)
+// console.log(stu_topic.data);
+
+  if(res_type == "video"){
+    console.log("video"); 
+    const result = await axios.post(`${domain}stu_shows_video`,{
+      "dept":dept,
+      "sub":sub,
+      "topic":topic,
+      "user_name":"hirthick"
+    })
+  console.log(result.data)
+   
+  res.render("student_resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"sub_arr":sem_sub,"res_ty":res_type,"dept":dept,"sem":sem,"topics":stu_topic.data,"sub":sub ,"resourse": result.data,"letter":firstLetter});
+  
+  }else{
+    if(res_type === "document"){
+  console.log("doc");
+      const result = await axios.post(`${domain}stu_doc_name`,{
+  
+      "dept":dept,
+      "sub":sub,
+      "topic":topic,
+      "user_name":"hirthick"
+  
+      }) 
+  
+      console.log(result.data)
+      res.render("student_resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"sub_arr":sem_sub,"dept":dept,"sem":sem,"topics":stu_topic.data,"sub":sub ,"resourse": result.data,"letter":firstLetter});
+  
+    }else{
+      if(res_type === "link"){
+        console.log("link");
+        const result = await axios.post(`${domain}stu_shows_link`,{
+          "dept":dept,
+          "sub":sub, 
+          "topic":topic,
+          "user_name":"hirthick"
+          })
+          console.log(result.data)
+    res.render("student_resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"sub_arr":sem_sub,"dept":dept,"sem":sem,"topics":stu_topic.data,"sub":sub ,"resourse": result.data,"letter":firstLetter});
+  
+      }
     }
+  }
+  
+})
 
-    const respond = await axios.post(`${domain}upload_pdf`,{
+
+server.get("/:dept/:sem/:sub/student/:topic/:res_type/show_pdf",async(req,res)=>{
+
+  const {dept,sem,sub,topic} = req.params;
+  const type = req.params.res_type;
+  const file_name = req.query.source;
+
+
+  const pdfResponse = await axios.post(`${domain}stu_show_pdf`,{
+    "dept":dept,
+    "sub":sub, 
+    "topic":topic,
+    "user_name":"hirthick",
+    "file_name":file_name
+  })
+
+  const pdfData = Buffer.from(pdfResponse.data.data);
+  console.log(pdfData);
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'inline');
+  res.send(pdfData);
+})
+
+
+
+
+
+
+
+  // adding student resource
+
+
+server.post("/:dept/:sem/:sub/student/:topic/:res_type",upload.single('file'),async(req,res)=>{
+
+  
+  const {dept,sem,sub,topic} = req.params;
+  const type = req.params.res_type;
+  let iconClass = "";
+  console.log(type);
+  console.log(req.file); 
+
+  
+if(type === "link"){
+  await axios.post(`${domain}stu_add_topic_link`,{
+    "dept":dept,
+    "sub":sub,
+    "topic":topic,
+    "body":req.body,
+    "user_name":"hirthick"
+
+  })
+}else{
+  if(type === "video"){
+    await axios.post(`${domain}stu_add_topic_video`,{
+      "dept":dept,
+      "sub":sub,
+      "topic":topic,
+      "body":req.body,
+      "user_name":"hirthick"
+    })
+  }else{
+    if(type === "document"){
+      const fileType = getFileType(req.file.originalname);
+
+      switch (fileType) {
+        case "PDF Document":
+          iconClass = "pdf.png";        
+          break;
+        case "JPG Image":
+        case "PNG Image":
+          iconClass = "docs.png"; 
+          break;
+        case "Microsoft Word Document x":
+        case "Microsoft Word Document":
+          iconClass = "docs.png";  
+          break;
+        case "Microsoft PowerPoint Presentation":
+        case "Microsoft PowerPoint Presentation x":
+          iconClass = "ppt.png"; 
+          break;
+        case "MP4 Video":
+          iconClass = "video.png"; 
+          break;
+        default:
+          iconClass = "docs.png"; 
+      } 
+
+
+      const respond = await axios.post(`${domain}stu_add_topic_doc`,{
         "dept":dept,
-        "sub":sub,
-        "unit":unit,
-        "topic":topic,
+        "sub":sub, 
+        "topic":topic,  
         "buffer":req.file.buffer,
         "file":req.file.originalname,
         "doc_title":req.body.topic,
-        "description":req.body.description,
-        "iconClass": iconClass
+        "description":req.body.discription,
+        "iconClass": iconClass,
+        "user_name":"hirthick"
     })
 
+console.log(respond.data);
 
-res.redirect((`${our_domain}${dept}/${sub}/${unit}/${topic}/doc_res`));
-}else{
-  res.redirect("/log_in");
-}
-    }catch(err){
-        res.send(err)
     }
+  } 
+} 
+
+res.redirect(`${our_domain}${dept}/${sem}/${sub}/student/${topic}/${type}`)
 })
-
-  
-
 
 //topic selecting page 
 
@@ -1047,12 +1203,12 @@ server.get("/:dept/:sem/:sub/:unit/:topic/:res_type",async(req,res)=>{
   const topic = req.params.topic;
   const check = req.user.role;
 
-  const resource_count = await axios.post(`${domain}count_docs_video_link`,{
-    "dept":dept,
-    "sub":sub,
-    "unit":unit
-  })
-  
+  // const resource_count = await axios.post(`${domain}count_docs_video_link`,{
+  //   "dept":dept,
+  //   "sub":sub,
+  //   "unit":unit
+  // })
+        
   const topics = await axios.get(`${domain}${dept}/${sub}/${unit}`);
   let firstLetter = req.user.username[0].toUpperCase();  
 
@@ -1105,7 +1261,31 @@ console.log("doc");
   // res.render("resource_page/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_ty,"dept":dept,"sem":sem,"unit":unit,"topics":topics.data,"sub":sub ,"check":check,"resourse":resource,"letter":firstLetter});
 });
 
+server.get("/:dept/:sem/:sub/:unit/:topic/:res_type/show_pdf", async (req, res) => {
+  try {
+    const dept = req.params.dept;
+    const  sub=req.params.sub;
+    const topic=req.params.topic;
+    const unit=req.params.unit;
+    const file_name=req.query.source;
+    const pdfResponse = await axios.post(`${domain}show_pdf`, {
+      "dept": dept,
+      "sub":sub,
+      "unit":unit,
+      "topic":topic,
+      "file_name":file_name
+  }); 
+  // console.log(pdfResponse.data.data);
+  const pdfData = Buffer.from(pdfResponse.data.data, 'binary');
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'inline; filename=' + file_name);
+  res.send(pdfData); // Directly send the binary data
+  } catch (err) { 
+    console.log(err);  
+    res.status(500).send('Error downloading syllabus'); 
+  }
  
+});
 // add resource
 
 
@@ -1154,7 +1334,7 @@ if(type === "link"){
           break;
         case "Microsoft PowerPoint Presentation":
         case "Microsoft PowerPoint Presentation x":
-          iconClass = "ppt.png";
+          iconClass = "ppt.png"; 
           break;
         case "MP4 Video":
           iconClass = "video.png"; 
@@ -1168,7 +1348,7 @@ if(type === "link"){
         "dept":dept,
         "sub":sub, 
         "unit":unit,
-        "topic":topic, 
+        "topic":topic,  
         "buffer":req.file.buffer,
         "file":req.file.originalname,
         "doc_title":req.body.topic,
