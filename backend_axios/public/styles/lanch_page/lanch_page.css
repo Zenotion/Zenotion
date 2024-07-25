@@ -950,13 +950,20 @@ background-size: 9px 9px;
 .two-two{
   width:  32em;
   height: 60em;
-  background-color: red;
+  writing-mode: vertical-rl;
+  background-color:#32012F;
+}
+
+.crew-member-img-kavi{
+  transform: rotateZ(90deg);
 }
 
 .three-line{
   width: 60em;
   height:  32em;
-  background-color: orange;
+  background-color: #01204E;
+  border: 1.5px solid white;
+  transform: rotateZ(180deg);
 }
 
 .crew-heading h2{
@@ -1054,7 +1061,33 @@ background-size: 9px 9px;
   font-weight: 200;
   padding: 0px 15px;
   text-align: justify;
+  cursor: default;
   color: hsla(0, 0%, 100%, 0.611);
+}
+
+.div-circle1-jothi{
+  background-color: #F6DCAC;
+  
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.div-circle2-jothi{
+  background-color: #028391;
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.div-circle1-kavi{
+  background-color: #E2DFD0;
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.div-circle2-kavi{
+  background-color: #524C42;
+  border-radius: 50%;
+  padding: 15px;
 }
 
 footer{
