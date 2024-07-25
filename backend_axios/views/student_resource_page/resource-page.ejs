@@ -55,11 +55,11 @@
         <div class="adding-blur rev-bg"></div>
         <div class="option-bar rombus-bg">
           <div class="option-heading-container">
-            <h3 class="option-heading">Unit 1</h3>
+            <h3 class="option-heading">topics</h3>
           </div>
           <div class="item-main-conatainer">
             <% for(let i=0;i<topics.length;i++){%>
-              <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i].topic}/${res_ty}`%>">
+              <a href="<%=`${our_domain}${dept}/${sem}/${sub}/student/${topics[i].topic}/${res_ty}`%>">
             <h3 class="option-items"><i class="ri-group-3-line"></i><%= topics[i].topic %></h3>
           </a>
             <% } %>
@@ -73,7 +73,7 @@
           <div class="sub-info-padding rev-bg">
           <div class="subject-name-main-container">
               <div class="path-content-container rev-bg">
-                <p class="rev-bg">loT and Cyber security including Block chain Technology/semester 1/Mathematics–I/Unit 1/<b class="rev-bg"><%=topic%></b></p>
+                <p class="rev-bg">loT and Cyber security including Block chain Technology/semester 1/Mathematics–I/student/<%=topic%>/<%=res_ty%><b class="rev-bg"><%=topic%></b></p>
               </div>
               <div class="subject-name-container rev-bg">
                 <p class="rev-bg"><span id="testing-animation"></span></p>
@@ -100,12 +100,11 @@
           <div class="adding-blur rev-bg"></div>
           <div class="topic-title">
             <h1>Resource</h1>
-            <% if(check == "teacher"){%>
             <div class="add-topic" id="open">
               Add new topic
               <img src="/images/notion_space/group_page/plus.png" class="plus-logo1" alt="">
             </div>
-            <% } %>
+            
           </div>
           <div class="divider"></div>
           <div class="topics-card-container ">
@@ -117,17 +116,17 @@
                 <p class="sem-heading rev-bg">Resource</p>
               </div>
               <div class="sem-main-container">
-                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/video`%>">
+                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/student/${topic}/video`%>">
                 <div class="video com-style">
                   <h3>Video</h3>
                 </div>
               </a>
-              <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/document`%>">
+              <a href="<%=`${our_domain}${dept}/${sem}/${sub}/student/${topic}/document`%>">
                 <div class="document com-style">
                   <h3>Document</h3>
                 </div>
               </a>
-              <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/link`%>">
+              <a href="<%=`${our_domain}${dept}/${sem}/${sub}/student/${topic}/link`%>">
                 <div class="link com-style">
                   <h3>Link</h3>
                 </div>
@@ -155,7 +154,7 @@
                           <p class="rev-bg"><%=resourse[i].document_desc%></p>
                           
                         </div>
-                        <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/document/show_pdf?source=${resourse[i].name}`%>">
+                        <a href="<%=`${our_domain}${dept}/${sem}/${sub}/student/${topic}/document/show_pdf?source=${resourse[i].name}`%>">
                         <div class="main-resource rev-bg">
                           <img src="<%=`/images/resource_page/${resourse[i].class}`%>" alt="" class="file-type rev-bg">
                           <p class="rev-bg"><%=resourse[i].name%></p>
@@ -223,6 +222,7 @@
                           </div>
                           </div>
                           </div>
+</div>
 
 
                           <% }}} }%>
@@ -274,7 +274,7 @@
                   <div class="main_form_continer">
                      
                       <div class="form">
-                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/${res_ty}`%>" method="post" class="form_box">
+                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/student/${topic}/${res_ty}`%>" method="post" class="form_box">
                               <label for="topic" class="bg">
                                   Topic name:
                               </label>
@@ -311,7 +311,7 @@
                   <div class="main_form_continer">
                      
                       <div class="form">
-                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/${res_ty}`%>" method="post" class="form_box">
+                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/student/${topic}/${res_ty}`%>" method="post" class="form_box">
                               <label for="link_name" class="bg">
                                   Topic name:
                               </label>
@@ -348,7 +348,7 @@
                   <div class="main_form_continer">
                      
                       <div class="form">
-                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/${res_ty}`%>" method="post" class="form_box" enctype="multipart/form-data">
+                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/student/${topic}/${res_ty}`%>" method="post" class="form_box" enctype="multipart/form-data">
                               <label for="topic" class="bg">
                                   Topic name:
                               </label>
@@ -370,20 +370,6 @@
     </div>
 
 <%}}}%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

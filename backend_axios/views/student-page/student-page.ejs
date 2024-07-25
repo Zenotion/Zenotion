@@ -60,7 +60,7 @@
             <% if(locals.sub_arr){
               for(let i=0;i<sub_arr.length;i++){ %>
 
-<a href="<%=`${our_domain}${dept}/${sem}/${sub_arr[i]}/1`%>" ><h3 class="option-items"><i class="ri-group-3-line"></i><%=sub_arr[i]%></h3></a>
+<a href="<%=`${our_domain}${dept}/${sem}/${sub_arr[i]}/student`%>" ><h3 class="option-items"><i class="ri-group-3-line"></i><%=sub_arr[i]%></h3></a>
 
             <%}}%>
             
@@ -117,33 +117,19 @@
           <div class="divider"></div>
           <div class="topics-card-container topic-section-bg">
 
-            <!-- pic-filter-containe -->
-            <!-- <div class="topic-filter-container rombus-bg">
-              <div class="left-bar-sem-title">
-                <img src="/images/notion_space/group_page/unit.png" alt="" class="sem-img-icon">
-                <p class="sem-heading rev-bg">Units</p>
-              </div>
-              <div class="sem-main-container">
-                <%if(locals.sub){
-                  for(let j=1;j<=5;j++){%>
-                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${j}`%>"> <div class="unit1 com-style">
-                    <h3>UNIT <%=j%></h3>
-                  </div></a>
-                  <%}}%>
-              </div>
-           </div> -->
             <!-- all - topic - section -->
+
               <div class="topic-container topic-section-bg">
                 <%if(locals.topics){
                   for(let i=0;i<topics.length;i++){%>
                   <div class="topic-container-section-holder rev-bg">
 
-                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i]}/video`%>"><div class="common-topic-card topic-card">
+                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/student/${topics[i].topic}/video`%>"><div class="common-topic-card topic-card">
                     <div class="topic-lable">
                       <%=sub%> </div>
                     <div class="topic-heading">
                       <h3><%=topics[i].topic%></h3>
-                      <p><%=topics[i].class%></p></div>
+                      <p><%=topics[i].topic_desc%></p></div>
                     <div class="about-topic">
                       <p>No. of documents : 3</p>
                       <div class="divider1"></div>
@@ -153,10 +139,12 @@
                     </div>
                   </div> 
                 </a>
+                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/student/delete_topic?topic=${topics[i].topic}`%>">
                 <div class="delete-button-on delete-button-trans" id="delete-button-js">
                   delete
                   <img src="/images/topic_page/delete-button-icon.png" alt="" class="rev-bg">
-                </div>                  
+                </div> 
+              </a>                 
               </div>
                   <%}}%>
                   
@@ -190,13 +178,13 @@
                   <div class="main_form_continer">
                      
                       <div class="form">
-                          <form action="" method="" class="form_box">
+                          <form action="<%=`${our_domain}${dept}/${sem}/${sub}/student`%>" method="post" class="form_box">
                               <label for="title" class="bg">
                                   Topic name:
                               </label>
-                              <input type="text" name="title" class="text_enter bg" placeholder="Enter a Topic" id="topic">
-                              <label for="des" class="bg">Description:</label>
-                              <input type="text" class="text_enter bg" placeholder="Enter the Description">
+                              <input type="text" name="topic" class="text_enter bg" placeholder="Enter a Topic" id="topic" required>
+                              <label for="des" class="bg">Description:(optional)</label>
+                              <input type="text" name="Description" class="text_enter bg" placeholder="Enter the Description">
                               <input type="submit" value="ADD" class="bg go_back">
                           </form>
                       </div>
