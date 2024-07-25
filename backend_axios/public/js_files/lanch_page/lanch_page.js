@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function checkEmail() {
-    const email = document.getElementById("email").value;
+    const email = document.getElementById("email").value.toLowerCase();
     const statusDiv = document.getElementById('emailStatus');
     const emailInput = document.getElementById('email');
     fetch('/email_check', {

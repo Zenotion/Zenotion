@@ -388,6 +388,72 @@ i{
   color: red;
 }
 
+.types-radio-buton-main-container{
+  display: flex;
+  gap: 20px;
+}
+
+
+.group-type-selection{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+.types-radio-button-main-container {
+  display: flex;
+  gap: 20px;
+}
+
+.type-section-common {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.type-section-common input[type="radio"] {
+  display: none;
+}
+
+.type-section-common label {
+  display: block;
+  padding: 15px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 250px;
+  height: 150px;
+  text-align: center;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.type-section-common label:hover {
+  background-color: #f0f0f0;
+}
+
+.type-section-common input[type="radio"]:checked + label {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.type-section-common label h3,
+.type-section-common label p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.rev-bg {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.grp-type-decs {
+  font-size: 0.9em;
+  color: hsla(0, 0%, 0%, 0.697);
+}
+
 footer{
   position: relative;
 }
@@ -541,6 +607,7 @@ border-radius: 50%;
   gap: 7px;
 }
 
+
 .email-container{
   display: flex;
   gap: 5px;
@@ -580,7 +647,7 @@ border-radius: 50%;
 .create-space-button{
   border: 1px solid black;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 180px;
   padding: 10px;
