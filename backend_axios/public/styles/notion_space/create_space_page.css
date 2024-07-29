@@ -419,9 +419,9 @@ i{
 .type-section-common label {
   display: block;
   padding: 15px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
+  border-radius: 7px;
   cursor: pointer;
+  border: 1px solid black;
   width: 250px;
   height: 150px;
   text-align: center;
@@ -433,15 +433,24 @@ i{
 }
 
 .type-section-common input[type="radio"]:checked + label {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: #fff;
+
+  background-color: #025BEE;
+  color: white;
+  cursor: pointer;
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: -4px 4px 0 0 black;
+  border: none;
 }
 
 .type-section-common label h3,
 .type-section-common label p {
   margin: 0;
   padding: 5px 0;
+}
+
+.type-section-common input[type="radio"]:checked + label p{
+  color: hsla(0, 0%, 100%, 0.59);
+
 }
 
 .rev-bg {
@@ -607,6 +616,9 @@ border-radius: 50%;
   gap: 7px;
 }
 
+.remove_add_email_section{
+  display: none;
+}
 
 .email-container{
   display: flex;

@@ -176,5 +176,22 @@ async function postData(formData) {
   }
 }
 
+let public_radio = document.getElementById("public");
+let private_radio = document.getElementById("private");
+let add_email_section = document.getElementById("add-member-to-grp-js")
+let radio_buttons = document.querySelectorAll("input[type = radio]");
 
+for(let i = 0;i < radio_buttons.length;i++){
+  radio_buttons[i].addEventListener("click",()=>{
+  if(radio_buttons[i].id == "public"){
+    add_email_section.classList.remove("add-member-to-grp");
+    add_email_section.classList.add("remove_add_email_section");
+
+  }else{
+    add_email_section.classList.add("add-member-to-grp");
+    add_email_section.classList.remove("remove_add_email_section");
+
+  }
+  })
+}
 
