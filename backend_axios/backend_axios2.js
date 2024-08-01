@@ -67,7 +67,7 @@ server.get("/",(req,res)=>{
 
    //notion space
 server.get("/notionspace", async(req,res)=>{
-    let user_name = "mani"; 
+    let user_name = "hirthick"; 
     let group_name = await axios.post(`${domain}retrive_spaces`,{
       "username":user_name
     });
@@ -80,13 +80,13 @@ server.get("/notionspace", async(req,res)=>{
       "our_domain":our_domain}); 
   }); 
   
-
+// retirving the group
 
   server.get("/notionspace/:selected_grp_id",async(req,res)=>{
-    console.log("came here")
+
     let g_id = req.params.selected_grp_id;
     // let user_name = req.user.username;
-    let user_name = "jothimani";
+    let user_name = "hirthick";
     let group_name = await axios.post(`${domain}retrive_spaces`,{
 
       "username":user_name
@@ -118,6 +118,28 @@ console.log(group_topic.data);
   });  
 
 
+// add topic to the group
+
+
+server.post("/notionspace/:selected_grp_id",async(req,res)=>{
+
+
+  await axios.post(`${domain}add_topic_group`,{
+    
+  })
+
+
+
+
+
+})
+
+
+
+
+
+
+
   server.get("/notionspace/:selected_grp_id/:topic/:res_type",async(req,res)=>{
 
 const {selected_grp_id,topic,res_type} = req.params;
@@ -133,7 +155,7 @@ if(res_type == "video"){
   console.log("video"); 
   const result = await axios.post(`${domain}retrive_videos`,{
     "space_id":parseInt(selected_grp_id),
-    "topic":topic,
+    "topic":topic, 
     "lable":"web hacking tools" 
   }) 
 console.log(result.data)  
@@ -193,21 +215,36 @@ server.get("/notionspace/create/space",(req,res)=>{
 
   })
 
-  server.post('/notionspace/create/space', upload.single('image'), (req, res) => {
-    const { spaceName, description, email } = req.body;
+  server.post('/notionspace/create/space', upload.single('image'), async(req, res) => {
+    const { spaceName, description, groupType } = req.body;
     const image = req.file;
+
+    if (groupType === "public"){
+
+      await axios.post(`${domain}create_space`,{
+        "sname":spaceName,
+        "desc":description,
+        "space_mode":groupType,
+        "username":"hirthick",
+        "g_profile":image.buffer 
+
+      }) 
+    }
+
+  
     console.log('Space Name:', spaceName);
     console.log('Description:', description);
-    console.log('Email:', JSON.parse(email)); // Parse JSON string to array
+    // console.log('Email:', JSON.parse(email)); // Parse JSON string to array
     console.log('Image:', image.buffer);
+    console.log('groupType:', groupType); 
 });
 
   //send the log in page to client
 
   
 server.get("/log_out",(req, res) =>{
-    try{
-    req.logout(function (err) {
+    try{ 
+    req.logout(function (err) { 
       if (err) {
         return next(err);
       }

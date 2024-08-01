@@ -45,6 +45,7 @@ function validateEmailFormat(email) {
 function checkCharCount_title() {
   const input = document.getElementById('new_title_form');
   document.getElementById("require-alert-mgs").textContent = "";
+
   const charCount = document.getElementById('charCount_title');
   const maxLength = 15;
 
@@ -61,6 +62,7 @@ function checkCharCount_title() {
 function checkCharCount_desc() {
   const input = document.getElementById('new_decs_form');
   const charCount = document.getElementById('charCount_desc');
+  document.getElementById("require-alert-mgs-desc").textContent = "";
   const maxLength = 75;
 
   charCount.textContent = `${input.value.length}/${maxLength}`;
@@ -123,19 +125,51 @@ function checkCharCount_email(){
 
 }
 
-
+let public_space_button = document.getElementById("public");
+let private_space_button = document.getElementById("private");
 let createSpaceButton = document.getElementById("create-space-button-js");
 
 createSpaceButton.addEventListener("click", async()=>{
   const imageFile = document.getElementById('upload-button').files[0];
   let spaceName = document.getElementById("new_title_form").value;
   let spaceDesc = document.getElementById("new_decs_form").value;
-  let email = [];
-  let emailItem = document.querySelectorAll(".email-item");
-  for(let i =0; i<emailItem.length;i++){
-    email.push(emailItem[i].textContent)
+  let public_type = "public";
+  let private_type = "private";
+  let email;
+  if(private_space_button.checked){
+    let email_Container = []
+    let emailItem = document.querySelectorAll(".email-item");
+    for(let i =0; i<emailItem.length;i++){
+      email_Container.push(emailItem[i].textContent)
+      console.log(email_Container);
+    }
+    email = email_Container;
   }
-  
+
+  console.log(email);
+  if(public_space_button.checked){
+    if(spaceName.trim() == "" || !imageFile || spaceDesc.trim() == ""){
+      if(spaceName.trim() == ""){
+        document.getElementById("require-alert-mgs").textContent = "space name cant be empty";
+      }
+      if(spaceDesc.trim() == ""){
+        document.getElementById("require-alert-mgs-desc").textContent = "space description cant be empty";
+      }
+      if(!imageFile ){
+        document.getElementById("require-alert-mgs-img").textContent = "space image cant be empty";
+      }
+    }else{
+
+      const formData = new FormData();
+      formData.append('image', imageFile);
+      formData.append('spaceName', spaceName);
+      formData.append('description', spaceDesc);
+      formData.append('groupType',public_type)
+      postData(formData);
+    }
+  }
+
+  if(private_space_button.checked){
     if(spaceName.trim() == "" || !imageFile || email.length == 0){
       if(spaceName.trim() == ""){
         document.getElementById("require-alert-mgs").textContent = "space name cant be empty";
@@ -152,9 +186,12 @@ createSpaceButton.addEventListener("click", async()=>{
       formData.append('image', imageFile);
       formData.append('spaceName', spaceName);
       formData.append('description', spaceDesc);
-      formData.append('email', JSON.stringify(email));
+      formData.append('groupType',private_type);
+        formData.append('email', JSON.stringify(email));
       postData(formData);
     }
+  }
+
   
 })
 

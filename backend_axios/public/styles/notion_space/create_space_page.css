@@ -376,6 +376,11 @@ i{
   font-weight: 600;
 }
 
+#require-alert-mgs-desc{
+  color: red;
+  font-weight: 600;
+}
+
 .error-display-style{
   color: red;
 }
