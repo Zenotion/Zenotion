@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>space name</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!--nav bar section-->
+    <header id="navbar-main">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#home" class="link-tag-main-logo">
+            <img src="/images/notion_space/group_page/zeotion.png" class="main_logo" alt="">
+          </a>
+        </div>
+        <div class="create-room">
+          Create new space
+          <img src="/images/notion_space/group_page/plus.png" class="plus-logo" alt="">
+        </div>
+      </div>
+    </header>
+
+    <!-- main section -->
+    <section id="main content">
+      <div class="main-container">
+        <div class="option-bar rombus-bg">
+          <div class="option-heading-container">
+            <a href="">
+            <h3 class="option-heading">Notion Space</h3>
+          </a>
+          </div>
+          <div class="option-searchhing-container">
+            <a href="">
+            <h3 class="option-heading-search"> <i class="ri-search-2-line"></i> <p>Search</p></h3>
+          </a>
+          </div>
+          <div class="item-main-conatainer">
+            <!-- <% if(locals.grp_names){%>
+              <%for(let i = 0; i<grp_names.length;i++){%>
+          <a href="<%=`${our_domain}notionspace/${grp_names[i].space_id}`%>">
+            <h3 class="option-items"><i class="ri-group-3-line"></i><%=grp_names[i].space_name%></h3>
+          </a>
+            <% }} %> -->
+        </div>
+        </div>
+        <!-- main content page -->
+        <div class="content-bar">
+            <div class="search-bar-main-sectoin rev-bg">
+              <div class="search-bar-container-holder rev-bg">
+                <i class="ri-search-2-line search-icon"></i>
+                <input type="text" name="prompt" placeholder="search" id="search-prompt-input" class="main-search-bar">
+                <i class="ri-arrow-right-line go_button_search"></i>     
+
+              </div>
+            </div>
+              <div class="suggestion-section suggestion-section_pi" id="suggestion-holder_js">
+                <a href="" class="rev-bg">
+                  <div class="suggest-content">
+                    <h4 class="grp-title-suggestion rev-bg">Zenotion</h4>
+                    <p class="grp-desc-suggestion rev-bg">this grp is specially for sharing notes and resources</p>
+                  </div>
+                </a>
+                <a href="" class="rev-bg">
+                <div class="suggest-content">
+                  <h4 class="grp-title-suggestion rev-bg">otha ommala</h4>
+                  <p class="grp-desc-suggestion rev-bg">this grp is specially for bad word speaking </p>
+                </div>
+              </a>
+              <a href="" class="rev-bg">
+                <div class="suggest-content">
+                  <h4 class="grp-title-suggestion rev-bg">testing</h4>
+                  <p class="grp-desc-suggestion rev-bg">this grp is specially for teasting</p>
+                </div>
+              </a>
+            </div>
+
+            <div class="group-display-section">
+                <div class="group-content-display-section">
+                  <div class="group_name_display_section rev-bg">
+                    <h3 class="grp-title-name img_testing">Zenotion</h3>   
+                    <p class="grp-des-name">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, minus commodi labore porro qui illum cum, minus commodi labore porro qui illum cum </p>
+                        <div class="member-title rev-bg">
+                          <p class="rev-bg">
+                            Total Members <i class="ri-group-line"></i> : 10
+                          </p>
+                          <p class="rev-bg">
+                            Created by : Nivaas
+                          </p>
+                        </div>
+                      </div>
+                      <div class="buttons-section">
+                        <div class="join-group-section">
+                          <h3 class="join-text">Join</h3>
+                          <i class="ri-arrow-right-line join-arrow"></i>
+                        </div>
+                        <div class="view-group-section">
+                          <h3 class="view-text">view</h3>
+                          <i class="ri-arrow-right-line view-arrow"></i>
+                        </div>
+                      </div>
+
+                </div>
+                <div class="group-content-display-section">
+                    
+                </div>
+                <div class="group-content-display-section">
+                    
+                </div>
+            </div>
+        </div>
+        </section>
+    <footer>
+      <div class="contact_continer" id = "contact">
+        <a href =""><i class="ri-instagram-fill" ></i></a>
+        <a href=""><i class="ri-linkedin-box-fill"></i></a>
+        <a href=""><i class="ri-mail-fill"></i></a>
+        <a href=""><i class="ri-whatsapp-fill"></i></a>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed('#testing-animation', {
+        strings: [`Create your space`],
+        typeSpeed: 60,
+        startDelay: 300
+      });
+      document.getElementById("testing-animation").classList.add("rev-bg");
+      document.querySelector(".typed-cursor").classList.add("rev-bg");
+    </script>
+</body>
+</html>
