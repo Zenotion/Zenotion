@@ -11,6 +11,7 @@ import session from "express-session";
 import nodemailer from "nodemailer";
 import 'dotenv/config';
 import { waitForDebugger } from "inspector";
+import { resolveSoa } from "dns";
 
  
 const server = express();  
@@ -66,12 +67,14 @@ server.get("/",(req,res)=>{
 
    //notion space
 server.get("/notionspace", async(req,res)=>{
-    let user_name = "hirthick"; 
+    let user_name = "mani"; 
     let group_name = await axios.post(`${domain}retrive_spaces`,{
       "username":user_name
     });
     let grp_names = group_name.data;
+
     console.log(grp_names);
+    
     res.render("notion_space/notion_space_home.ejs",{ 
       "grp_names":grp_names, 
       "our_domain":our_domain}); 
@@ -83,12 +86,20 @@ server.get("/notionspace", async(req,res)=>{
     console.log("came here")
     let g_id = req.params.selected_grp_id;
     // let user_name = req.user.username;
-    let user_name = "hirthick";
+    let user_name = "jothimani";
     let group_name = await axios.post(`${domain}retrive_spaces`,{
 
       "username":user_name
 
     }); 
+
+
+const group_topic = await axios.post(`${domain}retrive_topics`,{
+  "space_id":parseInt(g_id),
+  "lable":"web hacking tools"
+})
+console.log(group_topic.data);
+
   
     let group_detail = await axios.post(`${domain}retrive_space_details`,{
       "space_id":parseInt(g_id) 
@@ -97,12 +108,79 @@ server.get("/notionspace", async(req,res)=>{
   
     res.render("notion_space/group_page.ejs",{
      "group_detail":group_detail.data,
-     "groups":group_name.data, 
-     "our_domain":our_domain
+     "groups":group_name.data,     
+     "our_domain":our_domain,
+     "topic":group_topic.data
     });   
   
   
   });  
+
+
+  server.get("/notionspace/:selected_grp_id/:topic/:res_type",async(req,res)=>{
+
+const {selected_grp_id,topic,res_type} = req.params;
+let firstLetter = "teacher"[0].toUpperCase();  
+
+const group_topic = await axios.post(`${domain}retrive_topics`,{
+  "space_id":parseInt(selected_grp_id),
+  "lable":"web hacking tools"
+})
+
+if(res_type == "video"){
+  console.log("video"); 
+  const result = await axios.post(`${domain}retrive_videos`,{
+    "space_id":parseInt(selected_grp_id),
+    "topic":topic,
+    "lable":"web hacking tools" 
+  }) 
+console.log(result.data)  
+  
+// res.send(result.data)      
+res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter});
+
+}else{
+  if(res_type === "document"){
+console.log("doc");
+    const result = await axios.post(`${domain}retrive_documents`,{
+
+      "space_id":parseInt(selected_grp_id),
+        "topic":topic,
+        "lable":"web hacking tools"
+
+    }) 
+
+    console.log(result.data)
+    res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter});
+
+  }else{
+    if(res_type === "link"){
+      console.log("link");
+      const result = await axios.post(`${domain}reteive_links`,{
+        "space_id":parseInt(selected_grp_id),
+        "topic":topic,
+        "lable":"web hacking tools"
+        })
+        console.log(result.data)
+        res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter});
+
+    }
+  }
+}
+
+// res.send("connected")
+
+  })
+
+
+
+
+
+
+
+
+
+
 
   //create space route  
 
@@ -997,10 +1075,10 @@ server.get("/:dept/:sem/:sub/student/:topic/:res_type/show_pdf",async(req,res)=>
     "file_name":file_name
   })
 
-  const pdfData = Buffer.from(pdfResponse.data.data);
+  const pdfData = Buffer.from(pdfResponse.data.data); 
   console.log(pdfData);
   res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'inline');
+  res.setHeader('Content-Disposition', 'inline'); 
   res.send(pdfData);
 })
 

@@ -417,26 +417,14 @@
            </div>
             <!-- all - topic - section -->
             <div class="topic-container ">
-
+<%if(locals.topic){
+  for(let i=0;i<topic.length;i++){
+  %>
             <div class="topic-card">
               <div class="topic-lable">
                 Machine Learning <i class="ri-robot-3-fill"></i></div>
               <div class="topic-heading">
-                <h3>Neural Network</h3>
-                <p>this topic containes the network notes and shit</p></div>
-              <div class="about-topic">
-                <p>No. of documents : 3</p>
-                <div class="divider1"></div>
-                <p>No. of links : 5</p>
-                <div class="divider1"></div>
-                <p>No. of video : 2</p>
-              </div>
-            </div> 
-            <div class="topic-card">
-              <div class="topic-lable">
-                Machine Learning <i class="ri-robot-3-fill"></i></div>
-              <div class="topic-heading">
-                <h3>Neural Network</h3>
+                <h3><%=topic[i].topic%></h3>
                 <p>this topic containes the network notes and shit</p></div>
               <div class="about-topic">
                 <p>No. of documents : 3</p>
@@ -446,48 +434,8 @@
                 <p>No. of video : 2</p>
               </div>
             </div>
-            <div class="topic-card">
-              <div class="topic-lable">
-                Machine Learning <i class="ri-robot-3-fill"></i></div>
-              <div class="topic-heading">
-                <h3>Neural Network</h3>
-                <p>this topic containes the network notes and shit</p></div>
-              <div class="about-topic">
-                <p>No. of documents : 3</p>
-                <div class="divider1"></div>
-                <p>No. of links : 5</p>
-                <div class="divider1"></div>
-                <p>No. of video : 2</p>
-              </div>
-            </div>
-            <div class="topic-card">
-              <div class="topic-lable">
-                Machine Learning <i class="ri-robot-3-fill"></i></div>
-              <div class="topic-heading">
-                <h3>Neural Network</h3>
-                <p>this topic containes the network notes and shit</p></div>
-              <div class="about-topic">
-                <p>No. of documents : 3</p>
-                <div class="divider1"></div>
-                <p>No. of links : 5</p>
-                <div class="divider1"></div>
-                <p>No. of video : 2</p>
-              </div>
-            </div>
-            <div class="topic-card">
-              <div class="topic-lable">
-                Machine Learning <i class="ri-robot-3-fill"></i></div>
-              <div class="topic-heading">
-                <h3>Neural Network</h3>
-                <p>this topic containes the network notes and shit</p></div>
-              <div class="about-topic">
-                <p>No. of documents : 3</p>
-                <div class="divider1"></div>
-                <p>No. of links : 5</p>
-                <div class="divider1"></div>
-                <p>No. of video : 2</p>
-              </div>
-            </div>
+        <%}}%>
+            
           </div>
         </div>
       </div>

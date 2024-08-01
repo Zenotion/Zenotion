@@ -714,11 +714,11 @@ app.post(`/stu_shows_video`,async(req,res)=>{
    
 res.json(videos);
 } catch (error) {
-    console.error('Error fetching videos:', error);
+    console.error('Error fetching videos:', error); 
     res.status(500).json({ error: 'Internal Server Error' });
 }
 })
-// Route to fetch all PDF files
+// Route to fetch all PDF files 
 app.post("/stu_show_pdf", async (req, res) => {
     try{
     const department=req.body.dept;
@@ -1051,14 +1051,14 @@ app.post("/add_topic_group", async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');
-    }
+    } 
 });
 
-app.post("/retrive_topics",async(req,res)=>{
+app.post("/retrive_topics",async(req,res)=>{ 
     const { space_id, lable} = req.body;
     const lable_query=await db4.query(`select lable_id from lables where space_id=$1 and lable=$2`,[space_id,lable]);
     const lable_id = lable_query.rows[0].lable_id;
-    console.log(lable_id);
+    console.log(lable_id); 
     const topic=await db4.query(`select * from topics where lable_id=$1`,[lable_id])
     const topics = topic.rows.map(row => ({
         topic: row.topic,
@@ -1228,20 +1228,22 @@ app.post("/retrive_documents",async(req,res)=>{
 
 app.post(`/add_video_group`,async(req,res)=>{
         try{
+
         console.log(req.body);
         const space_id=req.body.space_id;
         const topic=req.body.topic;
         const lable=req.body.lable;
         const video=req.body.link;
         console.log(video);
-        function extractVideoId(videoUrl) {
+
+        function extractVideoId(videoUrl) { 
             // Regular expression to match YouTube video IDs
             var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             var match = videoUrl.match(regExp);
             if (match && match[2].length === 11) {
                 // The video ID is the second element in the match array
                 return match[2];
-            } else {
+            } else { 
                 // If no match found or video ID is not 11 characters long, return null
                 return null;
             }
@@ -1269,10 +1271,10 @@ catch (error) {
 
 app.delete("/video_group",async(req,res)=>{
     try{
-    const space_id=req.body.space_id;
+    const space_id=req.body.space_id; 
     const topic=req.body.topic;
     const lable=req.body.lable;
-    const video_title=req.body.video_title;
+    const video_title=req.body.video_title; 
     const admin_username=req.body.username
 
     const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
@@ -1291,27 +1293,29 @@ app.delete("/video_group",async(req,res)=>{
     }catch(err){
         console.error('Error adding video:', err);
         res.status(500).json({ error: 'Internal Server Error' });
-    }
+    } 
 })
 
-app.post("/retrive_videos",async(req,res)=>{
-    const space_id=req.body.space_id;
-    const topic=req.body.topic;
-    const lable=req.body.lable;
-    console.log(lable);
+app.post("/retrive_videos",async(req,res)=>{ 
+    const space_id=req.body.space_id;   
+    const topic=req.body.topic;   
+    const lable=req.body.lable; 
+    console.log(req.body);
    const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
         const lable_id = lable_query.rows[0].lable_id; 
         console.log(lable_id);
     const topic_key = await db4.query("SELECT topic_key FROM topics WHERE topic = $1 AND lable_id = $2", [topic, lable_id]);
     const topicKey = topic_key.rows[0].topic_key;
+    console.log(topicKey);
     const video_query=await db4.query(`select * from videos where topic_key=$1`,[topicKey]);
-    const videos =video_query.rows.map(row => ({
+    const videos =video_query.rows.map(row => ({ 
         video: row.video,
         video_title: row.video_title,
         video_desc: row.video_desc
-    }));   
-   
-res.json(videos);
+    }));     
+    const video = video_query.rows
+   console.log(video);
+res.json(video);
 })
 
 app.post(`/add_link_group`,async(req,res)=>{
