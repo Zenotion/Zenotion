@@ -1316,15 +1316,15 @@ app.post("/retrive_videos",async(req,res)=>{
     }));     
     const video = video_query.rows
    console.log(video);
-res.json(video);
-})
-
-app.post(`/add_link_group`,async(req,res)=>{
-    try{
-    const space_id=req.body.space_id;
-    const lable=req.body.lable;
+res.json(video); 
+}) 
+ 
+app.post(`/add_link_group`,async(req,res)=>{ 
+    try{ 
+    const space_id=req.body.space_id;  
+    const lable=req.body.lable; 
     const topic=req.body.topic;
-    const link=req.body.link;
+    const link=req.body.link; 
     const link_title=req.body.link_name;
     const link_desc=req.body.description;
     const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);

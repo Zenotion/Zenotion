@@ -110,7 +110,8 @@ console.log(group_topic.data);
      "group_detail":group_detail.data,
      "groups":group_name.data,     
      "our_domain":our_domain,
-     "topic":group_topic.data
+     "topic":group_topic.data,
+     "space_id":g_id
     });   
   
   
@@ -127,6 +128,7 @@ const group_topic = await axios.post(`${domain}retrive_topics`,{
   "lable":"web hacking tools"
 })
 
+
 if(res_type == "video"){
   console.log("video"); 
   const result = await axios.post(`${domain}retrive_videos`,{
@@ -136,8 +138,7 @@ if(res_type == "video"){
   }) 
 console.log(result.data)  
   
-// res.send(result.data)      
-res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter});
+res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter,"space_id":selected_grp_id});
 
 }else{
   if(res_type === "document"){
@@ -148,10 +149,10 @@ console.log("doc");
         "topic":topic,
         "lable":"web hacking tools"
 
-    }) 
+    })  
 
     console.log(result.data)
-    res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter});
+    res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter,"space_id":selected_grp_id});
 
   }else{
     if(res_type === "link"){
@@ -162,7 +163,7 @@ console.log("doc");
         "lable":"web hacking tools"
         })
         console.log(result.data)
-        res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter});
+        res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter,"space_id":selected_grp_id});
 
     }
   }
