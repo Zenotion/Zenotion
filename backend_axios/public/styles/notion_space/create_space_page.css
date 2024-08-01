@@ -388,6 +388,81 @@ i{
   color: red;
 }
 
+.types-radio-buton-main-container{
+  display: flex;
+  gap: 20px;
+}
+
+
+.group-type-selection{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+.types-radio-button-main-container {
+  display: flex;
+  gap: 20px;
+}
+
+.type-section-common {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.type-section-common input[type="radio"] {
+  display: none;
+}
+
+.type-section-common label {
+  display: block;
+  padding: 15px;
+  border-radius: 7px;
+  cursor: pointer;
+  border: 1px solid black;
+  width: 250px;
+  height: 150px;
+  text-align: center;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.type-section-common label:hover {
+  background-color: #f0f0f0;
+}
+
+.type-section-common input[type="radio"]:checked + label {
+
+  background-color: #025BEE;
+  color: white;
+  cursor: pointer;
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: -4px 4px 0 0 black;
+  border: none;
+}
+
+.type-section-common label h3,
+.type-section-common label p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.type-section-common input[type="radio"]:checked + label p{
+  color: hsla(0, 0%, 100%, 0.59);
+
+}
+
+.rev-bg {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.grp-type-decs {
+  font-size: 0.9em;
+  color: hsla(0, 0%, 0%, 0.697);
+}
+
 footer{
   position: relative;
 }
@@ -541,6 +616,10 @@ border-radius: 50%;
   gap: 7px;
 }
 
+.remove_add_email_section{
+  display: none;
+}
+
 .email-container{
   display: flex;
   gap: 5px;
@@ -580,7 +659,7 @@ border-radius: 50%;
 .create-space-button{
   border: 1px solid black;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 180px;
   padding: 10px;
@@ -599,4 +678,32 @@ border-radius: 50%;
   cursor: pointer;
   transform: translateY(-3px) translateX(2px);
   box-shadow: -4px 4px 0 0 black;
+}
+
+
+
+
+.option-heading-search{
+  padding: 4%;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  background-color: #f7df7f;
+  border: 0.5px solid black;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 4%;
+}
+
+.option-heading-search:hover{
+  background-color: #ffeb9c;
+  cursor: pointer;
+  box-shadow: 0.5px 0.5px 15px rgba(0, 0, 0, 0.151);
+}
+
+.option-heading-search p{
+  background-color: transparent;
 }

@@ -1014,8 +1014,10 @@ app.post("/create_space",async(req,res)=>{
     const description=req.body.desc;
     const group_profile=req.body.g_profile;
     const user_profile=req.body.u_profile;
+    const creator_name=req.body.username;
+    const space_mode=req.body.space_mode;
     console.log(req.body);
-    const sid_query=await db4.query(`insert into space (space_name,description,profile) values($1,$2,$3) RETURNING space_id`,[sname,description,group_profile ]);
+    const sid_query=await db4.query(`insert into space (space_name,description,profile,creator_name,space_mode) values($1,$2,$3,$4,%5) RETURNING space_id`,[sname,description,group_profile,creator_name,space_mode]);
     console.log(sid_query.rows[0].space_id);
     const sid=sid_query.rows[0].space_id;
     const query=await db4.query(`insert into members (space_id,user_name,user_profile,is_admin) values($1,$2,$3,$4)`,[sid,req.body.user,user_profile,req.body.admin])
@@ -1027,7 +1029,6 @@ app.post("/create_space",async(req,res)=>{
     console.log("seccessfull");
     const lableIds = lableQuery.rows.map(row => row.lable_id);
     console.log(lableIds);
-    
     res.json("successfully space created");
 
 })

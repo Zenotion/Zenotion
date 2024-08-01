@@ -36,6 +36,11 @@
             <h3 class="option-heading">Notion Space</h3>
           </a>
           </div>
+          <div class="option-searchhing-container">
+            <a href="">
+            <h3 class="option-heading-search"> <i class="ri-search-2-line"></i> <p>Search</p></h3>
+          </a>
+          </div>
           <div class="item-main-conatainer">
             <!-- <% if(locals.grp_names){%>
               <%for(let i = 0; i<grp_names.length;i++){%>
@@ -80,9 +85,27 @@
                 <input type="text" name="new_description" maxlength="75" class="new-space-new"  oninput="checkCharCount_desc()" placeholder="enter the description" id="new_decs_form">
                 <div id="charCount_desc" class="count-text">0/75</div>
               </div>
-
-              <div class="add-member-to-grp">
-                <p class="editing-p rev-bg">add members:* <span id="require-alert-mgs-email"></span></p>
+              <div class="group-type-selection">
+                <p class="editing-p rev-bg">Space Type: <span id="require-alert-group-type">*</span></p>
+                <div class="types-radio-button-main-container">
+                  <div class="public-type-section type-section-common">
+                      <input type="radio" name="spaceType" id="public" checked/>
+                      <label for="public" class="rev-bg">
+                          <h3 class="rev-bg">Public</h3>
+                          <p class="rev-bg grp-type-decs">Anyone can join this space and access the group</p>
+                      </label>
+                  </div>
+                  <div class="private-group-section type-section-common">
+                      <input type="radio" name="spaceType" id="private" />
+                      <label for="private" class="rev-bg">
+                          <h3 class="rev-bg">Private</h3>
+                          <p class="rev-bg grp-type-decs">This group can only be accessed by the member added by the ADMIN</p>
+                      </label>
+                  </div>
+              </div>              
+              </div>
+              <div class="remove_add_email_section" id="add-member-to-grp-js">
+                <p class="editing-p rev-bg">add members:*<span id="require-alert-mgs-email"></span></p>
                 <div class="email-container">
                   <input type="email" name="add_member" maxlength="75" class="new-space-email" oninput="checkCharCount_email()"  placeholder="example@gmail.com" id="new_eamil_form">
                   <div class="add-email-button" id="add-email-button-js">add</div>
