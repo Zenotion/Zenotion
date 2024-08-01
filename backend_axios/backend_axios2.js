@@ -193,12 +193,13 @@ server.get("/notionspace/create/space",(req,res)=>{
   })
 
   server.post('/notionspace/create/space', upload.single('image'), (req, res) => {
-    const { spaceName, description, email } = req.body;
+    const { spaceName, description, groupType, email } = req.body;
     const image = req.file;
     console.log('Space Name:', spaceName);
     console.log('Description:', description);
     console.log('Email:', JSON.parse(email)); // Parse JSON string to array
     console.log('Image:', image.buffer);
+    console.log('groupType:', groupType);
 });
 
   //send the log in page to client
