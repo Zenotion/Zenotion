@@ -67,7 +67,7 @@ server.get("/",(req,res)=>{
 
    //notion space
 server.get("/notionspace", async(req,res)=>{
-    let user_name = "mani"; 
+    let user_name = "hirthick"; 
     let group_name = await axios.post(`${domain}retrive_spaces`,{
       "username":user_name
     });
@@ -80,13 +80,13 @@ server.get("/notionspace", async(req,res)=>{
       "our_domain":our_domain}); 
   }); 
   
-
+// retirving the group
 
   server.get("/notionspace/:selected_grp_id",async(req,res)=>{
-    console.log("came here")
+
     let g_id = req.params.selected_grp_id;
     // let user_name = req.user.username;
-    let user_name = "jothimani";
+    let user_name = "hirthick";
     let group_name = await axios.post(`${domain}retrive_spaces`,{
 
       "username":user_name
@@ -96,7 +96,7 @@ server.get("/notionspace", async(req,res)=>{
 
 const group_topic = await axios.post(`${domain}retrive_topics`,{
   "space_id":parseInt(g_id),
-  "lable":"web hacking tools"
+  "lable":"blockchain" 
 })
 console.log(group_topic.data);
 
@@ -110,11 +110,38 @@ console.log(group_topic.data);
      "group_detail":group_detail.data,
      "groups":group_name.data,     
      "our_domain":our_domain,
-     "topic":group_topic.data
+     "topic":group_topic.data,
+     "space_id":g_id
     });   
   
   
   });  
+
+
+// add topic to the group
+
+
+server.post("/notionspace/:selected_grp_id",async(req,res)=>{
+
+  const space_id = req.params.selected_grp_id;
+  const topic = req.body.topic;
+  const topic_desc = req.body.discription;
+
+  await axios.post(`${domain}add_topic_group`,{
+    "space_id":parseInt(space_id),
+    "lable":"blockchain",
+    "topic":topic,
+    "topic_desc":topic_desc
+  })
+
+  res.redirect(`${our_domain}notionspace/${space_id}`)
+ 
+})
+
+
+
+
+
 
 
   server.get("/notionspace/:selected_grp_id/:topic/:res_type",async(req,res)=>{
@@ -127,17 +154,17 @@ const group_topic = await axios.post(`${domain}retrive_topics`,{
   "lable":"web hacking tools"
 })
 
+
 if(res_type == "video"){
   console.log("video"); 
   const result = await axios.post(`${domain}retrive_videos`,{
     "space_id":parseInt(selected_grp_id),
-    "topic":topic,
+    "topic":topic, 
     "lable":"web hacking tools" 
   }) 
 console.log(result.data)  
   
-// res.send(result.data)      
-res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter});
+res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter,"space_id":selected_grp_id});
 
 }else{
   if(res_type === "document"){
@@ -148,10 +175,10 @@ console.log("doc");
         "topic":topic,
         "lable":"web hacking tools"
 
-    }) 
+    })  
 
     console.log(result.data)
-    res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter});
+    res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter,"space_id":selected_grp_id});
 
   }else{
     if(res_type === "link"){
@@ -162,7 +189,7 @@ console.log("doc");
         "lable":"web hacking tools"
         })
         console.log(result.data)
-        res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter});
+        res.render("notion_space/resource-page.ejs",{"our_domain":our_domain,"topic":topic,"res_ty":res_type,"topics":group_topic.data ,"resourse": result.data,"letter":firstLetter,"space_id":selected_grp_id});
 
     }
   }
@@ -192,22 +219,49 @@ server.get("/notionspace/create/space",(req,res)=>{
 
   })
 
-  server.post('/notionspace/create/space', upload.single('image'), (req, res) => {
-    const { spaceName, description, groupType, email } = req.body;
+  server.post('/notionspace/create/space', upload.single('image'), async(req, res) => {
+    const { spaceName, description, groupType } = req.body;
     const image = req.file;
+
+    if (groupType === "public"){
+
+      await axios.post(`${domain}create_space`,{
+        "sname":spaceName,
+        "desc":description,
+        "space_mode":groupType,
+        "username":"hirthick",
+        "g_profile":image.buffer 
+
+      }) 
+    }
+
+    if(groupType === "private"){
+      await axios.post(`${domain}create_space`,{
+        "sname":spaceName,
+        "desc":description,
+        "space_mode":groupType,
+        "username":"hirthick",
+        "g_profile":image.buffer ,
+        
+
+      }) 
+
+
+    }
+  
     console.log('Space Name:', spaceName);
     console.log('Description:', description);
-    console.log('Email:', JSON.parse(email)); // Parse JSON string to array
+    // console.log('Email:', JSON.parse(email)); // Parse JSON string to array
     console.log('Image:', image.buffer);
-    console.log('groupType:', groupType);
+    console.log('groupType:', groupType); 
 });
 
   //send the log in page to client
 
   
 server.get("/log_out",(req, res) =>{
-    try{
-    req.logout(function (err) {
+    try{ 
+    req.logout(function (err) { 
       if (err) {
         return next(err);
       }

@@ -28,7 +28,7 @@
         </a>
       </div>
     </header>
-
+<div id="blur">
     <div class="edit-group-section dotted-bg" id="space-editing-main-section">
       <div class="another-bg rombus-bg">
         <div class="editing-heading-section rev-bg">
@@ -340,7 +340,7 @@
           <div class="adding-blur rev-bg"></div>
           <div class="topic-title">
             <h1>Topic</h1>
-            <div class="add-topic">
+            <div class="add-topic"  id="open">
               Add new topic
               <img src="/images/notion_space/group_page/plus.png" class="plus-logo1" alt="">
             </div>
@@ -427,6 +427,7 @@
 <%if(locals.topic){
   for(let i=0;i<topic.length;i++){
   %>
+          <a href="<%=`${our_domain}notionspace/${space_id}/${topic[i].topic}/video`%>">
             <div class="topic-card">
               <div class="topic-lable">
                 Machine Learning <i class="ri-robot-3-fill"></i></div>
@@ -441,6 +442,7 @@
                 <p>No. of video : 2</p>
               </div>
             </div>
+          </a>
         <%}}%>
             
           </div>
@@ -456,6 +458,44 @@
         <a href=""><i class="ri-whatsapp-fill"></i></a>
       </div>
     </footer>
+
+  </div>
+    
+    <div class="main" id="main">
+        <div class="cover">
+
+            <div class="sep">
+                <div class="greetings">
+                    <h2 class="bg welcome-title" >Add Topic</h2>
+                    <div class="box" id="close">
+                        <i class="ri-close-line"></i>
+                    </div>
+                    
+                  </div>
+
+                  <div class="main_form_continer">
+                     
+                      <div class="form">
+                          <form action="<%=`${our_domain}notionspace/${space_id}`%>" method="post" class="form_box">
+                              <label for="topic" class="bg">
+                                  Topic name:
+                              </label>
+                              <input type="text" name="topic" class="text_enter bg" placeholder="Enter a Topic" id="topic" required>
+                              <div class="count" id="count1">0/25</div>
+                              <label for="description" class="bg">Description:</label>
+                              <input type="text" class="text_enter bg" placeholder="Enter the Description" name="discription" id="des">
+                              <div class="count" id="count2">0/75</div>
+                              <input type="submit" value="ADD" class="bg go_back">
+                          </form>
+                      </div>
+                      
+                      
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="/js_files/notion_space/group_page.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>

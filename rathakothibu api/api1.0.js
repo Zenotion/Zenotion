@@ -1012,15 +1012,18 @@ app.post("/create_space",async(req,res)=>{
 
     const sname=req.body.sname;
     const description=req.body.desc;
-    const group_profile=req.body.g_profile;
+    const g_profile=req.body.g_profile;
+    const group_profile= Buffer.from(g_profile);
+
     const user_profile=req.body.u_profile;
-    const creator_name=req.body.username;
+    const creator_name=req.body.username; 
     const space_mode=req.body.space_mode;
-    console.log(req.body);
-    const sid_query=await db4.query(`insert into space (space_name,description,profile,creator_name,space_mode) values($1,$2,$3,$4,%5) RETURNING space_id`,[sname,description,group_profile,creator_name,space_mode]);
+    const admin=true; 
+    console.log(group_profile);
+    const sid_query=await db4.query(`insert into space (space_name,description,profile,creator_name,space_mode) values($1,$2,$3,$4,$5) RETURNING space_id`,[sname,description,group_profile,creator_name,space_mode]);
     console.log(sid_query.rows[0].space_id);
     const sid=sid_query.rows[0].space_id;
-    const query=await db4.query(`insert into members (space_id,user_name,user_profile,is_admin) values($1,$2,$3,$4)`,[sid,req.body.user,user_profile,req.body.admin])
+    const query=await db4.query(`insert into members (space_id,user_name,user_profile,is_admin) values($1,$2,$3,$4)`,[sid,creator_name,user_profile,admin])
    //insert lables
     const lables = ["machine learning", "artificial intelligence", "iot", "cyber security", "blockchain", "robotics"];
     const values = lables.map((lable, index) => `($1, $${index + 2})`).join(', ');
@@ -1029,10 +1032,10 @@ app.post("/create_space",async(req,res)=>{
     console.log("seccessfull");
     const lableIds = lableQuery.rows.map(row => row.lable_id);
     console.log(lableIds);
-    res.json("successfully space created");
+    res.json("successfully space created");    
 
 })
-
+ 
 app.post("/add_topic_group", async (req, res) => {
     try {
         const { space_id, lable, topic,topic_desc } = req.body;
@@ -1058,13 +1061,15 @@ app.post("/add_topic_group", async (req, res) => {
 app.post("/retrive_topics",async(req,res)=>{ 
     const { space_id, lable} = req.body;
     const lable_query=await db4.query(`select lable_id from lables where space_id=$1 and lable=$2`,[space_id,lable]);
+
+console.log(lable_query);
     const lable_id = lable_query.rows[0].lable_id;
     console.log(lable_id); 
     const topic=await db4.query(`select * from topics where lable_id=$1`,[lable_id])
     const topics = topic.rows.map(row => ({
         topic: row.topic,
         topic_title: row.topic_title,
-        lable_id: row.lable_id
+        lable_id: row.lable_id 
     }));   
     res.json(topics)
 
@@ -1131,11 +1136,12 @@ app.post("/retrive_lable",async(req,res)=>{
     try{
     const space_id= req.body.space_id;
     const lable_query=await db4.query(`SELECT * from lables where space_id=$1`,[space_id]);
+    console.log(lable_query);
     const lables = lable_query.rows.map(row => ({
         lable: row.lable,
         lable_id: row.lable_id
     }));
-    res.json(lables);
+    res.json(lables); 
 }catch(err){
     console.error("Error uploading file:", err);
     res.status(500).send("Internal Server Error");
@@ -1316,15 +1322,15 @@ app.post("/retrive_videos",async(req,res)=>{
     }));     
     const video = video_query.rows
    console.log(video);
-res.json(video);
-})
-
-app.post(`/add_link_group`,async(req,res)=>{
-    try{
-    const space_id=req.body.space_id;
-    const lable=req.body.lable;
+res.json(video); 
+}) 
+ 
+app.post(`/add_link_group`,async(req,res)=>{ 
+    try{ 
+    const space_id=req.body.space_id;  
+    const lable=req.body.lable; 
     const topic=req.body.topic;
-    const link=req.body.link;
+    const link=req.body.link; 
     const link_title=req.body.link_name;
     const link_desc=req.body.description;
     const lable_query = await db4.query("SELECT lable_id FROM lables WHERE space_id = $1 AND lable = $2", [space_id, lable]);
