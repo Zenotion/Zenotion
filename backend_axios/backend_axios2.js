@@ -96,7 +96,7 @@ server.get("/notionspace", async(req,res)=>{
 
 const group_topic = await axios.post(`${domain}retrive_topics`,{
   "space_id":parseInt(g_id),
-  "lable":"web hacking tools"
+  "lable":"blockchain" 
 })
 console.log(group_topic.data);
 
@@ -123,15 +123,19 @@ console.log(group_topic.data);
 
 server.post("/notionspace/:selected_grp_id",async(req,res)=>{
 
+  const space_id = req.params.selected_grp_id;
+  const topic = req.body.topic;
+  const topic_desc = req.body.discription;
 
   await axios.post(`${domain}add_topic_group`,{
-    
+    "space_id":parseInt(space_id),
+    "lable":"blockchain",
+    "topic":topic,
+    "topic_desc":topic_desc
   })
 
-
-
-
-
+  res.redirect(`${our_domain}notionspace/${space_id}`)
+ 
 })
 
 
@@ -231,6 +235,19 @@ server.get("/notionspace/create/space",(req,res)=>{
       }) 
     }
 
+    if(groupType === "private"){
+      await axios.post(`${domain}create_space`,{
+        "sname":spaceName,
+        "desc":description,
+        "space_mode":groupType,
+        "username":"hirthick",
+        "g_profile":image.buffer ,
+        
+
+      }) 
+
+
+    }
   
     console.log('Space Name:', spaceName);
     console.log('Description:', description);

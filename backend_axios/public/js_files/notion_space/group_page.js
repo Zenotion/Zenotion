@@ -86,12 +86,7 @@ if(s>0){
 }
 });
 
-// document.querySelector('.title').addEventListener('mousemove', function (e) {
-//   var x = e.clientX / (window.innerWidth);
-//   var y = e.clientY / (window.innerHeight);
-//   var imgFilter = document.querySelector('.img-filter');
-//   imgFilter.style.transform = 'translate(' + x * 20 + 'px, ' + y * 20 + 'px)';
-// });
+
 
 let revealbut = document.querySelector(".chat-trigger1");
 let revealbut1 = document.querySelector(".chat-trigger");

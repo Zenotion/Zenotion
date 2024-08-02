@@ -1032,10 +1032,10 @@ app.post("/create_space",async(req,res)=>{
     console.log("seccessfull");
     const lableIds = lableQuery.rows.map(row => row.lable_id);
     console.log(lableIds);
-    res.json("successfully space created");   
+    res.json("successfully space created");    
 
 })
-
+ 
 app.post("/add_topic_group", async (req, res) => {
     try {
         const { space_id, lable, topic,topic_desc } = req.body;
