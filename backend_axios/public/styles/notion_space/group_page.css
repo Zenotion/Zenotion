@@ -667,9 +667,9 @@ border: 0.3px solid black;
 .topics-card-container{
   display: grid;
   grid-template-columns: 21% 77.5%;
-  grid-template-rows:1fr;
   gap: 1.5%;
   background-color: transparent;
+  margin-bottom: 7em;
 }
 
 .add-topic{
@@ -789,7 +789,8 @@ border: 0.3px solid black;
   flex-direction: column;
   padding: 5px;
   margin-top: 1.5em;
-  height: 66.5%;
+  /* height: 66.5%; */
+  height: auto;
 }
 
 .filter-heading{
@@ -859,6 +860,61 @@ border: 0.3px solid black;
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.custom-label-add-button{
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  background-color: #5131F3;
+  color: white;
+  font-weight: 400;
+  border-radius: 5px;
+  transition: all 0.4s ease-in-out;
+  font-size: 1.1em;
+  margin: 11px 0;
+}
+
+.custom-label-add-button:hover{
+  background-color: #ECE8E3;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: -4px 4px 0 0 black;
+}
+
+.custom-filter-show i{
+  color: black;
+  font-size: 1.3em;
+}
+
+.custom-filter-show{
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+  padding: 10px;
+  background-color: #5131F3;
+  color: white;
+  font-weight: 400;
+  border-radius: 5px;
+  transition: all 0.4s ease-in-out;
+  font-size: 1.1em;
+    margin: 11px 0;
+}
+
+.custom-filter-show:hover{
+  background-color: #ECE8E3;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: -4px 4px 0 0 black;
 }
 
 .center-u-checkbox input[type="checkbox"]{
