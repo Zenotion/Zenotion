@@ -1,0 +1,271 @@
+/* font import section */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  background-color: #F0EBE3;
+  list-style: none;
+}
+html{
+  overflow-x: hidden;
+  background-color: #F0EBE3;
+  opacity: 1;
+  background-image: radial-gradient(#000000 0.45px, #F0EBE3 0.45px);
+  background-size: 9px 9px;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+  background-color: transparent;
+}
+header{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.navbar-container{
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 6%;
+}
+
+@keyframes scr {
+  0%{
+    background-color: #ECE8E3;
+  }
+  100%{
+    background-color: #FFEAE3;
+  }
+}
+
+.Notion-space{
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 110px;
+  padding: 10px;
+  background-color: #5131F3;
+  color: white;
+  font-weight: 400;
+  border-radius: 5px;
+  transition: all 0.4s ease-in-out;
+  font-size: small;
+}
+
+.Notion-space img{
+  background: transparent;
+}
+
+nav{
+  background-color: #ECE8E3;
+}
+
+.left-half{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.user-profile-option{
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile_pic{
+  border-radius:50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.main_profile_image{
+  border-radius:50%;
+  width: 50px;
+}
+
+.pro_common{
+  width: 100%;
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pro_common:hover{
+  background-color: #00000072;
+}
+
+.pro_option_display{
+  position:fixed;
+  width: 11em;
+  border: 1px solid black;
+  display: flex;
+  background-color: #F0EBE3;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  right: 3.2em;
+  z-index: 6;
+
+}
+.dis_profile{
+  display: none;
+}
+
+.user-profile-option i{
+  font-size:25px;
+}
+.link-tag-main-logo{
+  background-color: #ECE8E3;
+}
+.logo{
+  background-color: #ECE8E3;
+  margin-top: 5px;
+}
+.Notion-space:hover{
+  background-color: #ECE8E3;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: -4px 4px 0 0 black;
+}
+
+.nav-items{
+  list-style: none;
+  background-color: #FFF0E5;
+}
+
+.plus-logo{
+  width:25px;
+}
+
+.main_logo{
+  width: 50px;
+  border-radius: 50%;
+}
+.move-navbar{
+  animation-name: scr;
+  animation-duration: 0.8s;
+  background-color: #FFEAE3;
+}
+
+
+.main-container{
+  display: grid;
+  grid-template-columns: 21% 79%;
+  grid-template-rows:1fr;
+  padding: 0% 6%;
+  gap: 1.5%;
+  background-color: #F0EBE3;
+  opacity: 1;
+  padding-bottom: 1.6%;
+  background-image: radial-gradient(#000000 0.45px, #F0EBE3 0.45px);
+  background-size: 9px 9px;
+}
+
+.option-bar{
+background-color: transparent;
+height: 23vh;
+}
+
+
+.rev-bg{
+  background-color: transparent;
+}
+
+/* background-color: #5131F3; */
+
+
+.option-heading{
+  padding: 4%;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  background-color: #f7df7f;
+  border: 0.5px solid black;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 4%;
+}
+.main-section{
+  height: auto;  
+  padding: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+} 
+
+.main-section h1{
+  font-size: 3em;
+  font-weight: 550;
+  padding-left: 30px;
+}
+
+.item-main-conatainer{
+  overflow-y: scroll;
+  height: 100%;
+  padding:2%;
+  background-color: transparent;
+}
+
+.item-main-conatainer::-webkit-scrollbar{
+  display: none;
+}
+
+.option-items{
+  font-weight: 400;
+  padding: 4%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 4%;
+  transition: all 0.2s ease-in-out;
+  background-color: #ffe3e1;
+  color: black;
+}
+
+.option-items:hover{
+  background-color: #5131f3ef;
+  box-shadow: -5px 0 0 black;
+  color: white;
+  cursor: pointer;
+}
+
+.option-bar{
+  margin-top: 5%;
+}
+
+.rombus-bg{
+  background-color: #F0EBE3;
+  opacity: 1;
+  background-image:  linear-gradient(135deg, #000000 25%, transparent 25%), linear-gradient(225deg, #000000 25%, transparent 25%), linear-gradient(45deg, #000000 25%, transparent 25%), linear-gradient(315deg, #000000 25%, #F0EBE3 25%);
+  background-position:  4px 0, 4px 0, 0 0, 0 0;
+  background-size: 4px 4px;
+  background-repeat: repeat;
+}
+.option-heading:hover{
+  background-color: #ffeb9c;
+  cursor: pointer;
+  box-shadow: 0.5px 0.5px 15px rgba(0, 0, 0, 0.151);
+}
+
+.main-container-text{
+  padding: 10px;
+}
+
+.main-container-text p {
+  font-size: large;
+}

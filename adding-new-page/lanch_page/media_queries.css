@@ -1,0 +1,675 @@
+
+/* responce for range of 1838px to 2560px */
+
+@media(min-width:1838px){
+
+    /* nav bar media query */
+.nav{
+    padding:15px;
+}
+
+.logo{
+    height: 50pt;
+    width: 50pt;
+}
+
+
+.option a{
+    font-size: 30px;
+}
+
+/* title content media query */
+
+.title_content h1{
+    font-size: 40px;
+}
+
+.title_content p{
+    font-size: 30px;
+}
+
+.image_continer img{
+    height: 490pt;
+    width:490pt
+}
+
+/* feacture continer media query */
+
+.feacture_card{
+    width:394px;
+    height: 395px;
+}
+
+.card-content h1{
+    font-size: 32px;
+}
+
+.overlay-content p{
+    font-size: 28px;
+}
+
+/* swiper continer media query */
+
+.swiper_continer{
+    width: 100%;
+}
+
+.wrapper{
+    width: 1000pt;
+    height: 300pt;
+}
+.carousel{
+    max-width: 100%;
+    
+}
+
+.text {
+    font-size: 40px;
+}
+.text h2{
+    font-size: 45px;
+}
+
+.img {
+    height: 300px;
+    width: 300px;
+}
+
+/* sign up button media query */
+
+.signup_content h1{
+    font-size: 38px;
+
+}
+
+.button_continer button{
+    padding:20px 35px;
+    font-size: 25px;
+    margin: 20px;
+    
+}
+
+.button_continer h3{
+    font-size: 34px;
+}
+
+/* footer media query */
+
+.contact_continer{
+    gap:40px;
+
+}
+.contact_continer i{
+    font-size: 35px;
+ }
+
+}
+
+/* media query from the range of 1100px to 1400px */
+
+@media(min-width:1100px) and (max-width:1400px){
+
+/* title content media query */
+
+
+.title_content h1{
+    font-size: 27px;
+}
+
+.title_content p{
+    font-size: 17px;
+}
+
+.image_continer img{
+    height: 350pt;
+    width:350pt
+}
+
+/* feacture continer media query */
+
+.feacture_card{
+    width:270px;
+    height:270px;
+}
+
+/* swiper continer media query */
+
+.carousel .card {
+    height: 250pt;
+}
+
+.wrapper{
+    height: 250pt;
+    margin:3%;
+}
+
+.carousel .card h2 {
+    font-size: 30px;
+}
+
+.carousel .card p {
+    font-size: 28px;
+}
+
+/* sign up button media query */
+
+.signup_content h1{
+    font-size: 28px;
+
+}
+
+.button_continer h3{
+    font-size: 23px;
+}
+}
+
+/* media query from the range of 900px to 1100px */
+
+
+@media(min-width:900px) and (max-width:1100px){
+
+    /* nav bar media query */
+    .nav{
+        padding: 7px;
+    }
+    
+    .logo{
+        height: 35pt;
+        width: 35pt;
+    }
+    
+    
+    .option a{
+        font-size: 15px;
+    }
+
+  
+    /* title content media query */
+
+
+.title_content h1{
+    font-size: 20px;
+}
+
+.title_content p{
+    font-size: 15px;
+}
+
+.image_continer img{
+    height: 280pt;
+    width:280pt
+}
+
+/* feacture continer media query */
+
+.feacture_card{
+    width:225px;
+    height:225px;
+}
+
+.card-content h1{
+    font-size: 17px;
+}
+
+.overlay-content{
+    font-size: 15px;
+}
+
+/* swiper continer media query */
+
+.carousel .card {
+    height: 200pt;
+}
+
+.wrapper{
+    height: 200pt;
+    margin:2%;
+}
+
+.swiper_continer{
+    padding: 2%;
+}
+
+
+.carousel .card h2 {
+    font-size: 27px;
+}
+
+.carousel .card p {
+    font-size: 25px;
+}
+
+/* sign up button media query */
+
+.signup_content h1{
+    font-size: 25px;
+
+}
+
+.button_continer h3{
+    font-size: 20px;
+}
+
+.button_continer button{
+    padding:10px 25px;
+    font-size: 15px;
+    margin: 20px;
+    
+}
+}
+
+/* media query from the range of 700px to 900px */
+
+
+@media(min-width:700px) and (max-width:899px){
+    .option{
+        display: none;
+    }
+
+    .drop_down{
+        top:12%;
+    }
+
+    @keyframes pop{
+        0%{
+           height: 0px;
+           display: none;
+          
+        }
+    
+        40%{
+            display:none;
+        }
+       
+        100%{
+            height: 220px;
+           display: block;
+        }
+         }
+
+        .drop_down a{
+            font-size: 15px;
+        }
+
+
+    /* title content media query */
+
+
+    .title_content h1{
+        font-size: 16px;
+    }
+    
+    .title_content p{
+        font-size: 13px;
+    }
+    
+    .image_continer img{
+        height: 225pt;
+        width:225pt
+    }
+
+    /* feacture continer media query */
+
+.feacture_card{
+    width:200px;
+    height:200px;
+}
+
+.card-content h1{
+    font-size: 16px;
+}
+
+.overlay-content{
+    font-size: 14px;
+}
+
+
+/* swiper continer media query */
+
+.carousel .card {
+    height: 170pt;
+}
+
+.wrapper{
+    height: 170pt;
+    margin:2%;
+}
+
+.swiper_continer{
+    padding: 2%;
+}
+
+
+.carousel .card h2 {
+    font-size: 22px;
+}
+
+.carousel .card span{
+    font-size: 18px;
+}
+
+/* sign up button media query */
+
+.signup_content h1{
+    font-size: 23px;
+
+}
+
+.button_continer h3{
+    font-size: 18px;
+}
+
+.button_continer button{
+    padding:10px 25px;
+    font-size: 14px;
+    margin: 15px;
+    
+}
+}
+
+
+/* media query from the range of 500px to 700px */
+
+@media(min-width:500px) and (max-width:700px){
+    .option{
+        display: none;
+    }
+
+/* title content media query */
+.title_continer{
+    flex-direction: column;
+}
+
+.title_content h1{
+    font-size: 15px;
+}
+
+.title_content p{
+    font-size: 13px;
+}
+
+.image_continer img{
+    display: none;
+}
+
+
+/* media query for drop down  */
+
+@keyframes pop{
+    0%{
+       height: 0px;
+       display: none;
+      
+    }
+
+    40%{
+        display:none;
+    }
+   
+    100%{
+        height: 270px;
+       display: block;
+    }
+     }
+
+.drop_down a{
+    font-size: 18px;
+}
+
+.drop_down{
+    top:12%;
+}
+/* feacture continer media query */
+
+.feacture_card{
+    width:170px;
+    height:170px;
+}
+
+.card-content h1{
+    font-size: 14px;
+}
+    
+.overlay-content {
+    font-size: 12px;
+
+}
+/* swiper continer media query */
+
+.carousel .card {
+    flex-direction: column;
+    height:300pt;
+    width:278pt;
+}
+
+.wrapper{
+    height: auto;
+}
+
+.wrapper .carousel{
+    width:310pt;
+}
+
+.carousel .card .img {
+    height: 120px;
+    width: 120px;
+    margin:20px
+}
+
+.carousel .card h2 {
+    font-size: 17px;
+}
+
+.carousel .card span {
+    font-size: 13px;
+    margin:20px;
+    
+}
+
+.text{
+    padding:4%;
+}
+
+
+/* sign up button media query */
+
+.signup_content h1{
+    font-size: 20px;
+
+}
+
+.button_continer h3{
+    font-size: 16px;
+}
+
+.button_continer button{
+    padding:10px 25px;
+    font-size: 14px;
+    margin: 15px;
+    
+}
+
+
+/* footer media query */
+
+.contact_continer{
+    gap:20px;
+
+}
+.contact_continer i{
+    font-size: 20px;
+ }
+
+ .drop_down a{
+    font-size: 15px;
+}
+
+}
+
+
+
+
+/* media query from the range of 500px to 700px */
+
+@media(min-width:315px) and (max-width:500px){
+
+
+    /* nav bar media query */
+    .nav{
+        padding:10px;
+    }
+    
+    .logo{
+        height: 25pt;
+        width: 25pt;
+    }
+
+    .menu i{
+        font-size: 20px;
+    }
+
+    .drop_down a{
+        font-size: 11px;
+    }
+
+    .drop_down li{
+        margin:.5%;
+    }
+    .drop_down{
+        top:10.5%;
+        z-index: 1;
+    }
+    .option{
+        display: none;
+    }
+
+    @keyframes pop{
+        0%{
+           height: 0px;
+           display: none;
+          
+        }
+    
+        40%{
+            display:none;
+        }
+       
+        100%{
+            height: 250px;
+           display: block;
+        }
+         }
+
+    /* title content media query */
+.title_continer{
+    flex-direction: column;
+}
+
+.title_content h1{
+    font-size: 11px;
+}
+
+.title_content p{
+    font-size: 9px;
+}
+
+.image_continer img{
+    display: none;
+}
+
+.title_content{
+    padding: 2%;
+}
+
+/* feacture continer media query */
+
+.feacture_card{
+    width:130px;
+    height:130px;
+}
+
+.card-content h1{
+    font-size: 12px;
+}
+    
+    
+.overlay-content {
+    font-size: 10px;
+
+}
+
+/* swiper continer media query */
+
+.carousel .card {
+    flex-direction: column;
+    height:auto;
+    width:145pt;
+    /* border: none; */
+}
+
+.wrapper{
+    height: auto;
+}
+
+.wrapper .carousel{
+    width:180pt;
+}
+
+.carousel .card .img {
+    height: 100px;
+    width: 100px;
+    margin:20px
+}
+
+.carousel .card h2 {
+    font-size: 15px;
+}
+
+.carousel .card span {
+    font-size: 10px;
+    margin:20px;
+    
+}
+
+.text{
+    padding:4%;
+}
+
+.wrapper i {
+    font-size:15px;
+}
+
+/* sign up button media query */
+
+.signup_content h1{
+    font-size: 15px;
+
+}
+
+.button_continer h3{
+    font-size: 13px;
+}
+
+.button_continer button{
+    padding:10px 25px;
+    font-size: 14px;
+    margin: 15px;
+    
+}
+
+/* footer media query */
+
+.contact_continer{
+    gap:15px;
+
+}
+.contact_continer i{
+    font-size: 14px;
+ }
+
+
+ 
+.menu i{
+    font-size: 17px;
+}
+}

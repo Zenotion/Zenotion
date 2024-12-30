@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>space name</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <link rel="stylesheet" href="resource-page.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!--nav bar section-->
+    <header id="navbar-main">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#home" class="link-tag-main-logo">
+            <img src="/images/notion_space/group_page/zeotion.png" class="main_logo" alt="">
+          </a>
+        </div>
+        <disv class="left-half">
+
+          <a href="<%=our_domain%>notionspace/create/space">
+            <div class="Notion-space">
+              Notion Space          
+            </div>
+          </a>
+          <div class="user-profile-option">
+            <i class="ri-user-fill"></i>
+          </div>
+        </disv>
+      </div>
+    </header>
+
+    <!-- main section -->
+    <section id="main content ">
+      <div class="main-container">
+        <div class="adding-blur rev-bg"></div>
+        <div class="option-bar rombus-bg">
+          <div class="option-heading-container">
+            <h3 class="option-heading">Unit 1</h3>
+          </div>
+          <div class="item-main-conatainer">
+            <h3 class="option-items"><i class="ri-group-3-line"></i>topic 1</h3>
+            <h3 class="option-items"><i class="ri-group-3-line"></i>topic 2</h3>
+            <h3 class="option-items"><i class="ri-group-3-line"></i>topic 3</h3>
+            <h3 class="option-items"><i class="ri-group-3-line"></i>topic 4</h3>
+        </div>  
+        </div>
+        <!-- main content page -->
+
+        <div class="content-bar rombus-bg">
+          <div class="cover-container">
+          </div>
+          <div class="subject-name-main-container">
+              <div class="path-content-container rev-bg">
+                <p class="rev-bg">loT and Cyber security including Block chain Technology/semester 1/Mathematics–I/Unit 1/<b class="rev-bg">neural network</b></p>
+              </div>
+              <div class="subject-name-container rev-bg">
+                <p class="rev-bg"><span id="testing-animation"></span></p>
+              </div>
+              <div class="unit-name-container rev-bg">
+                <h4 class="rev-bg">Resource:</h4>
+                <div class="subject-unit-name rev-bg">
+                  <p class="rev-bg">NUMBER OF VIDEOS : 1</p>
+                  <p class="rev-bg">NUMBER OF DOCUMENTS : 0</p>
+                  <p class="rev-bg">NUMBER OF LINKS : 5</p>
+                </div>
+              </div>  
+          </div>
+          
+        </div>
+
+        <!-- the topic card section -->
+        <div class="topic-section-container">
+          <div class="adding-blur rev-bg"></div>
+          <div class="topic-title">
+            <h1>Resource</h1>
+          </div>
+          <div class="divider"></div>
+          <div class="topics-card-container ">
+
+            <!-- pic-filter-containe -->
+            <div class="topic-filter-container rombus-bg">
+              <div class="left-bar-sem-title">
+                <i class="ri-database-2-fill"></i>
+                <p class="sem-heading rev-bg">Resource</p>
+              </div>
+              <disv class="sem-main-container">
+                <div class="video com-style">
+                  <h3>Video</h3>
+                </div>
+                <div class="document com-style">
+                  <h3>Document</h3>
+                </div>
+                <div class="link com-style">
+                  <h3>Links</h3>
+                </div>
+              </disv>
+           </div>
+            <!-- all - topic - section -->
+              <div class="topic-container ">
+                    <dsiv class="document-hold-container">
+                      <div class="topic-name-lable">
+                        <p>neutral networks</p>
+                      </div>
+                      <div class="main-container-of-document ">
+                        <div class="doc-title rev-bg">
+                          <h3 class="rev-bg">Activation Functions</h3>
+                        </div>
+                        <div class="doc-desc rev-bg">
+                          <p class="rev-bg">this is mainly used to activate the neurons in the neural network</p>
+                        </div>
+                        <div class="main-resource rev-bg">
+                          <img src="pdf.png" alt="" class="file-type rev-bg">
+                          <p class="rev-bg">filename.pdf</p>
+                        </div>
+                      </div>
+                    </dsiv>
+                    <dsiv class="link-hold-container">
+                      <div class="topic-name-lable">
+                        <p>neutral networks</p>
+
+                      </div>
+                      <div class="main-container-of-link ">
+                        <div class="link-title rev-bg">
+                          <h3 class="rev-bg">Activation Functions</h3>
+                        </div>
+                        <div class="link-desc rev-bg">
+                          <p class="rev-bg">this is mainly used to activate the neurons in the neural network</p>
+                        </div>
+                        <div class="link-button">
+                          <p class="rev-bg">link</p>
+                        </div>
+                      </div>
+                    </dsiv>
+              </div> 
+
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="adding-blur rev-bg"></div>
+      <div class="contact_continer" id = "contact">
+        <a href =""><i class="ri-instagram-fill" ></i></a>
+        <a href=""><i class="ri-linkedin-box-fill"></i></a>
+        <a href=""><i class="ri-mail-fill"></i></a>
+        <a href=""><i class="ri-whatsapp-fill"></i></a>
+      </div>
+    </footer>
+    <script src="resource-page.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed('#testing-animation', {
+        strings: [`neutral networks`],
+        typeSpeed: 60,
+        startDelay: 300
+      });
+      document.getElementById("testing-animation").classList.add("rev-bg");
+      document.querySelector(".typed-cursor").classList.add("rev-bg");
+    </script>
+</body>
+</html>

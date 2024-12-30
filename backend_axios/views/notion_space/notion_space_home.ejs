@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NotionSpace</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <link rel="stylesheet" href="/styles/notion_space/notion_space_home.css">
+</head>
+<body>
+    <!--nav bar section-->
+    <header id="navbar-main">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#home" class="link-tag-main-logo">
+            <img src="/images/notion_space/notion_space_home/zeotion.png" class="main_logo" alt="">
+          </a>
+        </div> 
+        <a href="<%=our_domain%>notionspace/create/space">
+        <div class="create-room">
+          Create new space
+          <img src="/images/notion_space/notion_space_home/plus.png" class="plus-logo" alt="">
+        </div>
+      </a>
+      </div> 
+    </header>
+
+    <!-- main section -->
+    <section id="main content">
+      <div class="main-container">
+        <div class="option-bar">
+          <div class="option-heading-container">
+            <a href="<%=our_domain%>notionspace">
+              <h3 class="option-heading">Notion Space</h3>
+            </a>
+            </div>
+          <div class="item-main-conatainer">
+            <% if(locals.grp_names){%>
+              <%for(let i = 0; i<grp_names.length;i++){%>
+          <a href="<%=`${our_domain}notionspace/${grp_names[i].space_id}`%>">
+            <h3 class="option-items"><i class="ri-group-3-line"></i><%=grp_names[i].space_name%></h3>
+          </a>
+            <% }} %>
+        </div> 
+        </div>
+        <!-- main content page -->
+        <div class="content-bar">
+          <div class="title">
+            <h1 class="main-topic-heading"><span id="testing-animation"></span></h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa deleniti incidunt totam eligendi commodi fugit, quo id enim tempore tenetur quis blanditiis obcaecati harum ex similique labore fugiat nobis repudiandae.
+            Inventore necessitatibus in quia nam totam distinctio eveniet pariatur, quis accusantium perspiciatis aut aperiam laudantium illum adipisci minus omnis obcaecati repellat quae deleniti tenetur rerum commodi ab sequi! Non, doloribus.
+            Corporis repudiandae quasi iste. Non accusantium hic nemo eaque neque ipsum quisquam sequi, cupiditate ullam esse aut pariatur aperiam soluta. Vel culpa eos debitis? In officiis non provident iusto quia.
+            Nam dolor aliquid, itaque placeat voluptatibus nisi hic similique consequatur illum ratione sint doloribus optio eum accusamus modi voluptatem provident libero ipsum aperiam sapiente commodi cupiditate! Illum aut sint odit?
+            </p>
+          </div>
+          <div class="divider"></div>
+          <div class="feature">
+            <h1 class="main-feature-heading">Features</h1>
+            <div class="main-feature-container">
+              <div class="feature-1 feature-hover"></div>
+              <div class="feature-2 feature-hover"></div>
+              <div class="feature-3 feature-hover"></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="steps">
+            <h1 class="main-step-heading">Steps</h1>
+            <div class="main-step-container">
+              <div class="step1 step-adj"></div>
+              <div class="step2 step-adj"></div>
+              <div class="step3 step-adj"></div>
+              <div class="step4 step-adj"></div>
+              <div class="step5 step-adj"></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="create-room-section">
+            <h2 class="main-create-room-heading">Do go ahead and create a space for you and your right now</h2>
+            <div class="create-room-again">
+              Create new space
+              <img src="/images/notion_space/notion_space_home/plus.png" class="plus-logo-again" alt="">
+            </div>
+          </div>
+          <div class="contact_continer" id = "contact">
+            <a href =""><i class="ri-instagram-fill" ></i></a>
+            <a href=""><i class="ri-linkedin-box-fill"></i></a>
+            <a href=""><i class="ri-mail-fill"></i></a>
+            <a href=""><i class="ri-whatsapp-fill"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="/js_files/notion_space/notion_space_home.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed('#testing-animation', {
+        strings: ['Notion Space'],
+        typeSpeed: 60,
+        startDelay: 300
+      });
+    </script>
+</body>
+</html>

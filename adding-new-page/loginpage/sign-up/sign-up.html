@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>log-in</title>
+  <link rel="stylesheet" href="sign-up.css">
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+</head>
+<body>
+    <div class="main-section dotted-bg">
+      <div class="main-container rombus-bg">
+          <div class="signup_main">
+
+            <div class="greetings">
+              <h2 class="rev-bg welcome-title">wellcome to Zenotion</h2>            </div>
+
+            <div class="main-user-input-section">
+              <div class="heading rev-bg">
+                <i class="ri-git-repository-private-fill"></i>
+                <h2 class="rev-bg">Create a New account</h2>
+              </div>
+              <div class="main-form-container">
+              <form action="/opt_verify" method="post" id="register_form" autocomplete="off">
+                <label for="" class="rev-bg">username:</label>
+                <input type="text" id="username" placeholder="username" name="username" required>
+                <label for="" class="rev-bg">enter the email</label>
+                <input type="email" id="email" placeholder="example@gmail.com" name="email" required>
+                <label for="" class="rev-bg">create password</label>
+                  <input type="password" placeholder="password" name="password" id="password" required>
+                  <ion-icon name="eye" id="eyeicon" onclick="pass1()" ></ion-icon>
+                <button class="go_back" id="reg_button" disabled ><span class="text rev-bg">register</span></button>
+                <div id="usernameStatus" style="color: red;"></div>
+                <div id="emailStatus" style="color: red;"></div>
+                <div class="sign-in-button rev-bg">
+                  Do you have an account ? 
+                  <a href="/sign-up" class="rev-bg">Sign in</a>
+                </div>
+              </form>
+            </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  <script src="sign-up.js"></script>
+</body>
+</html>

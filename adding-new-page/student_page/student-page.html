@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>space name</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <!-- <link rel="stylesheet" href="/styles/subject_page/topic-page.css"> -->
+  <link rel="stylesheet" href="student-page.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <div id="blur">
+    <!--nav bar section-->
+    <header id="navbar-main">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#home" class="link-tag-main-logo">
+            <img src="/images/topic_page/zeotion.png" class="main_logo" alt="">
+          </a>
+        </div>
+        <div class="left-half">
+
+          <a href="<%=our_domain%>notionspace/create/space">
+            <div class="Notion-space">
+              Notion Space          
+            </div>
+          </a>
+          <div class="user-profile-option">
+            <i class="ri-user-fill"></i>
+          </div>
+        </disv>
+      </div>
+    </header>
+
+    <!-- main section -->
+    <section id="main content ">
+      <div class="main-container">
+        <div class="adding-blur rev-bg"></div>
+        <div class="option-bar rombus-bg">
+          <div class="option-heading-container">
+            <h3 class="option-heading">Semester 1</h3>
+          </div>
+          <div class="item-main-conatainer">
+            <%if(locals.sub_arr){
+              for(let i=0;i<sub_arr.length;i++){%>
+
+<a href="<%=`${our_domain}${dept}/${sem}/${sub_arr[i]}/1`%>" ><h3 class="option-items"><i class="ri-group-3-line"></i><%=sub_arr[i]%></h3></a>
+
+            <%}}%>
+            
+        </div>  
+        </div>
+        <!-- main content page -->
+        <div class="content-bar rombus-bg">
+          <div class="sub-info-padding rev-bg">
+
+          <div class="subject-name-main-container">
+              <div class="path-content-container rev-bg">
+                <p class="rev-bg">loT and Cyber security including Block chain Technology/semester 1/<b class="rev-bg"><%=sub%></b>/<b class="rev-bg">student</b></p>
+              </div>
+              <div class="subject-name-container rev-bg">
+                <p class="rev-bg"><span id="testing-animation"></span></p>
+              </div>
+              <div class="unit-name-container rev-bg">
+                <h4 class="rev-bg">units:</h4>
+                <div class="subject-unit-name rev-bg">
+                  <p class="rev-bg">unit 1 : CALCULUS</p>
+                  <p class="rev-bg">unit 2 : FUNCTIONS OF SEVERAL VARIABLES</p>
+                  <p class="rev-bg">unit 3 : MULTIPLE INTEGRALS AND APPLICATIONS</p>
+                  <p class="rev-bg">unit 4 : DIFFERENTIAL EQUATIONS</p>
+                  <p class="rev-bg">unit 5 : DIFFERENTIAL EQUATIONS</p>
+                </div>
+              </div>
+          </div>
+                      
+        </div>
+          <div class="connectors-holder rev-bg">
+            <div class="student-heading">
+              Student Personal Space
+            </div>
+          </div>
+
+        </div>
+
+        <!-- the topic card section -->
+        <div class="topic-section-container">
+          <div class="adding-blur rev-bg"></div>
+          <div class="topic-title">
+            <h1>Topics</h1>
+            <%if(locals.role){%>
+              <div class="buttons-add-delete rev-bg">
+              <div class="delete-topic" id="delete-topic-js">
+                <p class="del-butotn-text rev-bg" id="text-change-delete">delete topic</p>
+                <i class="ri-delete-bin-7-fill del-icon-config" id="icon-change-delete"></i>
+              </div>
+            <div class="add-topic" id="open">
+              Add new topic
+              <img src="/images/notion_space/group_page/plus.png" class="plus-logo1" alt="">
+            </div>
+          </div>
+            <%}%>
+            
+          </div>
+          <div class="divider"></div>
+          <div class="topics-card-container ">
+
+            <!-- pic-filter-containe -->
+            <div class="topic-filter-container rombus-bg">
+              <div class="left-bar-sem-title">
+                <img src="/images/notion_space/group_page/unit.png" alt="" class="sem-img-icon">
+                <p class="sem-heading rev-bg">Units</p>
+              </div>
+              <div class="sem-main-container">
+                <%if(locals.sub){
+                  for(let j=1;j<=5;j++){%>
+                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${j}`%>"> <div class="unit1 com-style">
+                    <h3>UNIT <%=j%></h3>
+                  </div></a>
+                  <%}}%
+              </div>
+           </div>
+            <!-- all - topic - section -->
+              <div class="topic-container rev-bg">
+                <%if(locals.topics){
+                  for(let i=0;i<topics.length;i++){%>
+                  <div class="topic-container-section-holder rev-bg">
+
+                <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topics[i]}/video`%>"><div class="common-topic-card topic-card">
+                    <div class="topic-lable">
+                      Unit <%=unit%> </div>
+                    <div class="topic-heading">
+                      <h3><%=topics[i].topic%></h3>
+                      <p><%=topics[i].class%></p></div>
+                    <div class="about-topic">
+                      <p>No. of documents : 3</p>
+                      <div class="divider1"></div>
+                      <p>No. of links : 5</p>
+                      <div class="divider1"></div>
+                      <p>No. of video : 2</p>
+                    </div>
+                  </div> 
+                </a>
+                <div class="delete-button-on delete-button-trans" id="delete-button-js">
+                  delete
+                  <img src="/images/topic_page/delete-button-icon.png" alt="" class="rev-bg">
+                </div>                  
+              </div>
+                  <%}}%>
+                  
+              </div> 
+
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="adding-blur rev-bg"></div>
+      <div class="contact_continer" id = "contact">
+        <a href =""><i class="ri-instagram-fill" ></i></a>
+        <a href=""><i class="ri-linkedin-box-fill"></i></a>
+        <a href=""><i class="ri-mail-fill"></i></a>
+        <a href=""><i class="ri-whatsapp-fill"></i></a>
+      </div>
+    </footer>
+  </div>
+    <div class="main" id="main">
+        <div class="cover">
+
+            <div class="sep">
+                <div class="greetings">
+                    <h2 class="bg welcome-title" >Add Topic</h2>
+                    <div class="box" id="close">
+                        <i class="ri-close-line"></i>
+                    </div>
+                    
+                  </div>
+
+                  <div class="main_form_continer">
+                     
+                      <div class="form">
+                          <form action="" method="" class="form_box">
+                              <label for="title" class="bg">
+                                  Topic name:
+                              </label>
+                              <input type="text" name="title" class="text_enter bg" placeholder="Enter a Topic" id="topic">
+                              <label for="des" class="bg">Description:</label>
+                              <input type="text" class="text_enter bg" placeholder="Enter the Description">
+                              <input type="submit" value="ADD" class="bg go_back">
+                          </form>
+                      </div>
+                      
+                      
+                  </div>
+            </div>
+        </div>
+    </div>
+    <script src="student-page.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed('#testing-animation', {
+        strings: [`<%=sub%>`],
+        typeSpeed: 60,
+        startDelay: 300
+      });
+      document.getElementById("testing-animation").classList.add("rev-bg");
+      document.querySelector(".typed-cursor").classList.add("rev-bg");
+    </script>
+</body>
+</html>

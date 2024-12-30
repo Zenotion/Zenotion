@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="./dept.css">
+
+    <title>Departments choosing</title>
+</head>
+<body>
+
+     <!--nav bar section-->
+     <header id="navbar-main">
+        <div class="navbar-container">
+          <div class="logo">
+            <a href="#home" class="link-tag-main-logo">
+              <img src="/images/notion_space/group_page/zeotion.png" class="main_logo" alt="">
+            </a>
+          </div>
+          <a href="<%=our_domain%>notionspace/create/space">
+            <div class="create-room">
+              Notion space
+              <img src="/images/notion_space/notion_space_home/plus.png" class="plus-logo" alt="">
+            </div>
+          </a>
+        </div>
+      </header>
+    
+
+      <div class="main_continer ">
+        <div class="content_continer rombus-bg">
+            <div class="card_continer">
+                <div class="dept-title">
+                    <p class="dept-name-title"><span id="testing-animation"></span></p>
+                    </div>
+                <div class="card">
+                <div class="topic-card">
+                    <div class="topic-lable">
+                        IOT 
+                      </div>
+                        <div class="topic-heading">
+                            <h3>Communicative English</h3>
+                            <p>this topic containes the network notes and shit</p></div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-lable">
+                        FT </div>
+                        <div class="topic-heading">
+                            <h3>Communicative English</h3>
+                            <p>this topic containes the network notes and shit</p></div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-lable">
+                        AIML </div>
+                        <div class="topic-heading">
+                            <h3>Communicative English</h3>
+                            <p>this topic containes the network notes and shit</p></div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-lable">
+                        MECH </div>
+                        <div class="topic-heading">
+                            <h3>Communicative English</h3>
+                            <p>this topic containes the network notes and shit</p></div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-lable">
+                        EEE </div>
+                        <div class="topic-heading">
+                            <h3>Communicative English</h3>
+                            <p>this topic containes the network notes and shit</p></div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-lable">
+                        ROBOTICS </div>
+                        <div class="topic-heading">
+                            <h3>Communicative English</h3>
+                            <p>this topic containes the network notes and shit</p></div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-lable">
+                        IT </div>
+                        <div class="topic-heading">
+                            <h3>Communicative English</h3>
+                            <p>this topic containes the network notes and shit</p></div>
+                </div>
+
+            </div>
+            </div>
+            
+
+        </div>
+
+
+
+
+
+      </div>
+      <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+      <script>
+        var typed = new Typed('#testing-animation', {
+          strings: [`Choose a Department`],
+          typeSpeed: 60,
+          startDelay: 300
+        });
+        document.getElementById("testing-animation").classList.add("rev-bg");
+        document.querySelector(".typed-cursor").classList.add("rev-bg");
+      </script>
+</body>
+</html>

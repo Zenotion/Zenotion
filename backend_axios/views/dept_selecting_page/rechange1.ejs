@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/dept_selecting_page/rechange.css">
+    <link rel="stylesheet" href="styles/dept_selecting_page/media_query.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<title>Zenotion</title>
+<link rel="icon" type="image/x-icon" href="../../images/lanch_page/favicon.png">
+</head>
+<body>
+
+       <!-- nab bar -->
+       <div class="nav">
+        
+            <div class="logo"></div>
+            <div class="student_dashboard">
+
+                <a href="<%=`${our_domain}notionspace`%>"> <button class="go_back"><Span class="text">
+                    <h4>NotionSpace</h4>
+                </Span></button>
+               <a href="/log_out"> <button class="go_back"><Span class="text">
+                    <h4>LOG OUT</h4>
+                </Span>
+                </button>
+            </a>
+            </div>
+        </div>
+
+        <div class="gra_nav"></div>
+        <!-- main continer holding dept and semester -->
+        <div class="main_continer">
+
+            <div class="unit_continer">
+
+                <% for(let i = 0;i<dept.length;i++){%>
+                   
+                <center ><a href=<%=`/${dept[i]}`%>>
+
+                    <li class="left_bar" id ="<%=`/${dept[i]}`%>"> 
+                        <%=dept[i]%></li></a></center>
+                <%}%>
+
+            </div>
+
+            <!-- semester continer contining semester cards -->
+            <div class="semester_continer">
+                    <div class="topic_head_continer"><h1><span>Semesters:</span></h1></div> 
+                    <div class="card_continer">
+                        <%for(let j=0;j<sem_sub.length;j++){%>
+                            <div class="flip-card">
+                                <b></b>
+                                <div class="flip-card-inner">
+                                <div class="flip-card-front"> 
+                                <div class="sems">semester <%=j+1%></div>
+                                </div>
+                                <div class="flip-card-back"> <center>
+                                    <% for(let i=0;i<sem_sub[j].length;i++){%>
+                                <li> <a href='<%=`/${select}/${sem_sub[j][i]}/1`%>'> <%=sem_sub[j][i]%></a></li> 
+                                   <%}%></center>
+                                    </div>
+                                </div>
+                              </div>
+                           
+                        <%}%>
+                    </div>
+            
+                
+            
+                 </div>
+            
+   
+   
+   
+           </div>
+             
+         
+             
+
+
+
+  
+
+    <script src="js_files/dept_selecting_page/dept_selecting_page.js"></script>
+</body>
+</html>

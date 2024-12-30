@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>resource</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/sorce_video/resource.css">
+    <link rel="stylesheet" href="/styles/sorce_video/media_query.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/images/lanch_page/favicon.png">
+</head>
+<body>
+
+    <!-- nab bar -->
+    <div class="nav_bar">
+        <div class="logo"></div>
+    </div>
+
+<!-- main continer -->
+<div class="gra_nav"></div>
+
+
+    <div class="main_continer">
+
+        <div class="unit_continer">
+            <a href="<%=`${our_domain}${dept}/${sub}/student/own_work`%>"><button class="go_back left_bar"><span class="text">Go back</span></button></a>
+            <a href="<%=`/${dept}/${sub}/student/own_work/${topic}/video_res` %>"><div class="left_bar"><center>Videos</center></div></a>
+            <a href="<%=`/${dept}/${sub}/student/own_work/${topic}/doc_res` %>"><div class="left_bar"><center>Documents</center></div></a>
+            <a href="<%=`/${dept}/${sub}/student/own_work/${topic}/link_res` %>"><div class="left_bar"><center>Links</center></div></a>
+        </div>
+
+        <div class="main_topic_continer">
+            <div class="topic_head_continer">
+                <h1><span>Video:</span></h1>
+                <button type="button" class="button" onclick="openLoginModal()">
+                    <span class="button__text">Add Video</span>
+                    <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                  </button>
+            </div>
+            <div class="main_video_content">
+                <%if (locals.data){%>
+                <%for(let i=0;i<data.length;i++){%>
+                <div class="video_continer">
+                    <span class="text1">
+
+                    <div class="video_section">
+                        <iframe src="<%=`https://www.youtube.com/embed/${data[i].video}` %>">
+                        </iframe>
+                    </div>
+                    <div class="video_description">
+                        <div class="doc_title"><h2>Video Title:</h2> 
+                            <h3> &ensp;<%= data[i].video_title%></h3>
+                        </div>
+                        <div class="doc_des"> <h2>Video Description:</h2><p> &ensp;<%=data[i].video_desc %></p></div>
+                    </div>
+                </div>
+            </span>
+                <%}}%>
+
+                
+                
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="loginModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <div class="other_content">
+            <h1 class="add_topic">ADD video</h1>
+            <form action="<%=`/${dept}/${sub}/student/own_work/${topic}/video_res` %>" method="post">
+                <label>enter the vidoe name:</label>
+                <input type="text" placeholder="enter the video topic" name="link_name">
+                <label>enter the video link:</label>
+                <input type="text" placeholder="enter thr video link" name="link">
+                <label>enter the description:</label>
+                <textarea name="description" cols="50" rows="10" ></textarea>
+                <button class="sub_button">Add</button>
+            </form>
+            </div>
+        </div>
+
+    </div>
+    <script src="/js_files/sorce_video/resource.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Scanner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    #qr-reader {
+      display: none; /* Initially hidden */
+      margin: 20px auto;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      width:50%;
+    }
+    #dataForm{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: left;
+      gap:.5em;
+    }
+    .container{
+      width:100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+
+    .o1{
+      width:100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .p1{
+      width:80%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Login Form</h1>
+  
+  <!-- QR Code Scanner -->
+  <div id="qr-reader" style="width: 450px;"></div>
+  <div id="qr-reader-results"></div>
+<!-- Buttons to Start and Close Scanner -->
+  <button id="startScanner">Open Camera</button>
+  <button id="closeScanner" style="display: none;">Close Camera</button>
+
+
+
+  <!-- Form to Fill Scanned Data -->
+  
+  <form id="dataForm" action="/login" method="post">
+    <div class="p1">
+      <label for="username">Username:</label>
+    </div>
+    <div class="o1">
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="p1">
+      <label for="scannedData">Scanned Data:</label>
+    </div>
+    <div class="o1">
+      <input type="text" id="scannedData" name="scannedData" readonly>
+    </div>
+    <div class="p1">
+      <label for="password">Password:</label>
+    </div>
+    <div class="o1">
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/html5-qrcode/minified/html5-qrcode.min.js"></script>
+  <script>
+    // JavaScript for QR code scanner with start and close options
+    let qrReader; // To store the QR code reader instance
+    const startButton = document.getElementById('startScanner');
+    const closeButton = document.getElementById('closeScanner');
+    const qrReaderDiv = document.getElementById('qr-reader');
+    const scannedDataInput = document.getElementById('scannedData');
+
+    // Open Camera Button
+    startButton.addEventListener('click', async () => {
+      try {
+        // Prompt for camera access permission
+        await navigator.mediaDevices.getUserMedia({ video: true });
+        alert("Camera access granted. Initializing QR scanner...");
+
+        if (!qrReader) {
+          // Initialize the QR Code reader
+          qrReader = new Html5Qrcode("qr-reader");
+        }
+
+        // Display the QR reader div and the Close Camera button
+        qrReaderDiv.style.display = "block";
+        closeButton.style.display = "inline";
+
+        // Start the QR scanner
+        Html5Qrcode.getCameras().then(cameras => {
+          if (cameras.length > 0) {
+            qrReader.start(
+              cameras[0].id,
+              { 
+                fps: 10, 
+                qrbox: { width: 300, height: 300 } // Smaller scanning frame size
+              },
+              (decodedText) => {
+                // Populate the scanned data into the input field
+                scannedDataInput.value = decodedText;
+
+                // Automatically stop the scanner after scanning (optional)
+                qrReader.stop().then(() => {
+                  qrReaderDiv.style.display = "none";
+                  closeButton.style.display = "none";
+                }).catch(err => console.error("Failed to stop the camera:", err));
+              },
+              (errorMessage) => {
+                console.warn("QR Scan error:", errorMessage);
+              }
+            ).catch(err => console.error("Error starting QR scanner:", err));
+          } else {
+            alert("No cameras found.");
+          }
+        }).catch(err => console.error("Error getting cameras:", err));
+
+      } catch (err) {
+        // Handle case where permission is denied
+        alert("Camera access denied. Please enable camera access to scan QR codes.");
+        console.error("Camera access denied:", err);
+      }
+    });
+
+    // Close Camera Button
+    closeButton.addEventListener('click', () => {
+      if (qrReader) {
+        qrReader.stop().then(() => {
+          qrReaderDiv.style.display = "none";
+          closeButton.style.display = "none";
+         
+        }).catch(err => console.error("Failed to stop the camera:", err));
+      }
+    });
+  </script>
+</body>
+</html>

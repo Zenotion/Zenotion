@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>log-in</title>
+  <link rel="stylesheet" href="/styles/log_in_page/login.css">
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+</head>
+<body>
+    <div class="main-section dotted-bg">
+      <div class="main-container rombus-bg">
+        <div class="sign-in-section">
+
+          <div class="greetings">
+            <h2 class="rev-bg welcome-title">welcome back,</h2>
+            <img src="/images/log_in_page/welcome_back.png" class="welcome-img" alt="">
+          </div>
+
+          <div class="main-user-input-section">
+            <div class="heading rev-bg">
+              <i class="ri-git-repository-private-fill"></i>
+              <h2 class="rev-bg">Sign in to Zenotion</h2>
+          </div>
+            <div class="main-form-container">
+              <form action="/login" method="POST" autocomplete="off">
+                <label for="" class="rev-bg">Username:</label>
+                <input type="text" placeholder="username" name="username">
+                <label for="" class="rev-bg">Password:</label>
+                  <input type="password" placeholder="password" name="password" id="inputpassword">
+                  <ion-icon name="eye" id="eyeicon" onclick="pass1()" ></ion-icon>
+                <div class="forget_pass rev-bg">
+                  <a href="/forget_pass" class="rev-bg">forget password?</a>
+                </div>
+                  <button class="go_back"><span class="text rev-bg" >Sign In</span></button>
+                <div class="sign-up-button rev-bg">
+                  If don't have a account yet ?
+                  <a href="/sign_up" class="rev-bg">Sign up</a>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src="/js_files/log_in_page/login.js"></script>
+</body>
+</html>

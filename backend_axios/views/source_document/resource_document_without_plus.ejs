@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>resource</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/source_document/resource_document.css">
+    <link rel="stylesheet" href="/styles/source_document/media_queries.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/images/lanch_page/favicon.png"></head>
+<body>
+
+    <!-- nab bar -->
+    <div class="nav_bar">
+        <div class="logo"></div>
+    </div>
+
+<!-- main continer -->
+<div class="gra_nav"></div>
+
+    <div class="main_continer">
+
+        <div class="unit_continer">
+            <a href="<%=`${our_domain}${dept}/${sub}/1`%>"><button class="go_back left_bar"><span class="text">Go back</span></button></a>
+            <a href="<%=`/${dept}/${sub}/${unit}/${topic}/video_res` %>"><div class="left_bar"><CENTER>Videos</CENTER></div></a>
+            <a href="<%=`/${dept}/${sub}/${unit}/${topic}/doc_res` %>"><div class="left_bar"><CENTER>Documents</CENTER></div></a>
+            <a href="<%=`/${dept}/${sub}/${unit}/${topic}/link_res` %>"><div class="left_bar"><CENTER>Links</CENTER></div></a>
+          
+          
+        </div>
+
+        <div class="main_topic_continer">
+            <div class="topic_head_continer">
+                <h1><span>Documents:</span></h1>
+            </div>
+            <div class="main_document_content">
+            <%if(locals.data){
+                for (let i=0;i<data.length;i++){%>
+                <div class="document_continer">
+                    <span class="text1">
+
+                    <a href="<%=`/${dept}/${sub}/${unit}/${topic}/doc_res/show_doc?file_name=${data[i].name}&title=${data[i].document_title}` %>">
+                        <div class="document_icon">
+                            <i class="<%= data[i].class%>"></i>
+    
+                        </div>
+                    </a>
+                    
+                    
+                    
+                    <div class="document_desc">
+                        <div class="doc_title"><h2>Doc Title:</h2> 
+                            <h4> &ensp;<%= data[i].document_title%></h4></div>
+                            <div class="doc_name"><h2>Doc name:</h2>  <h4> &ensp;<%=data[i].name%></h4></div>
+                            <div class="doc_des"> <h2>Doc Description:</h2><p> &ensp;<%= data[i].document_desc%></p></div>
+                            </div> 
+                        </span>
+                </div>
+               <%}}%>
+             
+                
+
+                
+            </div>
+        </div>
+
+
+    </div>
+
+    
+
+    </div>
+    <script src="/js_files/sorce_document/resource_document.js"></script>
+</body>
+</html>

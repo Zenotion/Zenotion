@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>space name</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <link rel="stylesheet" href="/styles/notion_space/group_page.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!--nav bar section-->
+    <header id="navbar-main">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#home" class="link-tag-main-logo">
+            <img src="/images/notion_space/group_page/zeotion.png" class="main_logo" alt="">
+          </a>
+        </div>
+        <a href="<%=`${our_domain}`%>notionspace/create/space">
+          <div class="create-room">
+            Create new space
+            <img src="/images/notion_space/notion_space_home/plus.png" class="plus-logo" alt="">
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <div class="edit-group-section dotted-bg" id="space-editing-main-section">
+      <div class="another-bg rombus-bg">
+        <div class="editing-heading-section rev-bg">
+          <div class="edit-title rev-bg">
+            <i class="ri-edit-2-fill rev-bg"></i>
+            <h2 class="rev-bg">Edit space</h2>  
+          </div>
+          <i class="ri-close-large-line" id="worng-exit-editing-section"></i>
+        </div>
+        <form action="" id="editing-form">
+        <div class="main-form-section rev-bg">
+          <div class="file-upload-section rev-bg">
+          <p class="editing-p pro_heading rev-bg">Upload a new profile:</p>
+          <div class="form-container rev-bg ">
+            <input type="file" id="upload-button" accept="image/*">
+            <label for="upload-button" class="button-lable rev-bg">
+              <i class="fas fa-upload rev-bg"></i> &nbsp; Choose A Photo
+            </label>
+          </div>
+          <figure class="image-container rev-bg">
+              <img id="chosen-image" class="rev-bg" src="/images/notion_space/group_page/img.png">
+              <figcaption id="file-name"></figcaption>
+          </figure>
+        </div>
+        <div class="new-group-name rev-bg">
+          <p class="editing-p rev-bg">Enter new name:</p>
+          <input type="text" class="new-space-new" maxlength="15" oninput="checkCharCount_title()" value="<%= group_detail.space_name %> " id="new_title_form">
+          <div id="charCount_title"><%= group_detail.space_name %>/15</div>
+        </div>
+        <div class="new-group-name rev-bg"> 
+          <p class="editing-p rev-bg">Enter new description:</p>
+          <input type="text" name="new_description" maxlength="75" class="new-space-new"  oninput="checkCharCount_desc()" value="<%= group_detail.description%>" id="new_decs_form">
+          <div id="charCount_desc"><%= group_detail.description %>/75</div>
+        </div>
+        <div class="post-button rev-bg">
+          <div class="create-room-upload rev-bg">
+            Update          </div>
+        </div>
+        </div>
+      </form>
+      </div>
+    </div>
+
+    <!-- member editing and viewing section -->
+    <div class="message-group-section dotted-bg" id="message-group-section">
+      <div class="another-bg rombus-bg">
+        <div class="member-heading-section rev-bg">
+          <div class="member-title rev-bg">
+            <i class="ri-team-fill rev-bg"></i>
+            <h2 class="rev-bg">Members</h2>  
+          </div>
+          <i class="ri-close-large-line" id="worng-exit-member-section"></i>
+        </div>
+        <form action="" id="member-form">
+        <div class="member-main-section rev-bg">
+          <div class="member-info-contianer">
+            <div class="member-info-front rev-bg">
+              <img src="/images/notion_space/group_page/user1.jpg" class="member_imgs rev-bg" alt="">
+              <p class="member_name rev-bg">you</p>
+            </div>
+            <div class="member-info-back rev-bg">
+            </div>
+          </div>
+          <div class="member-info-contianer">
+            <div class="member-info-front rev-bg">
+              <img src="/images/notion_space/group_page/user2.jpeg" class="member_imgs rev-bg" alt="">
+              <p class="member_name rev-bg">hirthick</p>
+            </div>
+            <div class="member-info-back rev-bg">
+              <div class="admin-button rev-bg">
+                <div class="admin-role-giver rev-bg">
+                  <i class="ri-admin-fill rev-bg"></i>
+                  make admin
+                </div>
+              </div>
+              <div class="kick-button rev-bg">
+                <div class="kick-member rev-bg">
+                  kick
+                  <i class="ri-close-large-line rev-bg"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="member-info-contianer">
+            <div class="member-info-front rev-bg">
+              <img src="/images/notion_space/group_page/user3.jpg" class="member_imgs rev-bg" alt="">
+              <p class="member_name rev-bg">jothimani</p>
+            </div>
+            <div class="member-info-back rev-bg">
+              <div class="admin-button rev-bg">
+                <div class="admin-role-giver rev-bg">
+                  <i class="ri-admin-fill rev-bg"></i>
+                  make admin
+                </div>
+              </div>
+              <div class="kick-button rev-bg">
+                <div class="kick-member rev-bg">
+                  kick
+                  <i class="ri-close-large-line rev-bg"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="member-info-contianer">
+            <div class="member-info-front rev-bg">
+              <img src="/images/notion_space/group_page/user4.jpg" class="member_imgs rev-bg" alt="">
+              <p class="member_name rev-bg">hirthick</p>
+            </div>
+            <div class="member-info-back rev-bg">
+              <div class="admin-button rev-bg">
+                <div class="admin-role-giver rev-bg">
+                  <i class="ri-admin-fill rev-bg"></i>
+                  make admin
+                </div>
+              </div>
+              <div class="kick-button rev-bg">
+                <div class="kick-member rev-bg">
+                  kick
+                  <i class="ri-close-large-line rev-bg"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="member-info-contianer">
+            <div class="member-info-front rev-bg">
+              <img src="/images/notion_space/group_page/user5.jpeg" class="member_imgs rev-bg" alt="">
+              <p class="member_name rev-bg">kavi</p>
+            </div>
+            <div class="member-info-back rev-bg">
+              <div class="admin-button rev-bg">
+                <div class="admin-role-giver rev-bg">
+                  <i class="ri-admin-fill rev-bg"></i>
+                  make admin
+                </div>
+              </div>
+              <div class="kick-button rev-bg">
+                <div class="kick-member rev-bg">
+                  kick
+                  <i class="ri-close-large-line rev-bg"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+
+
+    <!-- main section -->
+    <section id="main content ">
+      <div class="chat-trigger1">
+        <div class="chat-trigger">        
+          <i class="ri-arrow-left-double-line"></i>
+        </div>
+      </div>
+      <div class="main-chat-section">
+        <div class="chat-header-container">
+          <i class="ri-message-2-line"></i>
+          <h2 class="rev-bg">Zencrew's chat</h2>
+        </div>
+        <div class="main-chat-container dotted-bg ">
+          <!-- sending message -->
+          <div class="sent-chat chat-dimension">
+            <div class="sent-username rev-bg">You</div>
+            <div class="sent-text rev-bg">hi,da hirthick database ready ahh?</div>
+            <div class="sent-time rev-bg">15/06/24</div>
+          </div>
+          <!-- receiving message -->
+          <div class="received-chat chat-dimension">
+            <div class="received-username rev-bg">hirthick</div>
+            <div class="received-text rev-bg">yes da amost finished</div>
+            <div class="received-time rev-bg">15/06/24</div>
+          </div>
+          <div class="sent-chat chat-dimension">
+            <div class="sent-username rev-bg">You</div>
+            <div class="sent-text rev-bg">nice da nigga</div>
+            <div class="sent-time rev-bg">15/06/24</div>
+          </div>
+          <div class="received-chat chat-dimension">
+            <div class="received-username rev-bg">jothimani</div>
+            <div class="received-text rev-bg">hi,guys</div>
+            <div class="received-time rev-bg">15/06/24</div>
+          </div>
+          <div class="sent-chat chat-dimension">
+            <div class="sent-username rev-bg">You</div>
+            <div class="sent-text rev-bg">un lap seri aiducha??</div>
+            <div class="sent-time rev-bg">15/06/24</div>
+          </div>
+          <div class="received-chat chat-dimension">
+            <div class="received-username rev-bg">hirthick</div>
+            <div class="received-text rev-bg">kadaila enna da soonanga ?</div>
+            <div class="received-time rev-bg">15/06/24</div>
+          </div>
+          <div class="received-chat chat-dimension">
+            <div class="received-username rev-bg">kavi</div>
+            <div class="received-text rev-bg">enna da pandringa? yaru lap da </div>
+            <div class="received-time rev-bg">15/06/24</div>
+          </div>
+          <div class="sent-chat chat-dimension">
+            <div class="received-username rev-bg">you</div>
+            <div class="received-text rev-bg">🤣</div>
+            <div class="received-time rev-bg">15/06/24</div>
+          </div>
+        </div>
+        <div class="texting-control-section">
+          <form action="" class="text-form rev-bg">
+            <input type="text" name="text" placeholder="enter the text" id="" autofocus class="text-input rev-bg">
+            <input type="submit" value="" class="text-submit-button">
+          </form>
+        </div>
+      </div>
+      <div class="main-container">
+        <div class="adding-blur rev-bg"></div>
+        <div class="option-bar rombus-bg">
+          <div class="option-heading-container">
+            <a href="<%=our_domain%>notionspace">
+            <h3 class="option-heading">Notion Space</h3>
+          </a>
+          </div>
+          <div class="item-main-conatainer">
+            <% if(locals.groups){%>
+              <%for(let i = 0; i<groups.length;i++){%>
+          <a href="<%=`${our_domain}notionspace/${groups[i].space_id}`%>">
+            <h3 class="option-items" id="<%=`/notionspace/${groups[i].space_id}` %>"><i class="ri-group-3-line"></i><%=groups[i].space_name%></h3>
+          </a>
+            <% }} %>
+        </div>  
+        </div>
+        <!-- main content page -->
+        <div class="content-bar rombus-bg">
+          
+          <div class="title">
+            <!-- image filter and adjustment -->
+            <div class="img-filter">
+              <div class="img-filter">
+              </div>
+            </div>
+            <div class="title-container rev-bg">
+            <div class="space-name">
+              <h1 class="main-topic-heading rev-bg"><span  id="testing-animation"></span></h1>
+              <div class="button-carrier rev-bg">                
+                <div class="edit-room" id="edit-space-button">
+                  <i class="ri-edit-2-fill"></i>
+                  Edit Space
+                </div>
+                <div class="exit-room">
+                  Exit Space
+                  <img src="/images/notion_space/group_page/exit.png" class="exit-logo" alt="">
+  
+                </div>
+              </div>
+            </div>
+            <div class="space-desc rev-bg">
+              <h2 class="rev-bg">description</h2>
+              <p class="rev-bg"><%= group_detail.description%> 
+              </p>
+            </div>
+            <div class="main-member-about-section rev-bg">
+              <div class="members-main rev-bg">
+                  <h2 class="rev-bg">Members</h2>
+                <div class="member-overview rev-bg">
+                  <div class="member1 profile-mini rev-bg">
+                    <!-- <img src="/images/notion_space/group_page/user1.jpg" class="member-style-img rev-bg"> -->
+                     <div class="member-style-img img-scr1">
+
+                     </div>
+                    <h4 class="rev-bg">you</h4>
+                  </div>
+                  <div class="member2 profile-mini rev-bg">
+                    <!-- <img src="/images/notion_space/group_page/user2.jpeg" class="member-style-img rev-bg" alt=""> -->
+                    <div class="member-style-img img-scr2">
+                    </div>
+                    <h4 class="rev-bg">MassMani</h4>
+                  </div>
+                  <div class="member3 profile-mini rev-bg">
+                    <!-- <img src="/images/notion_space/group_page/user3.jpg" class="member-style-img rev-bg" alt=""> -->
+                    <div class="member-style-img img-scr3">
+                    </div>
+                    <h4 class="rev-bg">Hirthick</h4>
+                  </div>
+                  <div class="member4 profile-mini rev-bg">
+                    <!-- <img src="/images/notion_space/group_page/user4.jpg" class="member-style-img rev-bg" alt=""> -->
+                    <div class="member-style-img img-scr4">
+                    </div>
+                    <h4 class="rev-bg">Kavi</h4>
+                  </div>
+                  <div class="more-members rev-bg" id="member-info-button">
+                    <i class="ri-arrow-right-wide-fill more-icon"></i>
+                  </div>
+                  </div>
+              </div>
+              <div class="about-main rev-bg">
+                  <h3 class="rev-bg">About Space</h3>
+                <div class="about-space rev-bg">
+                  <h4 class="rev-bg">Total Topic : 9</h4>
+                  <h4 class="rev-bg">Total Members : 10</h4>
+                  <!-- <h4 class="rev-bg">Create By : </h4> -->
+                  <h4 class="rev-bg">Created On : <%=group_detail.created_date %></h4>
+                </div>
+              </div>
+             </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- the topic card section -->
+        <div class="topic-section-container">
+          <div class="adding-blur rev-bg"></div>
+          <div class="topic-title">
+            <h1>Topic</h1>
+            <div class="add-topic">
+              Add new topic
+              <img src="/images/notion_space/group_page/plus.png" class="plus-logo1" alt="">
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="topics-card-container ">
+
+            <!-- pic-filter-containe -->
+            <div class="topic-filter-container rombus-bg">
+              <div class="filter-title">
+                <i class="ri-equalizer-fill rev-bg"></i>
+                <p class="filter-heading rev-bg">Filter</p>
+              </div>
+              <div class="filter-by-lable-container ">
+                <div class="lable-filter-title rev-bg">
+                <i class="ri-price-tag-3-fill"></i>
+                <p class="rev-bg">Lable</p>
+                </div>
+                <div class="filter-checkboxes rev-bg">
+                <form action="" class="rev-bg">
+                  <div class="check-box-flex rev-bg">
+                  <div class="all-topic center-u-checkbox rev-bg">
+                    <input type="checkbox" name="all" id="">
+                    <label for="" class="rev-bg">All</label>
+                  </div>
+                  <div class="machine-learning center-u-checkbox rev-bg">
+                    <input type="checkbox" name="machinelearning" id="">
+                    <label for="" class="rev-bg">machine learning</label>
+                  </div>
+                  <div class="web-dev center-u-checkbox rev-bg">
+                    <input type="checkbox" name="webdevelopment" id="">
+                    <label for="" class="rev-bg">web development</label>
+                  </div>
+                  <div class="block-chain center-u-checkbox rev-bg">
+                    <input type="checkbox" name="blockchain" id="">
+                    <label for="" class="rev-bg">blockchain</label>
+                  </div>
+                  <div class="cybersecurity center-u-checkbox rev-bg">
+                    <input type="checkbox" name="cybersecurity" id="">
+                    <label for="" class="rev-bg">cybersecurity</label>
+                  </div>
+                  <div class="database center-u-checkbox rev-bg">
+                    <input type="checkbox" name="database" id="">
+                    <label for="" class="rev-bg">database</label>
+                  </div>
+                  <div class="cloud-computing center-u-checkbox rev-bg">
+                    <input type="checkbox" name="cloudcomputing" id="">
+                    <label for="" class="rev-bg">cloud computing</label>
+                  </div>
+                  <div class="electrical center-u-checkbox rev-bg">
+                    <input type="checkbox" name="electrical" id="">
+                    <label for="" class="rev-bg">electrical</label>
+                  </div>
+                  <div class="electronics center-u-checkbox rev-bg">
+                    <input type="checkbox" name="electronics" id="">
+                    <label for="" class="rev-bg">electronics</label>
+                  </div>
+                  <div class="mechanical center-u-checkbox rev-bg">
+                    <input type="checkbox" name="mechanical" id="">
+                    <label for="" class="rev-bg">mechanical</label>
+                  </div>
+                  <div class="civil center-u-checkbox rev-bg">
+                    <input type="checkbox" name="civil" id="">
+                    <label for="" class="rev-bg">civil</label>
+                  </div>
+                  <div class="custom center-u-checkbox rev-bg">
+                    <input type="checkbox" name="custom" id="">
+                    <label for="" class="rev-bg">custom</label>
+                  </div>
+                </div>
+                </form>
+              </div>
+              </div>
+           </div>
+            <!-- all - topic - section -->
+            <div class="topic-container ">
+
+            <div class="topic-card">
+              <div class="topic-lable">
+                Machine Learning <i class="ri-robot-3-fill"></i></div>
+              <div class="topic-heading">
+                <h3>Neural Network</h3>
+                <p>this topic containes the network notes and shit</p></div>
+              <div class="about-topic">
+                <p>No. of documents : 3</p>
+                <div class="divider1"></div>
+                <p>No. of links : 5</p>
+                <div class="divider1"></div>
+                <p>No. of video : 2</p>
+              </div>
+            </div> 
+            <div class="topic-card">
+              <div class="topic-lable">
+                Machine Learning <i class="ri-robot-3-fill"></i></div>
+              <div class="topic-heading">
+                <h3>Neural Network</h3>
+                <p>this topic containes the network notes and shit</p></div>
+              <div class="about-topic">
+                <p>No. of documents : 3</p>
+                <div class="divider1"></div>
+                <p>No. of links : 5</p>
+                <div class="divider1"></div>
+                <p>No. of video : 2</p>
+              </div>
+            </div>
+            <div class="topic-card">
+              <div class="topic-lable">
+                Machine Learning <i class="ri-robot-3-fill"></i></div>
+              <div class="topic-heading">
+                <h3>Neural Network</h3>
+                <p>this topic containes the network notes and shit</p></div>
+              <div class="about-topic">
+                <p>No. of documents : 3</p>
+                <div class="divider1"></div>
+                <p>No. of links : 5</p>
+                <div class="divider1"></div>
+                <p>No. of video : 2</p>
+              </div>
+            </div>
+            <div class="topic-card">
+              <div class="topic-lable">
+                Machine Learning <i class="ri-robot-3-fill"></i></div>
+              <div class="topic-heading">
+                <h3>Neural Network</h3>
+                <p>this topic containes the network notes and shit</p></div>
+              <div class="about-topic">
+                <p>No. of documents : 3</p>
+                <div class="divider1"></div>
+                <p>No. of links : 5</p>
+                <div class="divider1"></div>
+                <p>No. of video : 2</p>
+              </div>
+            </div>
+            <div class="topic-card">
+              <div class="topic-lable">
+                Machine Learning <i class="ri-robot-3-fill"></i></div>
+              <div class="topic-heading">
+                <h3>Neural Network</h3>
+                <p>this topic containes the network notes and shit</p></div>
+              <div class="about-topic">
+                <p>No. of documents : 3</p>
+                <div class="divider1"></div>
+                <p>No. of links : 5</p>
+                <div class="divider1"></div>
+                <p>No. of video : 2</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="adding-blur rev-bg"></div>
+      <div class="contact_continer" id = "contact">
+        <a href =""><i class="ri-instagram-fill" ></i></a>
+        <a href=""><i class="ri-linkedin-box-fill"></i></a>
+        <a href=""><i class="ri-mail-fill"></i></a>
+        <a href=""><i class="ri-whatsapp-fill"></i></a>
+      </div>
+    </footer>
+    <script src="/js_files/notion_space/group_page.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed('#testing-animation', {
+        strings: [`<%= group_detail.space_name %>`],
+        typeSpeed: 60,
+        startDelay: 300
+      });
+      document.getElementById("testing-animation").classList.add("rev-bg");
+      document.querySelector(".typed-cursor").classList.add("rev-bg");
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>space name</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <link rel="stylesheet" href="/styles/resource_page/resource_advance.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!--nav bar section-->
+    <header id="navbar-main">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#home" class="link-tag-main-logo">
+            <img src="/images/notion_space/group_page/zeotion.png" class="main_logo" alt="">
+          </a>
+        </div>
+        <dis class="left-half rev-bg">
+          <div class="user-profile-option" id="profile-option">
+            <div class="profile_pic">
+              <img src="" alt="" class="main_profile_image">
+            </div>
+          </div>
+        </disv>
+      </div>
+    </header>
+
+    <div class="pro_option_display dis_profile" id="js_display-pro">
+      <div class="profile-detail-button pro_common">
+        <a href="http://localhost:5173/" class="rev-bg">
+          <h4 class="rev-bg">My Profile</h4>
+        </a>
+        </div>
+        <div class="logout-button pro_common">
+          <a href="/log_out" class="rev-bg ">
+        <h4 class="rev-bg">Log out</h4>
+      </a>
+      </div>
+    </div>
+<div class="main-container dotted-bg">
+  <div class="option-bar rombus-bg">
+    <div class="option-heading-container">
+      <h3 class="option-heading">Advance Options</h3>
+    </div>
+    <div class="item-main-conatainer">
+      <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/document/advance/summary?source=${source}`%>">
+        <h3 class="option-items rev-bg"><i class="ri-group-3-line rev-bg" ></i>Summary</h3>
+      </a>
+      <a href="<%=`${our_domain}${dept}/${sem}/${sub}/${unit}/${topic}/document/advance/qgen?source=${source}`%>">
+        <h3 class="option-items rev-bg"><i class="ri-group-3-line rev-bg" ></i>Question generator</h3>
+      </a>
+      
+  </div>  
+  </div>
+  <div class="main-section rombus-bg">
+    <div class="main-container-title">
+      <h1><%= title %></h1>
+    </div>
+    <div class="main-container-text">    
+      <% if(option == "summ") {%>
+        <div><%- summary %></div>
+      <%}else{%>
+        <% questions.forEach(question => { %>
+          <div class="question">
+              <h2>Q<%= question.id %>: <%= question.question %></h2>
+              <ul class="options">
+                  <% question.options.forEach(option => { %>
+                      <li><input type="radio" name="q<%= question.id %>" value="<%= option %>"> <%= option %></li>
+                  <% }) %>
+              </ul>
+          </div>
+        <% }) %>
+        <%}%>
+    </div>
+  </div>
+</div>
+</body>
+</html>

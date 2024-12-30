@@ -1,0 +1,309 @@
+*{
+    margin: none;
+      padding: none;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      background-color: #F6F5F2;
+      list-style: none;
+      text-decoration: none;
+  }
+  
+  .rev-bg{
+    background-color: transparent;
+  }
+  
+  
+  .rombus-bg{
+    background-color: #F0EBE3;
+    opacity: 1;
+    background-image:  linear-gradient(135deg, #000000 25%, transparent 25%), linear-gradient(225deg, #000000 25%, transparent 25%), linear-gradient(45deg, #000000 25%, transparent 25%), linear-gradient(315deg, #000000 25%, #F0EBE3 25%);
+    background-position:  4px 0, 4px 0, 0 0, 0 0;
+    background-size: 4px 4px;
+    background-repeat: repeat;
+  }
+  .dotted-bg{
+    background-color: #F6F5F2;
+    opacity: 1;
+    background-image:  radial-gradient(#444cf7 0.25px, transparent 0.25px), radial-gradient(#000000 0.25px, #F6F5F2 0.25px);
+    background-size: 11px 11px;
+    background-position: 0 0,5px 5px;
+  }
+  
+  .main-container{
+    border: 1px solid black;
+    height: auto;
+    width: 30em;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .main-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 98vh;
+  }
+  
+  .greetings{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: #5131F3;
+    border-top: 1px solid black;
+    border-radius: 5px 5px 0 0;
+  }
+  
+  .welcome-img{
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    color: #FFF8F3;
+  }
+  
+  .welcome-title{
+    font-weight: 500;
+    color: #FFF8F3;
+  }
+  
+  .logo{
+      width: 50px;
+      height: 50px;
+      background-color: transparent;
+  }
+  .logo-section{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+  }
+  .heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 45;
+  
+  }
+  .heading h2{
+    font-size: 34px;
+    font-weight: 400;
+  }
+  
+  
+  form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #FFF8F3;
+  }
+  .main-user-input-section{
+    background-color: #FFF8F3;
+  
+  }
+  
+  .main-form-container{
+    padding: 0 5em;
+    background-color: #FFF8F3;
+  }
+  
+  input {
+    background-color: #FFF8F3;
+    display: block;
+    color: hsl(0, 0%, 0%);
+    border: none;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 13px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    outline: none;
+    font-size: 14px;
+    border: 1px solid black;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  
+  @keyframes inputhover {
+    0%{  
+      border: 1px solid #5131F3;
+    }
+    50%{
+      border: 1.55px solid #5131F3;
+  
+    }
+    100%{
+      border: 2px solid #5131F3;
+    }
+  }
+  input:hover{
+    border: 1px solid #5131F3;
+    transition: all 0.1s ease-in-out;
+  }
+  
+  #emailInput:disabled{
+    background-color: #fff8f395;
+    border: 1px solid hsla(0, 0%, 0%, 0.636);
+  }
+  #emailInput:disabled:hover{
+    transform: translateY(0px) translateX(0px);
+    box-shadow: none;
+  }
+
+
+  input:focus{
+    border: 2px solid #5131F3;
+    background-color: white;
+    animation-name: inputhover;
+    animation-duration: 0.1s;
+    animation-timing-function: ease-in-out;
+  }
+  
+  input::selection{
+    color: white;
+    background-color: hsla(0, 0%, 0%, 0.698);
+  }
+  
+  
+  
+  .on-off{
+    display:flex ;
+    align-items: center;
+  }
+  
+  #eyeicon{
+    position: relative;
+    color: black;
+    border: none;
+    left: 140px;
+    bottom: 45px;
+    background: transparent;
+    cursor: pointer;
+  
+  }
+  
+  label {
+    display: block;
+    width: 100%;
+    font-weight: 540;
+    font-size:15px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: black;
+  }
+  
+  .forget_pass{
+    margin-bottom:15px;
+    font-size: 14px;
+    align-self: self-start;
+    margin-top: -20px;
+  
+  }
+  
+  .forget_pass a{
+    color:black;
+    font-weight: 600;}
+  
+  .forget_pass a:hover{
+    color: #535C91;
+    color: blue;
+  
+  }
+  
+  .sign-up-button a{
+    color:#5131F3;
+    font-weight: 600;
+  }
+  
+  .sign-up-button a:hover{
+    color: blue;
+    font-size: large;
+  }
+  
+  .sign-up-button{
+    margin-top: 20px;
+  }
+  
+  .go_back{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 135px;
+    padding: 10px;
+    background-color: #5131F3;
+    color: white;
+    font-weight: 400;
+    border-radius: 5px;
+    margin-top: 8px;
+    transition: all 0.4s ease-in-out;
+    font-size: 17px;
+  }
+  
+  .go_back:hover{
+    background-color: #FFF8F3;
+    color: black;
+    cursor: pointer;
+    transform: translateY(-3px) translateX(2px);
+    box-shadow: -4px 4px 0 0 black;
+  }
+  .text{
+    font-size: 20px;
+  }
+  
+  .rev-bg{
+    background-color: transparent;
+  }
+
+  .main-all-content-container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 5px;
+  } 
+
+   .otp-inputs{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin:20px;
+  }
+
+  .otp-inputs input{
+    border-radius: 5px;
+  }
+
+  .otp-inputs input::-webkit-inner-spin-button,
+  .otp-inputs input::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+
+  .otp-inputs input:disabled{
+    background-color: #fff8f395;
+    border: 1px solid hsla(0, 0%, 0%, 0.636);
+  }
+  .otp-inputs input:disabled:hover{
+    transform: translateY(0px) translateX(0px);
+    box-shadow: none;
+  }
+  .go_back:disabled{
+    background-color: #fff8f395;
+    color: hsla(0, 0%, 0%, 0.685);
+  }
+  
+  .go_back:disabled:hover{
+    transform: translateY(0px) translateX(0px);
+    box-shadow: none;
+  }
+  .otp-title{
+    background-color: #fff8f395;
+    color: hsla(0, 0%, 0%, 0.685);
+  }
+
+  

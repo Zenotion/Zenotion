@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>space name</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <link rel="stylesheet" href="/styles/notion_space/create_space_page.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!--nav bar section-->
+    <header id="navbar-main">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#home" class="link-tag-main-logo">
+            <img src="/images/notion_space/group_page/zeotion.png" class="main_logo" alt="">
+          </a>
+        </div>
+        <div class="create-room">
+          Create new space
+          <img src="/images/notion_space/group_page/plus.png" class="plus-logo" alt="">
+        </div>
+      </div>
+    </header>
+
+    <!-- main section -->
+    <section id="main content">
+      <div class="main-container">
+        <div class="option-bar rombus-bg">
+          <div class="option-heading-container">
+            <a href="">
+            <h3 class="option-heading">Notion Space</h3>
+          </a>
+          </div>
+          <div class="option-searchhing-container">
+            <a href="">
+            <h3 class="option-heading-search"> <i class="ri-search-2-line"></i> <p>Search</p></h3>
+          </a>
+          </div>
+          <div class="item-main-conatainer">
+            <!-- <% if(locals.grp_names){%>
+              <%for(let i = 0; i<grp_names.length;i++){%>
+          <a href="<%=`${our_domain}notionspace/${grp_names[i].space_id}`%>">
+            <h3 class="option-items"><i class="ri-group-3-line"></i><%=grp_names[i].space_name%></h3>
+          </a>
+            <% }} %> -->
+        </div>
+        </div>
+        <!-- main content page -->
+        <div class="content-bar rombus-bg">
+          <div class="create-grp-container">
+
+            <div class="add-space-img">
+                          
+            <div class="heading-create">
+              <h1><span id="testing-animation"></span></h1>
+            </div>
+            <p class="editing-p pro_heading rev-bg">Upload a new profile:* <span id="require-alert-mgs-img"></span></p>
+              <div class="file-upload-section rev-bg">
+                <figure class="image-container rev-bg">
+                  <img id="chosen-image" class="rev-bg" src="/images/notion_space/group_page/img.png">
+                  <figcaption id="file-name"></figcaption>
+              </figure>
+                <div class="form-container rev-bg ">
+                  <input type="file" id="upload-button" name="image" oninput="imgaleart()" accept="image/*">
+                  <label for="upload-button" class="button-lable">
+                    <i class="fas fa-upload rev-bg"></i> &nbsp; Choose A Photo
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="new-group-name rev-bg">
+                <p class="editing-p rev-bg">Enter space name:*  <span id="require-alert-mgs"></span></p>
+                <input type="text" class="new-space-new" maxlength="15" oninput="checkCharCount_title()" placeholder="enter the group" id="new_title_form">
+                <div id="charCount_title" class="count-text">0/15</div>
+              </div>
+
+              <div class="new-group-name rev-bg">
+                <p class="editing-p rev-bg">Enter space description:* <span id="require-alert-mgs-desc"></span></p>
+                <input type="text" name="new_description" maxlength="75" class="new-space-new"  oninput="checkCharCount_desc()" placeholder="enter the description" id="new_decs_form">
+                <div id="charCount_desc" class="count-text">0/75</div>
+              </div>
+              <div class="group-type-selection">
+                <p class="editing-p rev-bg">Space Type: <span id="require-alert-group-type">*</span></p>
+                <div class="types-radio-button-main-container">
+                  <div class="public-type-section type-section-common">
+                      <input type="radio" name="spaceType" value="public" id="public" checked/>
+                      <label for="public" class="rev-bg">
+                          <h3 class="rev-bg">Public</h3>
+                          <p class="rev-bg grp-type-decs">Anyone can join this space and access the group</p>
+                      </label>
+                  </div>
+                  <div class="private-group-section type-section-common">
+                      <input type="radio" name="spaceType" value="private" id="private" />
+                      <label for="private" class="rev-bg">
+                          <h3 class="rev-bg">Private</h3>
+                          <p class="rev-bg grp-type-decs">This group can only be accessed by the member added by the ADMIN</p>
+                      </label>
+                  </div>
+              </div>              
+              </div>
+              <div class="remove_add_email_section" id="add-member-to-grp-js">
+                <p class="editing-p rev-bg">add members:*<span id="require-alert-mgs-email"></span></p>
+                <div class="email-container">
+                  <input type="email" name="add_member" maxlength="75" class="new-space-email" oninput="checkCharCount_email()"  placeholder="example@gmail.com" id="new_eamil_form">
+                  <div class="add-email-button" id="add-email-button-js">add</div>
+                </div>
+                <div class="entered-email-section" id="entered-email-section-js">
+                </div>
+                <div class="rev-bg error-display-style" id="error-display"></div>
+              </div>
+
+            </div>
+            <div class="create-space-button" id="create-space-button-js">Create space</div>
+          </div>
+        </div>
+    </section>
+    <footer>
+      <div class="contact_continer" id = "contact">
+        <a href =""><i class="ri-instagram-fill" ></i></a>
+        <a href=""><i class="ri-linkedin-box-fill"></i></a>
+        <a href=""><i class="ri-mail-fill"></i></a>
+        <a href=""><i class="ri-whatsapp-fill"></i></a>
+      </div>
+    </footer>
+    <script src="/js_files/notion_space/create_space_page.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed('#testing-animation', {
+        strings: [`Create your space`],
+        typeSpeed: 60,
+        startDelay: 300
+      });
+      document.getElementById("testing-animation").classList.add("rev-bg");
+      document.querySelector(".typed-cursor").classList.add("rev-bg");
+    </script>
+</body>
+</html>

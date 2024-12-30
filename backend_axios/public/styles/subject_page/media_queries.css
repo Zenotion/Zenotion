@@ -1,0 +1,325 @@
+
+
+@media(max-width:1024px){
+
+    .unit_syllabus p{
+        font-size: 25px;
+    }
+
+}
+
+
+/* large laptop 1440px */
+
+@media(min-width:1024px) and (max-width:1236px){
+
+    .topics{
+        grid-template-columns: repeat(3,1fr);
+
+    }
+
+   
+
+    .topic_card_continer{
+        height:60vh;
+    }
+
+}
+
+/* laptop 1024px */
+
+@media(max-width:1024px){
+
+    
+    .unit_syllabus p{
+        font-size: 15px;
+    }
+
+    .topics{
+        grid-template-columns: repeat(3,1fr);
+
+    }
+
+
+    .topic_card_continer{
+        height:61vh;
+    }
+}
+
+
+/* tablet 750px */
+
+
+
+@media(max-width:929px){
+
+    .unit_continer{
+        display: none;
+        z-index: 1;
+        position: absolute;
+        width:0%;
+        height:90vh;
+        background-color: black;
+
+    }
+
+    
+@keyframes pop{
+    from{
+       width: 0%;
+       display: none;
+      
+    }
+   
+    to{
+       width:30%;
+       display: block;
+    }
+     }
+   
+     @keyframes pop1{
+       0%{
+          width: 30%;
+          display: block;
+       }
+       100%{
+          width:0%;
+          display: none;
+          
+       }
+        }
+   
+   .unit{
+        display: block;
+       animation: pop .7s ease-in-out both;
+   }
+   
+   .unit1{
+    display: none;
+       animation: pop1 .7s ease-in-out both;
+   }
+   .close{
+       font-size: 20px;
+       color:#fff;
+       margin:10px;
+       padding-top: 10px;
+   }
+
+
+   .bar{
+    padding:10px;
+    border:2px solid black;
+}
+
+.bar i{
+    font-size: 20px;
+}
+
+    .unit_continer a{
+        color:white;
+    }
+
+    .main_continer{
+        display: flex;
+        overflow-y: hidden;
+    }
+
+   
+    .topic_card_continer{
+        height:65vh;
+    }
+
+}
+
+@media(max-width:886px){
+    .topic_card_continer{
+
+        height: 65vh;
+    }
+
+}
+
+@media(max-width:886px){
+
+    .topic_card_continer{
+
+        height: 60vh;
+    }
+}
+@media(max-width:737px){
+
+
+    .headline{
+        font-size: 16px;
+    }
+
+    .topics{
+        grid-template-columns: repeat(2,1fr);
+        padding-bottom: 2%;
+
+    }
+
+    .topic_card_continer{
+
+        height: 60vh;
+    }
+
+    .bar{
+        padding:7px;
+        border:2px solid black;
+    }
+
+
+    .bar i{
+        font-size: 15px;
+    }
+
+}
+
+@media(max-width:713px){
+    
+    .topic_card_continer{
+
+        height: 58vh;
+    }
+}
+@media(max-width:697px){
+
+    .topic_card_continer{
+
+        height: 61vh;
+    }
+
+    .unit_syllabus p{
+        font-size: 13.5px;
+    }
+
+}
+@media(max-width:544px){
+
+    .unit_syllabus p{
+        font-size: 11.5px;
+    }
+
+    .headline{
+        font-size: 12px;
+    }
+
+    .topic_card{
+        height:250px;
+        width:150px;
+    }
+
+    .content{
+        height:230px;
+        width:130px;
+    }
+
+    .content h2{
+        font-size:16.5px;
+
+    }
+
+    .topics{
+        gap:5px;
+    }
+
+    .logo{
+        height: 30pt;
+        width: 30pt;
+    }
+
+    .student_dashboard button{
+        padding:5px 10px;
+        font-size: 13px;
+    }
+
+    .student_dashboard> button i{
+        font-size: 20px;
+    }
+
+    .topic_card_continer{
+
+        height: 67vh;
+    }
+
+
+    .bar i{
+        font-size: 13px;
+    }
+}
+
+@media(max-width:544px){
+
+    .topic_card_continer{
+
+        height: 65vh;
+    }
+
+    .unit_syllabus p{
+        font-size: 11px;
+    }
+
+}
+
+@media(max-width:408px){
+
+    .topic_card_continer{
+
+        height: 62.5vh;
+    }
+
+    .topic_card{
+        height:230px;
+        width:130px;
+    }
+
+    .content{
+        height:210px;
+        width:110px;
+    }
+
+    
+    .content h2{
+        font-size:16px;
+
+    }
+
+}
+
+@media(max-width:376px){
+
+    .topic_card{
+        height:170px;
+        width:100px;
+    }
+
+    .content{
+        height:160px;
+        width:90px;
+    }
+
+
+    .content h2{
+        font-size:15px;
+
+    }
+
+    .topic_card_continer{
+
+        height: 60vh;
+    }
+}
+
+@media(max-width:325px){
+
+    .unit_syllabus p{
+        font-size: 10px;
+    }
+
+    .topic_card_continer{
+
+        height: 66vh;
+    }
+
+}

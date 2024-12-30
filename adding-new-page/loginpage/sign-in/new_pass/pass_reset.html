@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>log-in</title>
+  <link rel="stylesheet" href="new_pass.css">
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+</head>
+<body>
+    <div class="main-section dotted-bg">
+      <div class="main-container rombus-bg">
+
+            <div class="greetings">
+                <h2 class="rev-bg welcome-title">Change password</h2>
+                <img src="key.png" class="welcome-img" alt="">
+            </div>
+
+        <div class="main-all-content-container">
+            
+        <div class="forgot-password-container">
+            <div class="content">
+                <h2>NEW PASSWORD</h2>
+                <p>Enter the new password and do not forget it please :)</p>
+            </div>
+                <form id="forgotPasswordForm" action="/update_pass" method="post">
+                    <input type="text" id="password" placeholder="new password" required name="password">
+                    <button type="submit" class="go_back">CHANGE PASSWORD</button>
+                </form>
+            <div class="condition-content">
+                <h3>Conditions*</h3>
+                <p>Ensure you new password contains:</p>
+                <ul class="condition-list">
+                    <li> atleast 6 character</li>
+                    <li> one number character</li>
+                    <li> one special character</li>
+                    <li> one capital character</li>
+                </ul>
+            </div>
+                <p id="message"></p>
+            </div>
+        </div>
+      </div>
+    </div>
+  <script src="new_pass.js"></script>
+</body>
+</html>
