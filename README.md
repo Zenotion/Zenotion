@@ -1,18 +1,8 @@
-Zenotion 📚🔍
-Revolutionizing Education with AI-Driven Automation & Secure Access
+# zenotion
 
-Overview
-Zenote is an advanced educational platform designed to simplify learning through AI-powered tools and secure authentication. It enables seamless resource sharing, automated question generation, and content summarization to enhance interactions between students and teachers.
+This website facilitates the sharing of educational resources between teachers and students. It includes personal spaces for students to store and manage their resources. Through this project, I gained valuable experience in both front-end and back-end development.
 
-Features
-✅ Resource Sharing – Upload and manage educational materials like notes, assignments, and videos.
-✅ Automated Question Generation – AI-driven tool using Gemini AI API to create quizzes from content.
-✅ Content Summarization – Extracts key points from lecture notes for quick understanding.
-✅ Secure Authentication – Ensures platform access through unique barcode-based authentication and passwords.
+![alt text](zenotion.png)
 
-Tech Stack
-Frontend: HTML5, CSS3, JavaScript
-Backend: Node.js, Express.js
-Database: PostgreSQL
-AI Integration: Gemini AI API for question and summary generation
-Security: Barcode-based authentication for access control
+![alt text](<Screenshot 2024-09-17 183320.png>) ![alt text](<Screenshot 2024-09-17 183422.png>) ![alt text](<Screenshot 2024-09-17 183507.png>) ![alt text](<Screenshot 2024-09-17 183648.png>) ![alt text](<Screenshot 2024-09-17 183733.png>) ![alt text](<Screenshot 2024-09-17 183810.png>) ![alt text](<Screenshot 2024-09-17 183857.png>) ![alt text](<Screenshot 2024-09-17 184046.png>) ![alt text](<Screenshot 2024-09-17 184116.png>) ![alt text](<Screenshot 2024-09-17 194125.png>) ![alt text](<Screenshot 2024-09-17 194233.png>) ![alt text](<Screenshot 2024-09-17 195831.png>) ![alt text](<Screenshot 2024-09-17 195856.png>) ![alt text](<Screenshot 2024-09-17 195938.png>)
+
